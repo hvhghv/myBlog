@@ -76119,7 +76119,7 @@ $1(a){A.wN(a).E1("/diary",t.X)},
 $S:12}
 A.Ua.prototype={
 Rq(){var s,r,q,p,o=null,n=A.a([],t.p)
-for(s=0;s<3;++s){r=$.avb[s]
+for(s=0;s<4;++s){r=$.avb[s]
 q=$.arM()
 p=$.au6()
 n.push(A.aiW("page/diary/"+r,q,o,new A.cp(B.zP,o,o,o,o,o,B.Q),20,o,new A.aY(p,100,p,100),o,new A.aY(0,30,0,30),!0,B.m))}return n},
@@ -81472,7 +81472,7 @@ $.apw=1
 $.VA=!1
 $.aAW=20
 $.awL=A.a(["\u8fd4\u56de\u9996\u9875\uff08\u8be5\u9875\u9762\u8fd8\u5728\u65bd\u5de5\u4e2d~~\uff09","\u6240\u6709\u6587\u7ae0","\u4e00\u70b9\u5c0f\u65e5\u8bb0"],t.s)
-$.avb=A.a(["2023-6-16.md","2023-6-12.md","firstTry.md"],t.s)
+$.avb=A.a(["2023-6-25.md","2023-6-16.md","2023-6-12.md","firstTry.md"],t.s)
 $.ap8=A.a([A.a(["MarkDownTest.md","MarkDownTest.md"],t.s)],A.a3("q<B<n>>"))
 $.aq6=null
 $.afl=null})();(function lazyInitializers(){var s=hunkHelpers.lazyFinal,r=hunkHelpers.lazy
