@@ -171,16 +171,20 @@ cdef pubilc void func1():
 
 * 坑点六，字符串问题   
 
-c语言的char * ,wchar_t 能直接当作cython的str类型来用。
+c语言的wchar_t 能直接当作cython的str类型来用。
+c语言的char * ,能直接当作cython的bytes类型来用。
 
-但是cython的str类型不能在c++文件里直接使用，要用wchar_t和char *   
+cython的bytes类型能直接在c++文件里用，也就是说，用bytes调用c++里的char*是可以的。    
+但是cython的str类型不能在c++文件里直接使用，要用Py_UNICODE。   
 
-所以本人就直接在cython和c++文件统一用Py_UNICODE了（懒得思考类型转换问题）   
-
-其中 Py_UNICODE 是 wchar_t的别名，相当与
+其中*Py_UNICODE*是*wchar_t的别名  
 ~~~
 typedef wchar_t Py_UNICODE
 ~~~
+
+而*Py_UNICODE*在*python.h*头文件和*cython*里均有定义
+
+所以本人就直接在cython和c++文件统一用Py_UNICODE了（懒得思考类型转换问题）    
 
 举个例子
 
