@@ -205,6 +205,8 @@ EDLL void py_test1(Py_UNICODE *a){
 
 生成dll后调用py_test1,传参wchar_t，就能在控制台打印出字符串了。
 
+注意: char* 在cython中的类型是bytes，而且还需要考虑末尾填'\0'。
+
 
 
 大体上我编译时遇到的问题就这些了。  
