@@ -65729,7 +65729,7 @@ A.Qg.prototype={
 E(a){return A.pj(B.du,A.a([new A.Ib(null)],t.p),B.a3,B.c9)}}
 A.Ib.prototype={
 M8(a){var s,r,q,p,o,n=null,m=A.a([A.e_(n,$.amf(),n)],t.p)
-for(s=0;s<6;++s){r=$.ahg[s][0]
+for(s=0;s<7;++s){r=$.ahg[s][0]
 q=A.qT()
 p=$.akI()
 o=$.akJ()
@@ -70642,7 +70642,7 @@ $.asI=20
 $.aoD=A.a(["\u8fd4\u56de\u9996\u9875\uff08\u8be5\u9875\u9762\u8fd8\u5728\u65bd\u5de5\u4e2d~~\uff09","\u6240\u6709\u6587\u7ae0\uff08~~~\u5b66\u4e60\u5b66\u4e60\uff09","\u4e00\u70b9\u5c0f\u65e5\u8bb0\uff08\u8bb0\u5f55\u4e00\u70b9\u5c0f\u4e50\u8da3\uff01\uff09"],t.s)
 $.an3=A.a(["2023-9-10.md","2023-9-7.md","2023-6-25.md","2023-6-16.md","2023-6-12.md","firstTry.md"],t.s)
 $.ahg=function(){var s="CompilationNote1.md",r="RichTextAndSelectText.md",q=t.s
-return A.a([A.a(["cython3.md","cython3.md"],q),A.a(["cython2.md","cython2.md"],q),A.a(["cython1.md","cython1.md"],q),A.a([s,s],q),A.a([r,r],q),A.a(["MarkDownTest.md","MarkDownTest.md"],q)],A.V("w<C<t>>"))}()})();(function lazyInitializers(){var s=hunkHelpers.lazyFinal,r=hunkHelpers.lazy
+return A.a([A.a(["2023-11-14.md","2023-11-14.md"],q),A.a(["cython3.md","cython3.md"],q),A.a(["cython2.md","cython2.md"],q),A.a(["cython1.md","cython1.md"],q),A.a([s,s],q),A.a([r,r],q),A.a(["MarkDownTest.md","MarkDownTest.md"],q)],A.V("w<C<t>>"))}()})();(function lazyInitializers(){var s=hunkHelpers.lazyFinal,r=hunkHelpers.lazy
 s($,"azE","bG",()=>A.avI(A.a3(A.aeP(self.window),"vendor"),B.d.a5S(A.aou(A.aeP(self.window)))))
 s($,"aAo","cW",()=>A.avJ())
 s($,"ax4","ads",()=>A.Ey(8))

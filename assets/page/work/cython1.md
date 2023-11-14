@@ -8,18 +8,18 @@
 
 * 坑点一，pyx并不能直接导出函数
 
-pyx的本质是一个动态链接库，所以，我猜想能不能直接*loadlibrary*这个动态链接库。于是我写了一个简单的代码测试一下。
+pyx的本质是一个动态链接库，所以，我猜想能不能直接*loadlibrary*这个动态链接库。于是我写了一个简单的代码测试一下。   
 
 ~~~
 cdef public func1():
     print("hello world")
 ~~~
 
-然后 *python setup.py build_ext* 生成pyd文件，拿pe工具一查，这导出表压根就没有func1函数.....
+然后*python setup.py build_ext* 生成pyd文件，拿pe工具一查，这导出表压根就没有func1函数.....
 
 所以还是得老老实实的，先生成c代码，再生成dll。
 
-* 坑点二，初始化写在了*DLL_PROCESS_ATTACH* 与 *DLL_PROCESS_DETACH* 里
+* 坑点二，初始化写在了DLL_PROCESS_ATTACH与DLL_PROCESS_DETACH里
 
 一开始，我是这样的
 
@@ -121,7 +121,7 @@ BOOL APIENTRY DllMain( HMODULE hModule,
 ~~~
 
 
-* 坑点三，Py_Init_...() 函数不管用
+* 坑点三，Py_Init_...()函数不管用
 
 本来开始时，我的代码是
 ~~~
@@ -141,7 +141,7 @@ PyImport_ImportModule("test");
 
 小提示: cython3.x版本用Py_Init_...()用这个过不了编译
 
-* 坑点四，*__PYX_EXTERN_C* 不能加 *_declspec(dllexport)*
+* 坑点四，__PYX_EXTERN_C不能加_declspec(dllexport)
 
 看了cython生成的头文件，发现每个导出函数都有 *__PYX_EXTERN_C*，于是添了个 *_declspec(dllexport)* 
 
@@ -173,18 +173,17 @@ cdef pubilc void func1():
 
 c语言的wchar_t 能直接当作cython的str类型来用。
 c语言的char * ,能直接当作cython的bytes类型来用。
+ 
+但是cython的str类型不能在c++文件里直接使用，要用Py_UNICODE。(bytes还没测试过) 
 
-cython的bytes类型能直接在c++文件里用，也就是说，用bytes调用c++里的char*是可以的。    
-但是cython的str类型不能在c++文件里直接使用，要用Py_UNICODE。   
-
-其中*Py_UNICODE*是*wchar_t的别名  
+其中*Py_UNICODE*是*wchar_t*的别名  
 ~~~
 typedef wchar_t Py_UNICODE
 ~~~
 
 而*Py_UNICODE*在*python.h*头文件和*cython*里均有定义
 
-所以本人就直接在cython和c++文件统一用Py_UNICODE了（懒得思考类型转换问题）    
+所以本人就直接在*cython*和c++文件统一用*Py_UNICODE*了（懒得思考类型转换问题）    
 
 举个例子
 
