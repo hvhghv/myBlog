@@ -89,8 +89,8 @@ BOOL APIENTRY DllMain( HMODULE hModule,
 }
 ~~~
 
-简单来说，就是*test.pyx*和*Dllmain.cpp*都调用了*py_import.h*里的*print_test()*，输出a的数值和a的地址。   
-假如两个文件是cpp，他们的结果是一样的，但假如一个文件是*cython*，另一个是*cpp*呢？
+简单来说，就是`test.pyx`和`Dllmain.cpp`都调用了`py_import.h`里的`print_test()`，输出a的数值和a的地址。   
+假如两个文件是cpp，他们的结果是一样的，但假如一个文件是`cython`，另一个是`cpp`呢？
 
 来测试一下吧
 ~~~
@@ -126,7 +126,7 @@ from py
 ```
 
 
-根据结果，我们发现，cpp中的a地址和pyx中的a地址是不一样了，换句话说，pyx对py_import.h里的变量做了深拷贝   
+根据结果，我们发现，cpp中的a地址和pyx中的a地址是不一样了，换句话说，pyx对`py_import.h`里的变量做了深拷贝   
 
 所以，cython里extern并没有与cpp共享变量  
 
@@ -220,7 +220,7 @@ BOOL APIENTRY DllMain( HMODULE hModule,
 ~~~
 
 就改动这三个地方。   
-简单来说，原来是在*py_import.h*里声明，变成了在*test.pyx*里声明。  
+简单来说，原来是在`py_import.h`里声明，变成了在`test.pyx`里声明。  
 
 重新编译运行，看看结果
 
