@@ -1,7 +1,1 @@
-git add .
-
-git commit -m '%time%'
-
-git push
-
-pause
+git add . && git commit -m '%time%' && git push && pause
