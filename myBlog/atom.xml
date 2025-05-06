@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>HvH洋的小站</title>
+  <icon>http://example.com/icon.png</icon>
+  
+  <link href="http://example.com/atom.xml" rel="self"/>
+  
+  <link href="http://example.com/"/>
+  <updated>2025-04-06T07:32:24.000Z</updated>
+  <id>http://example.com/</id>
+  
+  <author>
+    <name>hvhghv</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>第3期 - 用IDA进行C/C++调试</title>
+    <link href="http://example.com/mouth/mouth-3/doc/mouth-3/"/>
+    <id>http://example.com/mouth/mouth-3/doc/mouth-3/</id>
+    <published>2025-04-06T07:32:24.000Z</published>
+    <updated>2025-04-06T07:32:24.000Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;碎碎念&quot;&gt;&lt;a href=&quot;#碎碎念&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="每月随笔" scheme="http://example.com/categories/%E6%AF%8F%E6%9C%88%E9%9A%8F%E7%AC%94/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>第2期 - 资讯，RSS与信息茧房</title>
+    <link href="http://example.com/mouth/mouth-2/mouth-2/"/>
+    <id>http://example.com/mouth/mouth-2/mouth-2/</id>
+    <published>2025-04-06T04:15:00.000Z</published>
+    <updated>2025-05-06T10:36:00.890Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;第2期-资讯，RSS与信息茧房&quot;&gt;&lt;a href=&quot;#第2期-资讯，RSS与信息茧房&quot; class=&quot;headerlink&quot; title=&quot;第2期 - 资讯，RSS与信息茧房&quot;&gt;&lt;/a&gt;第2期 - 资讯，RSS与信息茧房&lt;/h1&gt;&lt;h2 id=&quot;本期要点&quot;&gt;&lt;a</summary>
+        
+      
+    
+    
+    
+    <category term="每月随笔" scheme="http://example.com/categories/%E6%AF%8F%E6%9C%88%E9%9A%8F%E7%AC%94/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>第1期 - 从远程办公到异地组网再到万物互联</title>
+    <link href="http://example.com/mouth/mouth-1/blog/%E7%AC%AC1%E6%9C%9F%20-%20%E4%BB%8E%E8%BF%9C%E7%A8%8B%E5%8A%9E%E5%85%AC%E5%88%B0%E5%BC%82%E5%9C%B0%E7%BB%84%E7%BD%91%E5%86%8D%E5%88%B0%E4%B8%87%E7%89%A9%E4%BA%92%E8%81%94/"/>
+    <id>http://example.com/mouth/mouth-1/blog/%E7%AC%AC1%E6%9C%9F%20-%20%E4%BB%8E%E8%BF%9C%E7%A8%8B%E5%8A%9E%E5%85%AC%E5%88%B0%E5%BC%82%E5%9C%B0%E7%BB%84%E7%BD%91%E5%86%8D%E5%88%B0%E4%B8%87%E7%89%A9%E4%BA%92%E8%81%94/</id>
+    <published>2025-01-20T05:45:06.000Z</published>
+    <updated>2025-01-20T05:45:06.000Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;本期要点&quot;&gt;&lt;a href=&quot;#本期要点&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="每月随笔" scheme="http://example.com/categories/%E6%AF%8F%E6%9C%88%E9%9A%8F%E7%AC%94/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>初学汇编认识到的一些小玩意</title>
+    <link href="http://example.com/simple/2023-11-14/"/>
+    <id>http://example.com/simple/2023-11-14/</id>
+    <published>2023-11-14T00:00:00.000Z</published>
+    <updated>2025-05-06T10:35:55.961Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;初学汇编认识到的一些小玩意&quot;&gt;&lt;a href=&quot;#初学汇编认识到的一些小玩意&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="零碎的小笔记" scheme="http://example.com/categories/%E9%9B%B6%E7%A2%8E%E7%9A%84%E5%B0%8F%E7%AC%94%E8%AE%B0/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>cython生成dll踩坑记（三）---变量共享篇</title>
+    <link href="http://example.com/cython/cython3/"/>
+    <id>http://example.com/cython/cython3/</id>
+    <published>2023-10-15T00:00:00.000Z</published>
+    <updated>2025-05-06T10:36:36.112Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;cython生成dll踩坑记（三）—变量共享篇&quot;&gt;&lt;a href=&quot;#cython生成dll踩坑记（三）—变量共享篇&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="cython的初步学习" scheme="http://example.com/categories/cython%E7%9A%84%E5%88%9D%E6%AD%A5%E5%AD%A6%E4%B9%A0/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>cython生成dll踩坑记（一）---基础篇</title>
+    <link href="http://example.com/cython/cython1/"/>
+    <id>http://example.com/cython/cython1/</id>
+    <published>2023-10-14T00:00:00.000Z</published>
+    <updated>2025-05-06T10:36:49.842Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;cython生成dll踩坑记（一）—基础篇&quot;&gt;&lt;a href=&quot;#cython生成dll踩坑记（一）—基础篇&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="cython的初步学习" scheme="http://example.com/categories/cython%E7%9A%84%E5%88%9D%E6%AD%A5%E5%AD%A6%E4%B9%A0/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>cython生成dll踩坑记（二）---打包篇</title>
+    <link href="http://example.com/cython/cython2/"/>
+    <id>http://example.com/cython/cython2/</id>
+    <published>2023-10-14T00:00:00.000Z</published>
+    <updated>2025-05-06T10:36:45.320Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;cython生成dll踩坑记（二）—打包篇&quot;&gt;&lt;a href=&quot;#cython生成dll踩坑记（二）—打包篇&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="cython的初步学习" scheme="http://example.com/categories/cython%E7%9A%84%E5%88%9D%E6%AD%A5%E5%AD%A6%E4%B9%A0/"/>
+    
+    
+  </entry>
+  
+</feed>

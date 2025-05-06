@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/myBlog/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/myBlog/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/myBlog/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/myBlog/images/apple-touch-icon.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/myBlog/images/favicon-32x32.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/myBlog/images/favicon-16x16.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/myBlog/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+  <link rel="alternate" href="/myBlog/atom.xml" title="HvH洋的小站" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="cython生成dll踩坑记（一）—基础篇2023-10-14最近研究了一下cython，花了3天时间才写出了一点成果来（太菜了~~~）。关于cython的教程还是比较少的，大部分还是得自己摸索。（指修完一个bug又出现两个bug）。不过也确实感觉收获了许多。  坑点一，pyx并不能直接导出函数  pyx的本质是一个动态链接库，所以，我猜想能不能直接loadlibrary这个动态链接库。于是我写了">
+<meta property="og:type" content="article">
+<meta property="og:title" content="cython生成dll踩坑记（一）---基础篇">
+<meta property="og:url" content="http://example.com/cython/cython1/index.html">
+<meta property="og:site_name" content="HvH洋的小站">
+<meta property="og:description" content="cython生成dll踩坑记（一）—基础篇2023-10-14最近研究了一下cython，花了3天时间才写出了一点成果来（太菜了~~~）。关于cython的教程还是比较少的，大部分还是得自己摸索。（指修完一个bug又出现两个bug）。不过也确实感觉收获了许多。  坑点一，pyx并不能直接导出函数  pyx的本质是一个动态链接库，所以，我猜想能不能直接loadlibrary这个动态链接库。于是我写了">
+<meta property="og:locale">
+<meta property="article:published_time" content="2023-10-14T00:00:00.000Z">
+<meta property="article:modified_time" content="2025-05-06T10:36:49.842Z">
+<meta property="article:author" content="hvhghv">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Pisces',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://example.com/cython/cython1/"/>
+
+
+
+
+
+  <title>cython生成dll踩坑记（一）---基础篇 | HvH洋的小站</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/myBlog/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">HvH洋的小站</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/myBlog/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/myBlog/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/myBlog/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-github">
+          <a target="_blank" href="https://github.com/hvhghv" rel="section noopener">
+            
+              <i class="menu-item-icon fa fa-fw fa-github"></i> <br />
+            
+            GitHub
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://example.com/myBlog/cython/cython1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/myBlog/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HvH洋的小站">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">cython生成dll踩坑记（一）---基础篇</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2023-10-14T00:00:00+00:00">
+                2023-10-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/myBlog/categories/cython%E7%9A%84%E5%88%9D%E6%AD%A5%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index">
+                    <span itemprop="name">cython的初步学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="cython生成dll踩坑记（一）—基础篇"><a href="#cython生成dll踩坑记（一）—基础篇" class="headerlink" title="cython生成dll踩坑记（一）—基础篇"></a>cython生成dll踩坑记（一）—基础篇</h1><h2 id="2023-10-14"><a href="#2023-10-14" class="headerlink" title="2023-10-14"></a>2023-10-14</h2><p>最近研究了一下cython，花了3天时间才写出了一点成果来（太菜了~~~）。关于cython的教程还是比较少的，大部分还是得自己摸索。（指修完一个bug又出现两个bug）。不过也确实感觉收获了许多。</p>
+<ul>
+<li>坑点一，pyx并不能直接导出函数</li>
+</ul>
+<p>pyx的本质是一个动态链接库，所以，我猜想能不能直接<code>loadlibrary</code>这个动态链接库。于是我写了一个简单的代码测试一下。   </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cdef public func1():</span><br><span class="line">    print(&quot;hello world&quot;)</span><br></pre></td></tr></table></figure>
+
+<p>然后<code>python setup.py build_ext</code>生成pyd文件，拿pe工具一查，这导出表压根就没有func1函数…..</p>
+<p>所以还是得老老实实的，先生成c代码，再生成dll。</p>
+<ul>
+<li>坑点二，初始化写在了<code>DLL_PROCESS_ATTACH</code>与<code>DLL_PROCESS_DETACH</code>里</li>
+</ul>
+<p>一开始，我是这样的</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">    </span><br><span class="line">#define PY_MOUDLE_NAME &quot;test&quot;</span><br><span class="line">#define PY_MOUDLE_INIT PyInit_test   </span><br><span class="line">    </span><br><span class="line">BOOL APIENTRY DllMain( HMODULE hModule,</span><br><span class="line">                       DWORD  ul_reason_for_call,</span><br><span class="line">                       LPVOID lpReserved</span><br><span class="line">                     )</span><br><span class="line">&#123;</span><br><span class="line">    switch (ul_reason_for_call)</span><br><span class="line">    &#123;</span><br><span class="line">    case DLL_PROCESS_ATTACH:</span><br><span class="line">    </span><br><span class="line">        PyObject* pmodule = NULL;</span><br><span class="line">    </span><br><span class="line">        PyImport_AppendInittab(PY_MOUDLE_NAME, PY_MOUDLE_INIT);</span><br><span class="line">        </span><br><span class="line">        Py_Initialize();</span><br><span class="line">    </span><br><span class="line">        pmodule = PyImport_ImportModule(PY_MOUDLE_NAME);</span><br><span class="line">        </span><br><span class="line">        if (pmodule == NULL) &#123;</span><br><span class="line">    </span><br><span class="line">            return FALSE;</span><br><span class="line">        &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line">    </span><br><span class="line">        break;</span><br><span class="line">    case DLL_THREAD_ATTACH:</span><br><span class="line">        break;</span><br><span class="line">    case DLL_THREAD_DETACH:</span><br><span class="line">        break;</span><br><span class="line">    case DLL_PROCESS_DETACH:</span><br><span class="line">        Py_FinalizeEx()</span><br><span class="line">        break;</span><br><span class="line">    &#125;</span><br><span class="line">    return TRUE;</span><br><span class="line">&#125;</span><br><span class="line">    </span><br></pre></td></tr></table></figure>
+
+
+<p>结果发现在自己的电脑里总报错，后来，我选择手动初始化，手动释放，就没报错了</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">#define PY_MOUDLE_NAME &quot;test&quot;</span><br><span class="line">#define PY_MOUDLE_INIT PyInit_test</span><br><span class="line">#define EDLL extern &quot;C&quot; _declspec(dllexport)</span><br><span class="line">    </span><br><span class="line">EDLL int py_init() &#123;</span><br><span class="line">    </span><br><span class="line">    PyObject* pmodule = NULL;</span><br><span class="line">    </span><br><span class="line">    PyImport_AppendInittab(PY_MOUDLE_NAME, PY_MOUDLE_INIT);</span><br><span class="line">    </span><br><span class="line">    Py_Initialize();</span><br><span class="line">    </span><br><span class="line">    pmodule = PyImport_ImportModule(PY_MOUDLE_NAME);</span><br><span class="line">    </span><br><span class="line">    if (pmodule == NULL) &#123;</span><br><span class="line">        return 0;</span><br><span class="line">    &#125;</span><br><span class="line">    else</span><br><span class="line">    &#123;</span><br><span class="line">        return 1;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">     </span><br><span class="line">     </span><br><span class="line">EDLL int py_exit() &#123;</span><br><span class="line">    return Py_FinalizeEx();</span><br><span class="line">&#125;</span><br><span class="line">      </span><br><span class="line">    </span><br><span class="line">BOOL APIENTRY DllMain( HMODULE hModule,</span><br><span class="line">                       DWORD  ul_reason_for_call,</span><br><span class="line">                       LPVOID lpReserved</span><br><span class="line">                     )</span><br><span class="line">&#123;</span><br><span class="line">    switch (ul_reason_for_call)</span><br><span class="line">    &#123;</span><br><span class="line">    case DLL_PROCESS_ATTACH:</span><br><span class="line">        break;</span><br><span class="line">    case DLL_THREAD_ATTACH:</span><br><span class="line">        break;</span><br><span class="line">    case DLL_THREAD_DETACH:</span><br><span class="line">        break;</span><br><span class="line">    case DLL_PROCESS_DETACH:</span><br><span class="line">        break;</span><br><span class="line">    &#125;</span><br><span class="line">    return TRUE;</span><br><span class="line">&#125;</span><br><span class="line">    </span><br></pre></td></tr></table></figure>
+
+
+<ul>
+<li>坑点三，<code>Py_Init_...()</code>函数不管用</li>
+</ul>
+<p>本来开始时，我的代码是</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">    </span><br><span class="line">Py_Initialize();</span><br><span class="line">PyInit_test();</span><br><span class="line">    </span><br></pre></td></tr></table></figure>
+<p>结果发现一直报指针访问不能为nullptr。<br>后来改成下面这样就好了。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">PyImport_AppendInittab(&quot;test&quot;, PyInit_test);</span><br><span class="line">Py_Initialize();</span><br><span class="line">PyImport_ImportModule(&quot;test&quot;);</span><br></pre></td></tr></table></figure>
+
+<p>小提示: <code>cython3.x</code>版本用<code>Py_Init_...()</code>用这个过不了编译</p>
+<ul>
+<li>坑点四，<code>__PYX_EXTERN_C</code>不能加<code>_declspec(dllexport)</code></li>
+</ul>
+<p>看了cython生成的头文件，发现每个导出函数都有<code>__PYX_EXTERN_C</code>，于是添了个<code>_declspec(dllexport)</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#define __PYX_EXTERN_C extern &quot;C&quot; _declspec(dllexport)</span><br></pre></td></tr></table></figure>
+
+
+<p>结果发现无效<br>只能老老实实写函数去包装了</p>
+<ul>
+<li>坑点五，无返回值时，返回值位PyObject问题</li>
+</ul>
+<p>在编写cython函数时，无返回值的函数最好加上<code>void</code>而不是不写。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># 建议不要这样写</span><br><span class="line">cdef public func1():</span><br><span class="line">    print(&quot;hello world&quot;)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># 而应该这样写</span><br><span class="line">cdef pubilc void func1():</span><br><span class="line">    print(&quot;hello world&quot;)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>坑点六，字符串问题</li>
+</ul>
+<p>c语言的<code>wchar_t</code>能直接当作cython的str类型来用。<br>c语言的<code>char *</code>能直接当作cython的bytes类型来用。</p>
+<p>但是cython的str类型不能在c++文件里直接使用，要用<code>Py_UNICODE</code>。(bytes还没测试过) </p>
+<p>其中<code>Py_UNICODE</code>是<code>wchar_t</code>的别名  </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">typedef wchar_t Py_UNICODE</span><br></pre></td></tr></table></figure>
+
+<p>而<code>Py_UNICODE</code>在<code>python.h</code>头文件和<code>cython</code>里均有定义</p>
+<p>所以本人就直接在<code>cython</code>和c++文件统一用<code>Py_UNICODE</code>了（懒得思考类型转换问题）    </p>
+<p>举个例子</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># test.pyx</span><br><span class="line">    </span><br><span class="line">cdef public void test1(Py_UNICODE *a):</span><br><span class="line">    print(a)</span><br><span class="line">    </span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">// dllmain.cpp</span><br><span class="line">    </span><br><span class="line">#define EDLL extern &quot;C&quot; _declspec(dllexport)</span><br><span class="line">    </span><br><span class="line">EDLL void py_test1(Py_UNICODE *a)&#123;</span><br><span class="line">    return test1(a);</span><br><span class="line">&#125;</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<p>生成dll后调用<code>py_test1</code>,传参<code>wchar_t</code>，就能在控制台打印出字符串了。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">注意: char* 在cython中的类型是bytes，而且还需要考虑末尾填&#x27;\0&#x27;。</span><br></pre></td></tr></table></figure>
+
+
+
+<p>大体上我编译时遇到的问题就这些了。<br>基础篇就这些内容了，下一次就谈谈dll生成后的打包方式与变量共享问题吧    </p>
+<ul>
+<li>最后给个小提示，在开发时，把多用try把代码包起来，然后在except中print错误信息，能极大提高找bug效率</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/myBlog/cython/cython2/" rel="next" title="cython生成dll踩坑记（二）---打包篇">
+                <i class="fa fa-chevron-left"></i> cython生成dll踩坑记（二）---打包篇
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/myBlog/cython/cython3/" rel="prev" title="cython生成dll踩坑记（三）---变量共享篇">
+                cython生成dll踩坑记（三）---变量共享篇 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/myBlog/archives">
+              
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/myBlog/categories/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/myBlog/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#cython%E7%94%9F%E6%88%90dll%E8%B8%A9%E5%9D%91%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89%E2%80%94%E5%9F%BA%E7%A1%80%E7%AF%87"><span class="nav-number">1.</span> <span class="nav-text">cython生成dll踩坑记（一）—基础篇</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2023-10-14"><span class="nav-number">1.1.</span> <span class="nav-text">2023-10-14</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">hvhghv</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/myBlog/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/myBlog/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/myBlog/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/myBlog/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/myBlog/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/myBlog/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/myBlog/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/myBlog/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/myBlog/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/myBlog/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/myBlog/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/myBlog/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/myBlog/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

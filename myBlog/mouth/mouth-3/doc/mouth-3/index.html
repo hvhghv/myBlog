@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/myBlog/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/myBlog/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/myBlog/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/myBlog/images/apple-touch-icon.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/myBlog/images/favicon-32x32.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/myBlog/images/favicon-16x16.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/myBlog/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+  <link rel="alternate" href="/myBlog/atom.xml" title="HvH洋的小站" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="碎碎念最近代码量多了起来，深受着bug的折磨。磨磨碎碎了几天后，想着要不写一篇（水一期）有关调bug的感受吧。 虽然本期隔了2个月了，欠的上一期等某天自己随手写的项目结果能拿到几千颗星时再补上吧（程序员猝死前的幻想罢了） 不是，这咋跑起来的！这咋跑不起来！常常会在写bug的途中冒出程序来。因此，通过调试去复现，测试，寻找此类状况是必不可少的。常见的调试器有vs自带的调试器，有gdb等这类工具。不过">
+<meta property="og:type" content="article">
+<meta property="og:title" content="第3期 - 用IDA进行C&#x2F;C++调试">
+<meta property="og:url" content="http://example.com/mouth/mouth-3/doc/mouth-3/index.html">
+<meta property="og:site_name" content="HvH洋的小站">
+<meta property="og:description" content="碎碎念最近代码量多了起来，深受着bug的折磨。磨磨碎碎了几天后，想着要不写一篇（水一期）有关调bug的感受吧。 虽然本期隔了2个月了，欠的上一期等某天自己随手写的项目结果能拿到几千颗星时再补上吧（程序员猝死前的幻想罢了） 不是，这咋跑起来的！这咋跑不起来！常常会在写bug的途中冒出程序来。因此，通过调试去复现，测试，寻找此类状况是必不可少的。常见的调试器有vs自带的调试器，有gdb等这类工具。不过">
+<meta property="og:locale">
+<meta property="og:image" content="http://example.com/myBlog/mouth/mouth-3/doc/_resources/903db277b8866f00614ff437b0e8783a.png">
+<meta property="og:image" content="http://example.com/myBlog/mouth/mouth-3/doc/_resources/45d2c396ec489dee2b060cc3cf137705.png">
+<meta property="og:image" content="http://example.com/myBlog/mouth/mouth-3/doc/_resources/8b199698174595ac392a770b62fa265e.png">
+<meta property="og:image" content="http://example.com/myBlog/mouth/mouth-3/doc/_resources/022aa1bd65967b25e11e48b1c10860fa.png">
+<meta property="og:image" content="http://example.com/myBlog/mouth/mouth-3/doc/_resources/42274db8836ad190ee94cc986b01efd6.png">
+<meta property="og:image" content="http://example.com/myBlog/mouth/mouth-3/doc/_resources/705d9a4c88f5882b4ea6699b44021546.png">
+<meta property="og:image" content="http://example.com/myBlog/mouth/mouth-3/doc/_resources/3a4b8d36061a71806d7d6bfbed11867f.png">
+<meta property="og:image" content="http://example.com/myBlog/mouth/mouth-3/doc/_resources/61fd714b90ca7cf05f77e911243d9a2a.png">
+<meta property="og:image" content="http://example.com/myBlog/mouth/mouth-3/doc/_resources/b88ccaae866e2e7524cbd03d8128235a.png">
+<meta property="og:image" content="http://example.com/myBlog/mouth/mouth-3/doc/_resources/6c1da90cc51e69b26da4628e7eee1304.png">
+<meta property="og:image" content="http://example.com/myBlog/mouth/mouth-3/doc/_resources/32ed30af5343d1d8b8a80796460f2716.png">
+<meta property="og:image" content="http://example.com/myBlog/mouth/mouth-3/doc/_resources/0935742dd40074bfabfdc6a76d43c996.png">
+<meta property="og:image" content="http://example.com/myBlog/mouth/mouth-3/doc/_resources/1740028ff8b4ea816178db71d10c0ad2.png">
+<meta property="og:image" content="http://example.com/myBlog/mouth/mouth-3/doc/_resources/7f3ec074fdff53e827a0ecf4e8378629.png">
+<meta property="og:image" content="http://example.com/myBlog/mouth/mouth-3/doc/_resources/ec59e268bd3ab0a85ba46a97eb173171.png">
+<meta property="og:image" content="http://example.com/myBlog/mouth/mouth-3/doc/_resources/dca6ca6e00af2a0ba12793d6a07a7a9b.png">
+<meta property="og:image" content="http://example.com/myBlog/mouth/mouth-3/doc/_resources/7912d1e9d82dd9b35cc314a80c7dce29.png">
+<meta property="article:published_time" content="2025-04-06T07:32:24.000Z">
+<meta property="article:modified_time" content="2025-04-06T07:32:24.000Z">
+<meta property="article:author" content="hvhghv">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/myBlog/mouth/mouth-3/doc/_resources/903db277b8866f00614ff437b0e8783a.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Pisces',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://example.com/mouth/mouth-3/doc/mouth-3/"/>
+
+
+
+
+
+  <title>第3期 - 用IDA进行C/C++调试 | HvH洋的小站</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/myBlog/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">HvH洋的小站</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/myBlog/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/myBlog/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/myBlog/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-github">
+          <a target="_blank" href="https://github.com/hvhghv" rel="section noopener">
+            
+              <i class="menu-item-icon fa fa-fw fa-github"></i> <br />
+            
+            GitHub
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://example.com/myBlog/mouth/mouth-3/doc/mouth-3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/myBlog/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HvH洋的小站">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">第3期 - 用IDA进行C/C++调试</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2025-04-06T07:32:24+00:00">
+                2025-04-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/myBlog/categories/%E6%AF%8F%E6%9C%88%E9%9A%8F%E7%AC%94/" itemprop="url" rel="index">
+                    <span itemprop="name">每月随笔</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="碎碎念"><a href="#碎碎念" class="headerlink" title="碎碎念"></a>碎碎念</h2><p>最近代码量多了起来，深受着bug的折磨。磨磨碎碎了几天后，想着要不写一篇（水一期）有关调bug的感受吧。</p>
+<p>虽然本期隔了2个月了，欠的上一期等某天自己随手写的项目结果能拿到几千颗星时再补上吧（程序员猝死前的幻想罢了）</p>
+<h2 id="不是，这咋跑起来的！这咋跑不起来！"><a href="#不是，这咋跑起来的！这咋跑不起来！" class="headerlink" title="不是，这咋跑起来的！这咋跑不起来！"></a>不是，这咋跑起来的！这咋跑不起来！</h2><p>常常会在写bug的途中冒出程序来。因此，通过调试去复现，测试，寻找此类状况是必不可少的。常见的调试器有vs自带的调试器，有gdb等这类工具。不过，这些工具都大多会在某些场景上存在局限，比如vs的只能用在window程序上啦，gdb要敲命令行啦，vscode+gdb要配一堆环境啦。有没有一款不吃环境，简单易上手上限高的调试器呢。有的，兄弟有的。可以尝试一下IDA里面的动态调试器。</p>
+<h2 id="IDA"><a href="#IDA" class="headerlink" title="IDA"></a>IDA</h2><p>IDA算是网络安全领域中热门，必备的工具，用于逆向，pwd等任务。不过，在我眼里，这可是最好的gdb图形化工具了。（由于进入左脚踏入门所以IDA的动态调试器又卡死了）</p>
+<h2 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h2><p>&#x2F;&#x2F; 下载安装就不说了。</p>
+<p>首先, 编译出来的程序是需要带调试信息的。vs就在编译时选择debug进行编译，gcc就弄-O0 -g选项（本人调试时比较喜欢-O0选项）</p>
+<p>然后用ida打开，配置好调试器就行，</p>
+<h2 id="使用技巧"><a href="#使用技巧" class="headerlink" title="使用技巧"></a>使用技巧</h2><ol>
+<li>当前函数变量的查看<br>例如，下面有一个parse_mount_tag函数,其中如果我想查看full_path, mount_tag，open_path。如何通过堆栈视图查看里面的变量</li>
+</ol>
+<p><img src="/myBlog/mouth/mouth-3/doc/myBlog/../_resources/903db277b8866f00614ff437b0e8783a.png" alt="903db277b8866f00614ff437b0e8783a.png"></p>
+<p><img src="/myBlog/mouth/mouth-3/doc/myBlog/../_resources/45d2c396ec489dee2b060cc3cf137705.png" alt="45d2c396ec489dee2b060cc3cf137705.png"></p>
+<h4 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h4><h5 id="拿full-path举例"><a href="#拿full-path举例" class="headerlink" title="拿full_path举例"></a>拿full_path举例</h5><ol>
+<li><p>记住full_path是一个8字节的指针</p>
+</li>
+<li><p>直接点击<br><code>00005639AE023050 mov     [rbp+full_path], rdi</code><br>里面的rbp+full_path</p>
+</li>
+</ol>
+<p>3.右键四字</p>
+<p>现在就能知道指针的值为<code>5639AF95B970</code>了</p>
+<blockquote>
+<p>单字节为1个字节，双字节为2个字节，双字为4个字节，四字为8字节</p>
+</blockquote>
+<h4 id="指针的指向"><a href="#指针的指向" class="headerlink" title="指针的指向"></a>指针的指向</h4><p><img src="/myBlog/mouth/mouth-3/doc/myBlog/../_resources/8b199698174595ac392a770b62fa265e.png" alt="8b199698174595ac392a770b62fa265e.png"></p>
+<p><img src="/myBlog/mouth/mouth-3/doc/myBlog/../_resources/022aa1bd65967b25e11e48b1c10860fa.png" alt="022aa1bd65967b25e11e48b1c10860fa.png"><br>再拿之前的full_path作举例，由于full_path是一个指针。对于指针，可以双击这个指针，直接跳转到指针指向的地址</p>
+<h4 id="结构体变量的查看"><a href="#结构体变量的查看" class="headerlink" title="结构体变量的查看"></a>结构体变量的查看</h4><p>ctx是一个结构体vfs_file_context_t_0指针，如何方便的查看里面的内容呢<br><img src="/myBlog/mouth/mouth-3/doc/myBlog/../_resources/42274db8836ad190ee94cc986b01efd6.png" alt="42274db8836ad190ee94cc986b01efd6.png"></p>
+<ol>
+<li>首先，在结构体视图中添加vfs_file_context_t_0结构体(一般ida已经自动添加了，可以直接进入下一步)<br><img src="/myBlog/mouth/mouth-3/doc/myBlog/../_resources/705d9a4c88f5882b4ea6699b44021546.png" alt="705d9a4c88f5882b4ea6699b44021546.png"><br><img src="/myBlog/mouth/mouth-3/doc/myBlog/../_resources/3a4b8d36061a71806d7d6bfbed11867f.png" alt="3a4b8d36061a71806d7d6bfbed11867f.png"></li>
+</ol>
+<p><img src="/myBlog/mouth/mouth-3/doc/myBlog/../_resources/61fd714b90ca7cf05f77e911243d9a2a.png" alt="61fd714b90ca7cf05f77e911243d9a2a.png"><br><img src="/myBlog/mouth/mouth-3/doc/myBlog/../_resources/b88ccaae866e2e7524cbd03d8128235a.png" alt="b88ccaae866e2e7524cbd03d8128235a.png"></p>
+<p>视图-&gt;结构体-&gt;空白处右键-&gt;点击添加结构体类型-&gt;Add standard structue-&gt;按ctrl+f-&gt;输入需要查看的结构体类型名称-&gt;双击需要查看的结构体类型名称-&gt;完成</p>
+<p>2.在堆栈中找到指针值，跳到指针指向的地址，在该地址处按alt+q（不建议通过右键去选择结构体，此处选择的结构体是不全的）<br><img src="/myBlog/mouth/mouth-3/doc/myBlog/../_resources/6c1da90cc51e69b26da4628e7eee1304.png" alt="6c1da90cc51e69b26da4628e7eee1304.png"><br>3. 选择结构体（若找不到就跳到第一步），完成<br><img src="/myBlog/mouth/mouth-3/doc/myBlog/../_resources/32ed30af5343d1d8b8a80796460f2716.png" alt="32ed30af5343d1d8b8a80796460f2716.png"></p>
+<p><img src="/myBlog/mouth/mouth-3/doc/myBlog/../_resources/0935742dd40074bfabfdc6a76d43c996.png" alt="0935742dd40074bfabfdc6a76d43c996.png"></p>
+<h4 id="通过堆栈视图查询变量"><a href="#通过堆栈视图查询变量" class="headerlink" title="通过堆栈视图查询变量"></a>通过堆栈视图查询变量</h4><p>有些时候，追踪函数调用执行流时，会查看其中一两个函数的变量，由于此时的rbp，rsp已经改变，不能通过汇编视图直接跳转到堆栈里面去。此时就只能手算堆栈了。</p>
+<p>例如，我想查看vfs_write里面的变量，然而此时的rbp, rsp的环境是在vfs_process_read函数里，如何查看vfs_write的变量<br><img src="/myBlog/mouth/mouth-3/doc/myBlog/../_resources/1740028ff8b4ea816178db71d10c0ad2.png" alt="1740028ff8b4ea816178db71d10c0ad2.png"></p>
+<p>根据x64的规范，进入一个函数后，就会先压一个函数返回地址和rbp<br>反过来，我们先寻找到这个函数返回地址，就能定位到原本的变量位置<br>由此，可以采取下列的方法</p>
+<ol>
+<li><p>在堆栈视图中寻找到vfs_write的返回地址，与vfs_write的调用函数返回地址（也就是vfs_write前一个函数test_simpple_vfs）<br><img src="/myBlog/mouth/mouth-3/doc/myBlog/../_resources/7f3ec074fdff53e827a0ecf4e8378629.png" alt="7f3ec074fdff53e827a0ecf4e8378629.png"><br><img src="/myBlog/mouth/mouth-3/doc/myBlog/../_resources/ec59e268bd3ab0a85ba46a97eb173171.png" alt="ec59e268bd3ab0a85ba46a97eb173171.png"></p>
+</li>
+<li><p>在汇编视图中记录好ida反汇编出来的变量的所在位置，<br><img src="/myBlog/mouth/mouth-3/doc/myBlog/../_resources/dca6ca6e00af2a0ba12793d6a07a7a9b.png" alt="dca6ca6e00af2a0ba12793d6a07a7a9b.png"></p>
+</li>
+<li><p>根据vfs_write的调用函数返回地址进行推断，（根据第二步的位置进行判断，-8为第二格，-10h为第三格，-18h为第四格，-20h为第5格），和变量的所在位置对应好就行</p>
+</li>
+</ol>
+<p><img src="/myBlog/mouth/mouth-3/doc/myBlog/../_resources/7912d1e9d82dd9b35cc314a80c7dce29.png" alt="7912d1e9d82dd9b35cc314a80c7dce29.png"></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>ida还有交叉引用，dump为c、python数组，修补啥的功能太多就不讲了。总之真香。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/myBlog/mouth/mouth-2/mouth-2/" rel="next" title="第2期 - 资讯，RSS与信息茧房">
+                <i class="fa fa-chevron-left"></i> 第2期 - 资讯，RSS与信息茧房
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/myBlog/archives">
+              
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/myBlog/categories/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/myBlog/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A2%8E%E7%A2%8E%E5%BF%B5"><span class="nav-number">1.</span> <span class="nav-text">碎碎念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8D%E6%98%AF%EF%BC%8C%E8%BF%99%E5%92%8B%E8%B7%91%E8%B5%B7%E6%9D%A5%E7%9A%84%EF%BC%81%E8%BF%99%E5%92%8B%E8%B7%91%E4%B8%8D%E8%B5%B7%E6%9D%A5%EF%BC%81"><span class="nav-number">2.</span> <span class="nav-text">不是，这咋跑起来的！这咋跑不起来！</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IDA"><span class="nav-number">3.</span> <span class="nav-text">IDA</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95"><span class="nav-number">4.</span> <span class="nav-text">使用方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7"><span class="nav-number">5.</span> <span class="nav-text">使用技巧</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C"><span class="nav-number">5.0.1.</span> <span class="nav-text">基本操作</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%8B%BFfull-path%E4%B8%BE%E4%BE%8B"><span class="nav-number">5.0.1.1.</span> <span class="nav-text">拿full_path举例</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8C%87%E9%92%88%E7%9A%84%E6%8C%87%E5%90%91"><span class="nav-number">5.0.2.</span> <span class="nav-text">指针的指向</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BB%93%E6%9E%84%E4%BD%93%E5%8F%98%E9%87%8F%E7%9A%84%E6%9F%A5%E7%9C%8B"><span class="nav-number">5.0.3.</span> <span class="nav-text">结构体变量的查看</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E5%A0%86%E6%A0%88%E8%A7%86%E5%9B%BE%E6%9F%A5%E8%AF%A2%E5%8F%98%E9%87%8F"><span class="nav-number">5.0.4.</span> <span class="nav-text">通过堆栈视图查询变量</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">6.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">hvhghv</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/myBlog/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/myBlog/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/myBlog/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/myBlog/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/myBlog/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/myBlog/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/myBlog/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/myBlog/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/myBlog/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/myBlog/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/myBlog/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/myBlog/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/myBlog/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
