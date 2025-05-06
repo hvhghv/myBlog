@@ -1,0 +1,1772 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/myBlog/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/myBlog/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/myBlog/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/myBlog/images/apple-touch-icon.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/myBlog/images/favicon-32x32.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/myBlog/images/favicon-16x16.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/myBlog/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+  <link rel="alternate" href="/myBlog/atom.xml" title="HvH洋的小站" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="偶尔会更新一小下。也许一点小思路会自己长出来的 &gt;.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="HvH洋的小站">
+<meta property="og:url" content="http://example.com/default-index/index.html">
+<meta property="og:site_name" content="HvH洋的小站">
+<meta property="og:description" content="偶尔会更新一小下。也许一点小思路会自己长出来的 &gt;.">
+<meta property="og:locale">
+<meta property="article:author" content="hvhghv">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Pisces',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://example.com/default-index/"/>
+
+
+
+
+
+  <title>HvH洋的小站</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left 
+  page-home">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/myBlog/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">HvH洋的小站</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/myBlog/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/myBlog/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/myBlog/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-github">
+          <a target="_blank" href="https://github.com/hvhghv" rel="section noopener">
+            
+              <i class="menu-item-icon fa fa-fw fa-github"></i> <br />
+            
+            GitHub
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+  <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://example.com/myBlog/mouth/mouth-3/doc/mouth-3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/myBlog/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HvH洋的小站">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/myBlog/mouth/mouth-3/doc/mouth-3/" itemprop="url">第3期 - 用IDA进行C/C++调试</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2025-04-06T07:32:24+00:00">
+                2025-04-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/myBlog/categories/%E6%AF%8F%E6%9C%88%E9%9A%8F%E7%AC%94/" itemprop="url" rel="index">
+                    <span itemprop="name">每月随笔</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="碎碎念"><a href="#碎碎念" class="headerlink" title="碎碎念"></a>碎碎念</h2><p>最近代码量多了起来，深受着bug的折磨。磨磨碎碎了几天后，想着要不写一篇（水一期）有关调bug的感受吧。</p>
+<p>虽然本期隔了2个月了，欠的上一期等某天自己随手写的项目结果能拿到几千颗星时再补上吧（程序员猝死前的幻想罢了）</p>
+<h2 id="不是，这咋跑起来的！这咋跑不起来！"><a href="#不是，这咋跑起来的！这咋跑不起来！" class="headerlink" title="不是，这咋跑起来的！这咋跑不起来！"></a>不是，这咋跑起来的！这咋跑不起来！</h2><p>常常会在写bug的途中冒出程序来。因此，通过调试去复现，测试，寻找此类状况是必不可少的。常见的调试器有vs自带的调试器，有gdb等这类工具。不过，这些工具都大多会在某些场景上存在局限，比如vs的只能用在window程序上啦，gdb要敲命令行啦，vscode+gdb要配一堆环境啦。有没有一款不吃环境，简单易上手上限高的调试器呢。有的，兄弟有的。可以尝试一下IDA里面的动态调试器。</p>
+<h2 id="IDA"><a href="#IDA" class="headerlink" title="IDA"></a>IDA</h2><p>IDA算是网络安全领域中热门，必备的工具，用于逆向，pwd等任务。不过，在我眼里，这可是最好的gdb图形化工具了。（由于进入左脚踏入门所以IDA的动态调试器又卡死了）</p>
+<h2 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h2><p>&#x2F;&#x2F; 下载安装就不说了。</p>
+<p>首先, 编译出来的程序是需要带调试信息的。vs就在编译时选择debug进行编译，gcc就弄-O0 -g选项（本人调试时比较喜欢-O0选项）</p>
+<p>然后用ida打开，配置好调试器就行，</p>
+<h2 id="使用技巧"><a href="#使用技巧" class="headerlink" title="使用技巧"></a>使用技巧</h2><ol>
+<li>当前函数变量的查看<br>例如，下面有一个parse_mount_tag函数,其中如果我想查看full_path, mount_tag，open_path。如何通过堆栈视图查看里面的变量</li>
+</ol>
+<p><img src="/myBlog/mouth/mouth-3/doc/myBlog/../_resources/903db277b8866f00614ff437b0e8783a.png" alt="903db277b8866f00614ff437b0e8783a.png"></p>
+<p><img src="/myBlog/mouth/mouth-3/doc/myBlog/../_resources/45d2c396ec489dee2b060cc3cf137705.png" alt="45d2c396ec489dee2b060cc3cf137705.png"></p>
+<h4 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h4><h5 id="拿full-path举例"><a href="#拿full-path举例" class="headerlink" title="拿full_path举例"></a>拿full_path举例</h5><ol>
+<li><p>记住full_path是一个8字节的指针</p>
+</li>
+<li><p>直接点击<br><code>00005639AE023050 mov     [rbp+full_path], rdi</code><br>里面的rbp+full_path</p>
+</li>
+</ol>
+<p>3.右键四字</p>
+<p>现在就能知道指针的值为<code>5639AF95B970</code>了</p>
+<blockquote>
+<p>单字节为1个字节，双字节为2个字节，双字为4个字节，四字为8字节</p>
+</blockquote>
+<h4 id="指针的指向"><a href="#指针的指向" class="headerlink" title="指针的指向"></a>指针的指向</h4><p><img src="/myBlog/mouth/mouth-3/doc/myBlog/../_resources/8b199698174595ac392a770b62fa265e.png" alt="8b199698174595ac392a770b62fa265e.png"></p>
+<p><img src="/myBlog/mouth/mouth-3/doc/myBlog/../_resources/022aa1bd65967b25e11e48b1c10860fa.png" alt="022aa1bd65967b25e11e48b1c10860fa.png"><br>再拿之前的full_path作举例，由于full_path是一个指针。对于指针，可以双击这个指针，直接跳转到指针指向的地址</p>
+<h4 id="结构体变量的查看"><a href="#结构体变量的查看" class="headerlink" title="结构体变量的查看"></a>结构体变量的查看</h4><p>ctx是一个结构体vfs_file_context_t_0指针，如何方便的查看里面的内容呢<br><img src="/myBlog/mouth/mouth-3/doc/myBlog/../_resources/42274db8836ad190ee94cc986b01efd6.png" alt="42274db8836ad190ee94cc986b01efd6.png"></p>
+<ol>
+<li>首先，在结构体视图中添加vfs_file_context_t_0结构体(一般ida已经自动添加了，可以直接进入下一步)<br><img src="/myBlog/mouth/mouth-3/doc/myBlog/../_resources/705d9a4c88f5882b4ea6699b44021546.png" alt="705d9a4c88f5882b4ea6699b44021546.png"><br><img src="/myBlog/mouth/mouth-3/doc/myBlog/../_resources/3a4b8d36061a71806d7d6bfbed11867f.png" alt="3a4b8d36061a71806d7d6bfbed11867f.png"></li>
+</ol>
+<p><img src="/myBlog/mouth/mouth-3/doc/myBlog/../_resources/61fd714b90ca7cf05f77e911243d9a2a.png" alt="61fd714b90ca7cf05f77e911243d9a2a.png"><br><img src="/myBlog/mouth/mouth-3/doc/myBlog/../_resources/b88ccaae866e2e7524cbd03d8128235a.png" alt="b88ccaae866e2e7524cbd03d8128235a.png"></p>
+<p>视图-&gt;结构体-&gt;空白处右键-&gt;点击添加结构体类型-&gt;Add standard structue-&gt;按ctrl+f-&gt;输入需要查看的结构体类型名称-&gt;双击需要查看的结构体类型名称-&gt;完成</p>
+<p>2.在堆栈中找到指针值，跳到指针指向的地址，在该地址处按alt+q（不建议通过右键去选择结构体，此处选择的结构体是不全的）<br><img src="/myBlog/mouth/mouth-3/doc/myBlog/../_resources/6c1da90cc51e69b26da4628e7eee1304.png" alt="6c1da90cc51e69b26da4628e7eee1304.png"><br>3. 选择结构体（若找不到就跳到第一步），完成<br><img src="/myBlog/mouth/mouth-3/doc/myBlog/../_resources/32ed30af5343d1d8b8a80796460f2716.png" alt="32ed30af5343d1d8b8a80796460f2716.png"></p>
+<p><img src="/myBlog/mouth/mouth-3/doc/myBlog/../_resources/0935742dd40074bfabfdc6a76d43c996.png" alt="0935742dd40074bfabfdc6a76d43c996.png"></p>
+<h4 id="通过堆栈视图查询变量"><a href="#通过堆栈视图查询变量" class="headerlink" title="通过堆栈视图查询变量"></a>通过堆栈视图查询变量</h4><p>有些时候，追踪函数调用执行流时，会查看其中一两个函数的变量，由于此时的rbp，rsp已经改变，不能通过汇编视图直接跳转到堆栈里面去。此时就只能手算堆栈了。</p>
+<p>例如，我想查看vfs_write里面的变量，然而此时的rbp, rsp的环境是在vfs_process_read函数里，如何查看vfs_write的变量<br><img src="/myBlog/mouth/mouth-3/doc/myBlog/../_resources/1740028ff8b4ea816178db71d10c0ad2.png" alt="1740028ff8b4ea816178db71d10c0ad2.png"></p>
+<p>根据x64的规范，进入一个函数后，就会先压一个函数返回地址和rbp<br>反过来，我们先寻找到这个函数返回地址，就能定位到原本的变量位置<br>由此，可以采取下列的方法</p>
+<ol>
+<li><p>在堆栈视图中寻找到vfs_write的返回地址，与vfs_write的调用函数返回地址（也就是vfs_write前一个函数test_simpple_vfs）<br><img src="/myBlog/mouth/mouth-3/doc/myBlog/../_resources/7f3ec074fdff53e827a0ecf4e8378629.png" alt="7f3ec074fdff53e827a0ecf4e8378629.png"><br><img src="/myBlog/mouth/mouth-3/doc/myBlog/../_resources/ec59e268bd3ab0a85ba46a97eb173171.png" alt="ec59e268bd3ab0a85ba46a97eb173171.png"></p>
+</li>
+<li><p>在汇编视图中记录好ida反汇编出来的变量的所在位置，<br><img src="/myBlog/mouth/mouth-3/doc/myBlog/../_resources/dca6ca6e00af2a0ba12793d6a07a7a9b.png" alt="dca6ca6e00af2a0ba12793d6a07a7a9b.png"></p>
+</li>
+<li><p>根据vfs_write的调用函数返回地址进行推断，（根据第二步的位置进行判断，-8为第二格，-10h为第三格，-18h为第四格，-20h为第5格），和变量的所在位置对应好就行</p>
+</li>
+</ol>
+<p><img src="/myBlog/mouth/mouth-3/doc/myBlog/../_resources/7912d1e9d82dd9b35cc314a80c7dce29.png" alt="7912d1e9d82dd9b35cc314a80c7dce29.png"></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>ida还有交叉引用，dump为c、python数组，修补啥的功能太多就不讲了。总之真香。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://example.com/myBlog/mouth/mouth-2/mouth-2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/myBlog/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HvH洋的小站">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/myBlog/mouth/mouth-2/mouth-2/" itemprop="url">第2期 - 资讯，RSS与信息茧房</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2025-04-06T04:15:00+00:00">
+                2025-04-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/myBlog/categories/%E6%AF%8F%E6%9C%88%E9%9A%8F%E7%AC%94/" itemprop="url" rel="index">
+                    <span itemprop="name">每月随笔</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="第2期-资讯，RSS与信息茧房"><a href="#第2期-资讯，RSS与信息茧房" class="headerlink" title="第2期 - 资讯，RSS与信息茧房"></a>第2期 - 资讯，RSS与信息茧房</h1><h2 id="本期要点"><a href="#本期要点" class="headerlink" title="本期要点"></a>本期要点</h2><ul>
+<li>获取有价值，有意义，有趣的文章，资讯</li>
+<li>通过freshrss，readyou自建资讯类app</li>
+<li>通过freshrss爬取网站</li>
+<li>搭建rsshub爬取github等热门网站</li>
+<li>另一类的信息茧房？</li>
+</ul>
+<h2 id="接触RSS"><a href="#接触RSS" class="headerlink" title="接触RSS"></a>接触RSS</h2><p>搜代码搜东西啥的搜多了，总会发现一些比较有创意，有深度的文章。浏览文章的同时，我也很希望能收藏这一个博客。假如将来更新了那自己就能看得了更多。不过，也不是谁有那么多心思天天高强度刷新看有没有更新的。偶然的一次机会，我了解到了RSS，可以在博客更新时接收到更新信息。于是就有了折腾</p>
+<h2 id="RSS与其他资讯类app的不同（这一段写得好乱好杂）"><a href="#RSS与其他资讯类app的不同（这一段写得好乱好杂）" class="headerlink" title="RSS与其他资讯类app的不同（这一段写得好乱好杂）"></a>RSS与其他资讯类app的不同（这一段写得好乱好杂）</h2><p>可以说，最大的不同就是，没有算法下的迎合吧。其他资讯类app，推给你的内容都是大数据分析的。大数据认为你是这样，那内容就是这样。自己被动的接受这样的信息，成为大数据认为的这一类人。而rss是需要自己主动去订阅话题，博客，接收到的信息是自己想要希望要的。</p>
+<h2 id="效果图"><a href="#效果图" class="headerlink" title="效果图"></a>效果图</h2><p><img src="/myBlog/mouth/mouth-2/myBlog/img/mouth-2/32fbdcf115b6c30d5fad80b014f19ba.jpg" alt="3DED8B7C-868C-4F40-B915-9E31A4FA7525.png"></p>
+<p><img src="/myBlog/mouth/mouth-2/myBlog/img/mouth-2/a16dcf5bbd9fc897627f1bf03240edd.jpg" alt="9B349F38-2402-448E-BFA3-4AB9A4B5424D.jpg"></p>
+<h2 id="搭建方式"><a href="#搭建方式" class="headerlink" title="搭建方式"></a>搭建方式</h2><h3 id="freshrss搭建"><a href="#freshrss搭建" class="headerlink" title="freshrss搭建"></a>freshrss搭建</h3><p>freshrss拿docker跑就好，下面附上docker-compose脚本</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">services:</span><br><span class="line">  freshrss:</span><br><span class="line">    image: freshrss/freshrss:latest</span><br><span class="line">    container_name: freshrss</span><br><span class="line">    environment:</span><br><span class="line">      - CRON_MIN=*/20       #每20分钟刷新一次</span><br><span class="line">      - TZ=Asia/Shanghai</span><br><span class="line">      - FRESHRSS_INSTALL=--default-user=admin --api-enabled</span><br><span class="line">      - FRESHRSS_USER=--user=admin --api-password=12345678 --password=12345678&quot;    #两个密码要改改</span><br><span class="line">    volumes:</span><br><span class="line">      - ./data:/var/www/FreshRSS/data</span><br><span class="line">      - ./extensions:/var/www/FreshRSS/extensions</span><br><span class="line">    ports:</span><br><span class="line">      - 7753:80        #左边的8080可以改成服务器上没有用过的端口</span><br><span class="line">    depends_on:</span><br><span class="line">      - postgres</span><br><span class="line">    restart: always</span><br><span class="line"></span><br><span class="line">  postgres:</span><br><span class="line">    image: postgres:alpine</span><br><span class="line">    container_name: freshrss-postgres</span><br><span class="line">    environment:</span><br><span class="line">      - POSTGRES_USER=freshrss</span><br><span class="line">      - POSTGRES_PASSWORD=freshrss    #密码可以自己修改</span><br><span class="line">      - POSTGRES_DB=freshrss</span><br><span class="line">    volumes:</span><br><span class="line">      - ./freshrss-postgres-data:/var/lib/postgresql/data</span><br><span class="line">    restart: always</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>搭好后就能直接进入freshrss后台了。<br>随便找一个rss源，把网址填上去就弄好了</p>
+<h3 id="readyou搭建"><a href="#readyou搭建" class="headerlink" title="readyou搭建"></a>readyou搭建</h3><p>添加帐户，自托管里选Google Reader（不知道为什么选FreshRSS跑不起来），填帐号密码服务器地址</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">服务器地址参考，根据实际进行修改</span><br><span class="line">http://10.8.0.1:7753/api/greader.php/</span><br></pre></td></tr></table></figure>
+
+<p>这样就能在手机上享受rss了。</p>
+<h2 id="rsshub爬取热门网站"><a href="#rsshub爬取热门网站" class="headerlink" title="rsshub爬取热门网站"></a>rsshub爬取热门网站</h2><p>有些博客网站没有rss源，但有许多大佬通过rsshub创造出rss源出来。通过docker部署rsshub，浏览器安装rsshub插件实现功能。<br>下面只附上rsshub的docker-compose脚本</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">version: &#x27;3&#x27;</span><br><span class="line"></span><br><span class="line">services:</span><br><span class="line">    rsshub:</span><br><span class="line">        # two ways to enable puppeteer:</span><br><span class="line">        # * (only on amd64/x86_64) comment out marked lines, then use this image instead: diygod/rsshub:chromium-bundled</span><br><span class="line">        # * (on all supported architectures, but consumes more disk space and memory) leave anything unchanged</span><br><span class="line">        image: diygod/rsshub</span><br><span class="line">        restart: always</span><br><span class="line">        ports:</span><br><span class="line">            - &#x27;7691:1200&#x27; # 按需修改</span><br><span class="line">        environment:</span><br><span class="line">            NODE_ENV: production</span><br><span class="line">            CACHE_TYPE: redis</span><br><span class="line">            REDIS_URL: &#x27;redis://redis:6379/&#x27;</span><br><span class="line">            PUPPETEER_WS_ENDPOINT: &#x27;ws://browserless:3000&#x27;  # marked</span><br><span class="line">        depends_on:</span><br><span class="line">            - redis</span><br><span class="line">            - browserless  # marked</span><br><span class="line"></span><br><span class="line">    browserless:  # marked</span><br><span class="line">        image: browserless/chrome  # marked</span><br><span class="line">        restart: always  # marked</span><br><span class="line">        ulimits:  # marked</span><br><span class="line">          core:  # marked</span><br><span class="line">            hard: 0  # marked</span><br><span class="line">            soft: 0  # marked</span><br><span class="line"></span><br><span class="line">    redis:</span><br><span class="line">        image: redis:alpine</span><br><span class="line">        restart: always</span><br><span class="line">        volumes:</span><br><span class="line">            - ./redis-data:/data</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<h2 id="freshrss通过xpath爬取网站"><a href="#freshrss通过xpath爬取网站" class="headerlink" title="freshrss通过xpath爬取网站"></a>freshrss通过xpath爬取网站</h2><p>对于没有rss源，或者rss源无法使用的网站，可以通过分析xpath方式来爬。下面给出个参考</p>
+<p><img src="/myBlog/mouth/mouth-2/myBlog/img/mouth-2/a8664c7fe43803704a7a3265b38ceff.jpg" alt="C4B93A66-DB6D-46BA-A7C8-0868439A222B.png"></p>
+<p><img src="/myBlog/mouth/mouth-2/myBlog/img/mouth-2/cbde1b80c76f187c76a806adea2e1d7.jpg" alt="CAC30757-4A9D-4CA3-A2BA-B236F750D1CF.png"></p>
+<p><img src="/myBlog/mouth/mouth-2/myBlog/img/mouth-2/6a8779fb08bb82690ef27b249a89055.jpg" alt="C77B1DBB-4B85-4C03-A594-D0D394A7D367.png"></p>
+<p>xpath定位文章这里，定位到每一个文章栏。有多少个栏目，就会爬取多少篇文章。<br>剩下的选项，基本都要带上descendant</p>
+<p>其实浏览器安装个xpath-helper插件，摸索30分钟差不多就学会了</p>
+<p>当然，对于一些爬取带cookie的网站，又得docker搭个cookie管理器，配合起来爬，不过太多不展开了</p>
+<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>其实拿rss作为另一种信息来源，单方面的接收rss的信息，会不会是另一种信息茧房呢。不过嘛，至少比大数据裹挟下的海量信息要好得多了。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://example.com/myBlog/mouth/mouth-1/blog/%E7%AC%AC1%E6%9C%9F%20-%20%E4%BB%8E%E8%BF%9C%E7%A8%8B%E5%8A%9E%E5%85%AC%E5%88%B0%E5%BC%82%E5%9C%B0%E7%BB%84%E7%BD%91%E5%86%8D%E5%88%B0%E4%B8%87%E7%89%A9%E4%BA%92%E8%81%94/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/myBlog/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HvH洋的小站">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/myBlog/mouth/mouth-1/blog/%E7%AC%AC1%E6%9C%9F%20-%20%E4%BB%8E%E8%BF%9C%E7%A8%8B%E5%8A%9E%E5%85%AC%E5%88%B0%E5%BC%82%E5%9C%B0%E7%BB%84%E7%BD%91%E5%86%8D%E5%88%B0%E4%B8%87%E7%89%A9%E4%BA%92%E8%81%94/" itemprop="url">第1期 - 从远程办公到异地组网再到万物互联</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2025-01-20T05:45:06+00:00">
+                2025-01-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/myBlog/categories/%E6%AF%8F%E6%9C%88%E9%9A%8F%E7%AC%94/" itemprop="url" rel="index">
+                    <span itemprop="name">每月随笔</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="本期要点"><a href="#本期要点" class="headerlink" title="本期要点"></a>本期要点</h2><ul>
+<li>一台平板，远控电脑，随时随地进行办公</li>
+<li>异地组网，组建虚拟局域网</li>
+<li>本人对万物互联的认知</li>
+</ul>
+<h2 id="远程办公的折腾"><a href="#远程办公的折腾" class="headerlink" title="远程办公的折腾"></a>远程办公的折腾</h2><p>记得是高二那时候起，我就开始折腾异地组网远程办公了。不过是在高考完后到现在，才比较重视。折腾这玩意的原因嘛，零零散散大概似乎好像是看到一些文章，还有b站上对异地组网的介绍（当时觉得什么个人云电脑这些概念呀真是泰酷辣～）。不过最重要的原因是，笔记本电脑好贵，合适的本子一买就4000起步（不是很想让老爸老妈爆金币）。于是就折腾起来了。</p>
+<p>最开始的时候，我是采用moonlight在家进行串联（当时还没学会搞端口映射转发啥的～），然而串联仅限于在家，走出家门就寄了。真正算得上远程办公呢，是在b站上了解到蒲公英异地组网这产品。感觉自己发现了新天地，一路搜教程搜资料。借助蒲公英异地组网（随便也试了试向日葵的方案，但免费版的向日葵用下来不咋理想）终于搞出在外面也能远联的办法（花了我100大洋买了个蒲公英盒子，只能说能用，跑rdp还行）</p>
+<p>高考完后，我花活多了起来。最重要了解到服务器，docker这概念。之后，去阿里云，腾讯云，百度云，华为云啥的白嫖一个月免费服务器。自从有了服务器，我的远程办公方案终于成熟（基本就是我现在远程办公的方案）。直到现在大三，我也没买笔记本，一直是宿舍台式机加外出用平板远控宿舍台式机。</p>
+<h2 id="远程办公方案"><a href="#远程办公方案" class="headerlink" title="远程办公方案"></a>远程办公方案</h2><h3 id="rustdesk"><a href="#rustdesk" class="headerlink" title="rustdesk"></a>rustdesk</h3><p>用github上的开源项目rustdesk进行远联。体验下来，在4g移动网络下较流畅，目前是我远程办公的首选。</p>
+<h3 id="openvpn-RDP"><a href="#openvpn-RDP" class="headerlink" title="openvpn + RDP"></a>openvpn + RDP</h3><p>每台windows非家庭版的基本上都预装了rdp远程功能（客户端cmd直接执行mstsc，被控端控制面板&#x2F;设置里开），平板直接搜微软远程桌面。在所以方案中rdp协议是最流畅的。然而，RDP有致命弱点，用过RDP都知道，RDP牺牲了显卡的部分功能，（这个表述可能不太准，不过我也没想出更好的解释，就这样啦～），一些依赖显卡工作的程序可能无法正常工作，只好当作备选。(至于openvpn后面再讲)</p>
+<h3 id="frp-RDP"><a href="#frp-RDP" class="headerlink" title="frp + RDP"></a>frp + RDP</h3><p>同上，frp后面再讲</p>
+<h3 id="openvpn-VNC-（当然可以用frp代替openvpn）"><a href="#openvpn-VNC-（当然可以用frp代替openvpn）" class="headerlink" title="openvpn + VNC （当然可以用frp代替openvpn）"></a>openvpn + VNC （当然可以用frp代替openvpn）</h3><p>在我看来，vnc是无奈之选。vnc不咋流畅。但是，很奇怪的是，rustdesk和rdp操控虚拟机软件时会出现键盘鼠标出错的问题，然而vnc没这事。所以，远控时如果要用虚拟机，我会开vnc软件来弄。</p>
+<h2 id="开始重视安全-懒起来了-从frp到openvpn"><a href="#开始重视安全-懒起来了-从frp到openvpn" class="headerlink" title="开始重视安全+懒起来了 - 从frp到openvpn"></a>开始重视安全+懒起来了 - 从frp到openvpn</h2><p>既然都跑云服务器了，自然端口转发端口映射啥也少不了。最开始用frp来端口转发。3389跑a电脑的rdp，3390跑b电脑的rdp，3391跑c电脑的sshd这样。不过，也是逛了许多文章，被各种暴露端口带来的攻击吓到了（纯良小水管服务器经不起这样玩）。不过更重要的原因是每次加一个端口都要改配置，好烦好累不想动。正好了解到openvpn，组建一个虚拟局域网，上述所有难题都被解决。只要开机自启服务，以后端口随便开，啥配置也不用改，就能直接用。而且服务器上只用暴露一个端口（服务器22端口我也禁了），自带加密，太舒服了。可以做到出门在外也能连接到家中任何一个设备，可以随便搭游戏服务器（虽然说朋友是最高配置啦～）。</p>
+<h2 id="单片机也想弄互联"><a href="#单片机也想弄互联" class="headerlink" title="单片机也想弄互联"></a>单片机也想弄互联</h2><p>后面我开始接触单片机，主要是用micropython与arduino ide作为开发语言，主要用esp32开发板来开发。单片机常见是跑mqtt进行互联的，但我总感觉跑mqtt实现不了我理想中的效果（出门在外随时随地访问）。这时，我就开始思考，能不能把开发板也加入到我的虚拟局域网中呢。基于这个想法，我就开始行动。首先是移植openvpn。但看了看源码，太复杂太难啦，不咋现实。最后就对着源码与文档，开wireshake抓包分析协议，写了一个pocketopenvpn（当然也开源在了github上），实现了我想要的效果（不过实测下来还是有bug，但最近忙起来没咋接触单片机了就搁置）。现在我基本上在单片机上开tcp或udp服务端，外出时直接连接就能享受服务。</p>
+<h2 id="自己的万物互联"><a href="#自己的万物互联" class="headerlink" title="自己的万物互联"></a>自己的万物互联</h2><p>一直下来，我有一个想法。能将自己的所有设备，终端互联起来。出门在外，一台手机，一个平板，就能访问任何一个设备，获取信息，执行命令。设备之间相互配合协作，提供强大功能。目前自己只是走了一小步吧，不过希望有一天能实现（咕咕咕～）。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://example.com/myBlog/simple/2023-11-14/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/myBlog/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HvH洋的小站">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/myBlog/simple/2023-11-14/" itemprop="url">初学汇编认识到的一些小玩意</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2023-11-14T00:00:00+00:00">
+                2023-11-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/myBlog/categories/%E9%9B%B6%E7%A2%8E%E7%9A%84%E5%B0%8F%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index">
+                    <span itemprop="name">零碎的小笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="初学汇编认识到的一些小玩意"><a href="#初学汇编认识到的一些小玩意" class="headerlink" title="初学汇编认识到的一些小玩意"></a>初学汇编认识到的一些小玩意</h1><ul>
+<li>sp尽量64字节对齐，不然一些window api 直接报c05错误</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">;sp对齐方式</span><br><span class="line">    and sp,0FF00h	</span><br></pre></td></tr></table></figure>
+
+<p>在调用WindowsApi时，有时候会用到xmm0,ymm0,zmm0等这些寄存器。其中的一些指令是需要内存对齐的。假如sp没有对齐，就会导致内存访问错误。</p>
+<ul>
+<li>调试时，假如出现错误但总找不到错误原因时，那可能错误原因在指令上。</li>
+</ul>
+<p>有些指令的调用是需要一定条件的</p>
+<ul>
+<li>64位调用WindowsApi时,需要预留一些栈空间。（32位不清楚）</li>
+</ul>
+<p>调试时发现，调用WindowsApi时，会在开辟栈空间前，使用部分原有的栈空间。</p>
+<p>也就是说，假如call了WindowsApi，调用完后发现[sp]里面的数据已经变了。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://example.com/myBlog/cython/cython3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/myBlog/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HvH洋的小站">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/myBlog/cython/cython3/" itemprop="url">cython生成dll踩坑记（三）---变量共享篇</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2023-10-15T00:00:00+00:00">
+                2023-10-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/myBlog/categories/cython%E7%9A%84%E5%88%9D%E6%AD%A5%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index">
+                    <span itemprop="name">cython的初步学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="cython生成dll踩坑记（三）—变量共享篇"><a href="#cython生成dll踩坑记（三）—变量共享篇" class="headerlink" title="cython生成dll踩坑记（三）—变量共享篇"></a>cython生成dll踩坑记（三）—变量共享篇</h1><h2 id="2023-10-15"><a href="#2023-10-15" class="headerlink" title="2023-10-15"></a>2023-10-15</h2><p>前两期谈了谈cython的编译生成dll与打包的踩坑，现在来谈谈多线程。   </p>
+<ul>
+<li>坑点一, cython里extern并不能共享变量<br>先看下面一行代码</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">// py_import.h</span><br><span class="line">#pragma once</span><br><span class="line">#include &lt;Windows.h&gt;</span><br><span class="line"> </span><br><span class="line">int a = 0x03;</span><br><span class="line">int *pa = &amp;a;</span><br><span class="line"> </span><br><span class="line">void print_test(int test_a,int *test_pa)&#123;</span><br><span class="line">	printf(&quot;%x %x \n&quot;,test_a,test_pa);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"># test.pyx</span><br><span class="line"># </span><br><span class="line"># cython:language_level=3</span><br><span class="line">#</span><br><span class="line">cdef extern from &quot;py_import.h&quot;:</span><br><span class="line">    int a</span><br><span class="line">    int *pa</span><br><span class="line">    void print_test(int test_a,int *test_pa)</span><br><span class="line"># 只是为了生成头文件才写了这个_函数，不是我们的重点</span><br><span class="line">cdef public void _(): </span><br><span class="line">    pass</span><br><span class="line">print(&quot;from py &quot;)</span><br><span class="line">print_test(a,pa)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">// Dllmain.cpp</span><br><span class="line">#include &lt;Windows.h&gt;</span><br><span class="line">#include &quot;py_import.h&quot;</span><br><span class="line">#define EDLL extern &quot;C&quot; _declspec(dllexport)</span><br><span class="line"> </span><br><span class="line">// 这个是py解释器初始化函数，不是我们的重点</span><br><span class="line">EDLL int py_init() &#123;</span><br><span class="line">    </span><br><span class="line">    PyObject* pmodule = NULL;</span><br><span class="line">    PyImport_AppendInittab(PY_MOUDLE_NAME, PY_MOUDLE_INIT);</span><br><span class="line">    Py_Initialize();</span><br><span class="line">    pmodule = PyImport_ImportModule(PY_MOUDLE_NAME);</span><br><span class="line">    if (pmodule == NULL) &#123;</span><br><span class="line">        return 0;</span><br><span class="line">    &#125;</span><br><span class="line">    else</span><br><span class="line">    &#123;</span><br><span class="line">        return 1;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">// 这个是py解释器清除函数，不是我们的重点</span><br><span class="line">EDLL int py_exit() &#123;</span><br><span class="line">    return Py_FinalizeEx();</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">// 注意dllmain里调用了py_import.h里的print_test()</span><br><span class="line">BOOL APIENTRY DllMain( HMODULE hModule,</span><br><span class="line">                       DWORD  ul_reason_for_call,</span><br><span class="line">                       LPVOID lpReserved</span><br><span class="line">                     )</span><br><span class="line">&#123;</span><br><span class="line">    switch (ul_reason_for_call)</span><br><span class="line">    &#123;</span><br><span class="line">    case DLL_PROCESS_ATTACH:</span><br><span class="line">        printf(&quot;cpp:\n&quot;);</span><br><span class="line">        print_test(a, pa);</span><br><span class="line">        break;</span><br><span class="line">    case DLL_THREAD_ATTACH:</span><br><span class="line">        break;</span><br><span class="line">    case DLL_THREAD_DETACH:</span><br><span class="line">        break;</span><br><span class="line">    case DLL_PROCESS_DETACH:</span><br><span class="line">        break;</span><br><span class="line">    &#125;</span><br><span class="line">    return TRUE;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>简单来说，就是<code>test.pyx</code>和<code>Dllmain.cpp</code>都调用了<code>py_import.h</code>里的<code>print_test()</code>，输出a的数值和a的地址。<br>假如两个文件是cpp，他们的结果是一样的，但假如一个文件是<code>cython</code>，另一个是<code>cpp</code>呢？</p>
+<p>来测试一下吧</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">// 用这个文件生成exe来进行测试</span><br><span class="line"> </span><br><span class="line">#include &lt;Windows.h&gt;</span><br><span class="line"> </span><br><span class="line">typedef int (*py_init)();</span><br><span class="line">typedef void (*py_exit)();</span><br><span class="line"> </span><br><span class="line">int main()&#123;</span><br><span class="line">    HMODULE moudle = LoadLibrary(&quot;test.dll&quot;); // test.dll 就是上面编译出来的dll文件</span><br><span class="line">    py_init _init = (py_init)GetProcAddress(moudle,&quot;py_init&quot;);</span><br><span class="line">    py_exit _exit = (py_exit)GetProcAddress(moudle,&quot;py_exit&quot;);</span><br><span class="line">    _init();</span><br><span class="line">    _exit();</span><br><span class="line">    system(&quot;pause&quot;);</span><br><span class="line">&#125;</span><br><span class="line"> </span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">// 输出结果</span><br><span class="line"> </span><br><span class="line">cpp:</span><br><span class="line">3 e4146040</span><br><span class="line">from py</span><br><span class="line">3 e4146044</span><br><span class="line">请按任意键继续. . .</span><br><span class="line"> </span><br></pre></td></tr></table></figure>
+
+
+<p>根据结果，我们发现，cpp中的a地址和pyx中的a地址是不一样了，换句话说，pyx对<code>py_import.h</code>里的变量做了深拷贝   </p>
+<p>所以，cython里extern并没有与cpp共享变量  </p>
+<ul>
+<li>要共享变量，请使用public，在cython里声明</li>
+</ul>
+<p>现在，我们稍微改动一下代码,</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">// py_import.h</span><br><span class="line">// 注意，这两个变量声明地方换成了pyx</span><br><span class="line">#pragma once</span><br><span class="line">#include &lt;Windows.h&gt;</span><br><span class="line"> </span><br><span class="line">void print_test(int test_a,int *test_pa)&#123;</span><br><span class="line">	printf(&quot;%x %x \n&quot;,test_a,test_pa);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"># test.pyx</span><br><span class="line"># cython: language_level=3</span><br><span class="line">#</span><br><span class="line">cdef extern from &quot;py_import.h&quot;:</span><br><span class="line">    void print_test(int test_a,int *test_pa)</span><br><span class="line"># 注意，两个变量用public声明定义了</span><br><span class="line">cdef public int a = 0x03</span><br><span class="line">cdef public int *pa = &amp;a</span><br><span class="line"># 只是为了生成头文件才写了这个_函数，可忽略</span><br><span class="line">cdef public void _(): </span><br><span class="line">    pass</span><br><span class="line">print(&quot;from py &quot;)</span><br><span class="line">print_test(a,pa)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">// Dllmain.cpp</span><br><span class="line"> </span><br><span class="line">#include &lt;Windows.h&gt;</span><br><span class="line">#include &quot;py_import.h&quot;</span><br><span class="line">#define EDLL extern &quot;C&quot; _declspec(dllexport)</span><br><span class="line"> </span><br><span class="line">// 注意，调用print_test()放在了这里</span><br><span class="line">EDLL int py_init() &#123;</span><br><span class="line">    </span><br><span class="line">    PyObject* pmodule = NULL;</span><br><span class="line">    PyImport_AppendInittab(PY_MOUDLE_NAME, PY_MOUDLE_INIT);</span><br><span class="line">    Py_Initialize();</span><br><span class="line">    pmodule = PyImport_ImportModule(PY_MOUDLE_NAME);</span><br><span class="line">    if (pmodule == NULL) &#123;</span><br><span class="line">        return 0;</span><br><span class="line">    &#125;</span><br><span class="line">    else</span><br><span class="line">    &#123;</span><br><span class="line">        printf(&quot;cpp:\n&quot;);</span><br><span class="line">        print_test(a, pa);</span><br><span class="line">        return 1;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">// 这个是py解释器清除函数，不是我们的重点</span><br><span class="line">EDLL int py_exit() &#123;</span><br><span class="line">    return Py_FinalizeEx();</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">// 注意dllmain里print_test()放到了上面的初始化函数里</span><br><span class="line">BOOL APIENTRY DllMain( HMODULE hModule,</span><br><span class="line">                       DWORD  ul_reason_for_call,</span><br><span class="line">                       LPVOID lpReserved</span><br><span class="line">                     )</span><br><span class="line">&#123;</span><br><span class="line">    switch (ul_reason_for_call)</span><br><span class="line">    &#123;</span><br><span class="line">    case DLL_PROCESS_ATTACH:</span><br><span class="line">        break;</span><br><span class="line">    case DLL_THREAD_ATTACH:</span><br><span class="line">        break;</span><br><span class="line">    case DLL_THREAD_DETACH:</span><br><span class="line">        break;</span><br><span class="line">    case DLL_PROCESS_DETACH:</span><br><span class="line">        break;</span><br><span class="line">    &#125;</span><br><span class="line">    return TRUE;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>就改动这三个地方。<br>简单来说，原来是在<code>py_import.h</code>里声明，变成了在<code>test.pyx</code>里声明。  </p>
+<p>重新编译运行，看看结果</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">from py</span><br><span class="line">3 e41467d8</span><br><span class="line">cpp:</span><br><span class="line">3 e41467d8</span><br><span class="line">请按任意键继续. . .</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>坑点二，当放在pyx声明时，必须先初始化py解释后再调用该变量，否则变量处于未初始化状态。</li>
+</ul>
+<p>这次两个地方的地址就是一样了   </p>
+<p>因此，我们就知道，声明放在cython里，才能和cython共享变量   </p>
+<p>cython三期的踩坑记就这样完成了。<br>本来想说说多线程的，但可惜我能知道的东西也不多。     </p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://example.com/myBlog/cython/cython1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/myBlog/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HvH洋的小站">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/myBlog/cython/cython1/" itemprop="url">cython生成dll踩坑记（一）---基础篇</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2023-10-14T00:00:00+00:00">
+                2023-10-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/myBlog/categories/cython%E7%9A%84%E5%88%9D%E6%AD%A5%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index">
+                    <span itemprop="name">cython的初步学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="cython生成dll踩坑记（一）—基础篇"><a href="#cython生成dll踩坑记（一）—基础篇" class="headerlink" title="cython生成dll踩坑记（一）—基础篇"></a>cython生成dll踩坑记（一）—基础篇</h1><h2 id="2023-10-14"><a href="#2023-10-14" class="headerlink" title="2023-10-14"></a>2023-10-14</h2><p>最近研究了一下cython，花了3天时间才写出了一点成果来（太菜了~~~）。关于cython的教程还是比较少的，大部分还是得自己摸索。（指修完一个bug又出现两个bug）。不过也确实感觉收获了许多。</p>
+<ul>
+<li>坑点一，pyx并不能直接导出函数</li>
+</ul>
+<p>pyx的本质是一个动态链接库，所以，我猜想能不能直接<code>loadlibrary</code>这个动态链接库。于是我写了一个简单的代码测试一下。   </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cdef public func1():</span><br><span class="line">    print(&quot;hello world&quot;)</span><br></pre></td></tr></table></figure>
+
+<p>然后<code>python setup.py build_ext</code>生成pyd文件，拿pe工具一查，这导出表压根就没有func1函数…..</p>
+<p>所以还是得老老实实的，先生成c代码，再生成dll。</p>
+<ul>
+<li>坑点二，初始化写在了<code>DLL_PROCESS_ATTACH</code>与<code>DLL_PROCESS_DETACH</code>里</li>
+</ul>
+<p>一开始，我是这样的</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">    </span><br><span class="line">#define PY_MOUDLE_NAME &quot;test&quot;</span><br><span class="line">#define PY_MOUDLE_INIT PyInit_test   </span><br><span class="line">    </span><br><span class="line">BOOL APIENTRY DllMain( HMODULE hModule,</span><br><span class="line">                       DWORD  ul_reason_for_call,</span><br><span class="line">                       LPVOID lpReserved</span><br><span class="line">                     )</span><br><span class="line">&#123;</span><br><span class="line">    switch (ul_reason_for_call)</span><br><span class="line">    &#123;</span><br><span class="line">    case DLL_PROCESS_ATTACH:</span><br><span class="line">    </span><br><span class="line">        PyObject* pmodule = NULL;</span><br><span class="line">    </span><br><span class="line">        PyImport_AppendInittab(PY_MOUDLE_NAME, PY_MOUDLE_INIT);</span><br><span class="line">        </span><br><span class="line">        Py_Initialize();</span><br><span class="line">    </span><br><span class="line">        pmodule = PyImport_ImportModule(PY_MOUDLE_NAME);</span><br><span class="line">        </span><br><span class="line">        if (pmodule == NULL) &#123;</span><br><span class="line">    </span><br><span class="line">            return FALSE;</span><br><span class="line">        &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line">    </span><br><span class="line">        break;</span><br><span class="line">    case DLL_THREAD_ATTACH:</span><br><span class="line">        break;</span><br><span class="line">    case DLL_THREAD_DETACH:</span><br><span class="line">        break;</span><br><span class="line">    case DLL_PROCESS_DETACH:</span><br><span class="line">        Py_FinalizeEx()</span><br><span class="line">        break;</span><br><span class="line">    &#125;</span><br><span class="line">    return TRUE;</span><br><span class="line">&#125;</span><br><span class="line">    </span><br></pre></td></tr></table></figure>
+
+
+<p>结果发现在自己的电脑里总报错，后来，我选择手动初始化，手动释放，就没报错了</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">#define PY_MOUDLE_NAME &quot;test&quot;</span><br><span class="line">#define PY_MOUDLE_INIT PyInit_test</span><br><span class="line">#define EDLL extern &quot;C&quot; _declspec(dllexport)</span><br><span class="line">    </span><br><span class="line">EDLL int py_init() &#123;</span><br><span class="line">    </span><br><span class="line">    PyObject* pmodule = NULL;</span><br><span class="line">    </span><br><span class="line">    PyImport_AppendInittab(PY_MOUDLE_NAME, PY_MOUDLE_INIT);</span><br><span class="line">    </span><br><span class="line">    Py_Initialize();</span><br><span class="line">    </span><br><span class="line">    pmodule = PyImport_ImportModule(PY_MOUDLE_NAME);</span><br><span class="line">    </span><br><span class="line">    if (pmodule == NULL) &#123;</span><br><span class="line">        return 0;</span><br><span class="line">    &#125;</span><br><span class="line">    else</span><br><span class="line">    &#123;</span><br><span class="line">        return 1;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">     </span><br><span class="line">     </span><br><span class="line">EDLL int py_exit() &#123;</span><br><span class="line">    return Py_FinalizeEx();</span><br><span class="line">&#125;</span><br><span class="line">      </span><br><span class="line">    </span><br><span class="line">BOOL APIENTRY DllMain( HMODULE hModule,</span><br><span class="line">                       DWORD  ul_reason_for_call,</span><br><span class="line">                       LPVOID lpReserved</span><br><span class="line">                     )</span><br><span class="line">&#123;</span><br><span class="line">    switch (ul_reason_for_call)</span><br><span class="line">    &#123;</span><br><span class="line">    case DLL_PROCESS_ATTACH:</span><br><span class="line">        break;</span><br><span class="line">    case DLL_THREAD_ATTACH:</span><br><span class="line">        break;</span><br><span class="line">    case DLL_THREAD_DETACH:</span><br><span class="line">        break;</span><br><span class="line">    case DLL_PROCESS_DETACH:</span><br><span class="line">        break;</span><br><span class="line">    &#125;</span><br><span class="line">    return TRUE;</span><br><span class="line">&#125;</span><br><span class="line">    </span><br></pre></td></tr></table></figure>
+
+
+<ul>
+<li>坑点三，<code>Py_Init_...()</code>函数不管用</li>
+</ul>
+<p>本来开始时，我的代码是</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">    </span><br><span class="line">Py_Initialize();</span><br><span class="line">PyInit_test();</span><br><span class="line">    </span><br></pre></td></tr></table></figure>
+<p>结果发现一直报指针访问不能为nullptr。<br>后来改成下面这样就好了。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">PyImport_AppendInittab(&quot;test&quot;, PyInit_test);</span><br><span class="line">Py_Initialize();</span><br><span class="line">PyImport_ImportModule(&quot;test&quot;);</span><br></pre></td></tr></table></figure>
+
+<p>小提示: <code>cython3.x</code>版本用<code>Py_Init_...()</code>用这个过不了编译</p>
+<ul>
+<li>坑点四，<code>__PYX_EXTERN_C</code>不能加<code>_declspec(dllexport)</code></li>
+</ul>
+<p>看了cython生成的头文件，发现每个导出函数都有<code>__PYX_EXTERN_C</code>，于是添了个<code>_declspec(dllexport)</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#define __PYX_EXTERN_C extern &quot;C&quot; _declspec(dllexport)</span><br></pre></td></tr></table></figure>
+
+
+<p>结果发现无效<br>只能老老实实写函数去包装了</p>
+<ul>
+<li>坑点五，无返回值时，返回值位PyObject问题</li>
+</ul>
+<p>在编写cython函数时，无返回值的函数最好加上<code>void</code>而不是不写。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># 建议不要这样写</span><br><span class="line">cdef public func1():</span><br><span class="line">    print(&quot;hello world&quot;)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># 而应该这样写</span><br><span class="line">cdef pubilc void func1():</span><br><span class="line">    print(&quot;hello world&quot;)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>坑点六，字符串问题</li>
+</ul>
+<p>c语言的<code>wchar_t</code>能直接当作cython的str类型来用。<br>c语言的<code>char *</code>能直接当作cython的bytes类型来用。</p>
+<p>但是cython的str类型不能在c++文件里直接使用，要用<code>Py_UNICODE</code>。(bytes还没测试过) </p>
+<p>其中<code>Py_UNICODE</code>是<code>wchar_t</code>的别名  </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">typedef wchar_t Py_UNICODE</span><br></pre></td></tr></table></figure>
+
+<p>而<code>Py_UNICODE</code>在<code>python.h</code>头文件和<code>cython</code>里均有定义</p>
+<p>所以本人就直接在<code>cython</code>和c++文件统一用<code>Py_UNICODE</code>了（懒得思考类型转换问题）    </p>
+<p>举个例子</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># test.pyx</span><br><span class="line">    </span><br><span class="line">cdef public void test1(Py_UNICODE *a):</span><br><span class="line">    print(a)</span><br><span class="line">    </span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">// dllmain.cpp</span><br><span class="line">    </span><br><span class="line">#define EDLL extern &quot;C&quot; _declspec(dllexport)</span><br><span class="line">    </span><br><span class="line">EDLL void py_test1(Py_UNICODE *a)&#123;</span><br><span class="line">    return test1(a);</span><br><span class="line">&#125;</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<p>生成dll后调用<code>py_test1</code>,传参<code>wchar_t</code>，就能在控制台打印出字符串了。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">注意: char* 在cython中的类型是bytes，而且还需要考虑末尾填&#x27;\0&#x27;。</span><br></pre></td></tr></table></figure>
+
+
+
+<p>大体上我编译时遇到的问题就这些了。<br>基础篇就这些内容了，下一次就谈谈dll生成后的打包方式与变量共享问题吧    </p>
+<ul>
+<li>最后给个小提示，在开发时，把多用try把代码包起来，然后在except中print错误信息，能极大提高找bug效率</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://example.com/myBlog/cython/cython2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/myBlog/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HvH洋的小站">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/myBlog/cython/cython2/" itemprop="url">cython生成dll踩坑记（二）---打包篇</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2023-10-14T00:00:00+00:00">
+                2023-10-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/myBlog/categories/cython%E7%9A%84%E5%88%9D%E6%AD%A5%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index">
+                    <span itemprop="name">cython的初步学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="cython生成dll踩坑记（二）—打包篇"><a href="#cython生成dll踩坑记（二）—打包篇" class="headerlink" title="cython生成dll踩坑记（二）—打包篇"></a>cython生成dll踩坑记（二）—打包篇</h1><h2 id="2023-10-14"><a href="#2023-10-14" class="headerlink" title="2023-10-14"></a>2023-10-14</h2><p>上一期简单谈谈了cython生成dll的一些坑。  </p>
+<p>这一期呢，就打算谈谈怎么打包了。   </p>
+<p>假如你已经生成好dll了，然后写好exe调用这个dll，现在呢，你想这这些东西发布出去，结果发现在别人电脑里运行不了。。。。   </p>
+<p>一看，发现这个cython生成的dll依赖python3x.dll，可每个人都不会全是程序猿呀，没有python的环境。。。</p>
+<p>而且有时候，有python环境，反而会造成程序运行不了。。。  </p>
+<p>不当谜语人了，直接开始吧   </p>
+<ul>
+<li>通过embed包进行打包</li>
+</ul>
+<p>python官网中除了标准包，还有一种embed包，里面集成了基本的python环境。下载才6m，解压后就10m。用来制作发布包十分合适。</p>
+<ul>
+<li>坑点1，3.7.2embed包无法使用<br>起初我是下了3.7.2embed包，发现居然用不了。后来下了3.8.1embed包。这个包就能直接用（不知道是什么问题。。）</li>
+</ul>
+<p>下完后，会发现里面没有pip，没有tk库之类的（不过我还没有研究tk库，就只针对没有pip的情况）。   </p>
+<p>所以，我们就把pip下回来，然后把第三方模块安装。当然，pip占用10m，还是比较大的。所以我们最后再把pip卸载掉。（直接uninstall pip，setuptools就好，而且这个卸载还也确实挺干净的）   </p>
+<ul>
+<li>下面是我的方式</li>
+</ul>
+<p>首先，在embed包中，找到<code>python3x._pth</code>结尾的文件（x是版本号），修改里面内容，将site的#删去。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">改成下面这样</span><br><span class="line"></span><br><span class="line">python38.zip</span><br><span class="line">.</span><br><span class="line"></span><br><span class="line"># Uncomment to run site.main() automatically</span><br><span class="line">import site</span><br><span class="line">```  </span><br><span class="line"></span><br><span class="line">之后，把pip装回来。你可以采用get-pip.py的方式或者将电脑上另一个python标准包中的pip，setuptools，easy_install.py,pkg_resources复制到Lib/site-packages里（当然这个文件夹需要你自己新建）</span><br><span class="line"></span><br><span class="line">接着，下载需要的第三方模块</span><br></pre></td></tr></table></figure>
+<p>python -m pip install xxx</p>
+<pre><code>
+最后，将pip，setuptools卸载掉（只需卸载这两个就行啦）   
+
+* 坑点二，先卸setuptools，再卸pip，不要问为什么。。。。。
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">python -m pip uninstall setuptools</span><br><span class="line">python -m pip uninstall pip</span><br><span class="line">~~~  </span><br><span class="line"></span><br><span class="line">现在，基本的python打包环境就已经安装好了。直接把cython生成的dll拖进embed包里，然后exe加载这个dll就行了。     </span><br><span class="line"></span><br><span class="line">这样就解决了依赖python3x.dll的问题。    </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">好了，接下来我们来谈另一个问题，上面的内容都走了一遍，结果发现运行后闪退。。。   </span><br><span class="line"></span><br><span class="line">假如你电脑上还有另一个python环境，而且是相同版本的，那么，下面内容也许对你有帮助，假如不是，那就检查一下自己的代码，或者另寻他路。  </span><br><span class="line"></span><br><span class="line">当时我遇到这个问题时，我也一直没想出个所以然。之后吃饭的时候，我突然意识到dll加载顺序问题。    </span><br><span class="line">拿出调试器一看，果然,cython生成的dll需要python3x.dll，但是它并没有加载embed包下的python3x.dll，而是顺着系统环境变量直接找另一个标准包上的python3x.dll了。   </span><br><span class="line">* 解决办法很简单，在加载cython的dll前提前加载embed包下的python3x.dll就行了   </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+    
+// 之前的代码是这样的
+// test.dll 是cython生成的dll
+    
+HMODULE moudle = LoadLibrary(&quot;test.dll&quot;);
+ 
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+ 
+// 修改后
+ 
+LoadLibrary(&quot;python-3.8.1-embed-win32/python38.dll&quot;);
+HMODULE moudle = LoadLibrary(&quot;test.dll&quot;);
+ 
+~~~
+ 
+test.dll依赖python38.dll，但我们提前加载好python38.dll，win装载器不会傻愣愣地顺着环境变量跑去另一个python环境，而且系统也不会重新装载，于是就解决问题了。   
+
+打包的问题解决了，那exe也就能发布出去了    
+
+下一期是关于cython变量共享踩坑记。
+
+</code></pre>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+  </section>
+
+  
+
+
+          </div>
+          
+
+
+          
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/myBlog/archives">
+              
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/myBlog/categories/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/myBlog/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">hvhghv</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/myBlog/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/myBlog/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/myBlog/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/myBlog/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/myBlog/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/myBlog/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/myBlog/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/myBlog/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/myBlog/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/myBlog/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+
+  
+
+
+  <script type="text/javascript" src="/myBlog/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

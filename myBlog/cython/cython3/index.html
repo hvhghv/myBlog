@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/myBlog/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/myBlog/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/myBlog/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/myBlog/images/apple-touch-icon.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/myBlog/images/favicon-32x32.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/myBlog/images/favicon-16x16.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/myBlog/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+  <link rel="alternate" href="/myBlog/atom.xml" title="HvH洋的小站" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="cython生成dll踩坑记（三）—变量共享篇2023-10-15前两期谈了谈cython的编译生成dll与打包的踩坑，现在来谈谈多线程。     坑点一, cython里extern并不能共享变量先看下面一行代码  12345678910&#x2F;&#x2F; py_import.h#pragma once#include &lt;Windows.h&gt; int a &#x3D; 0x03;int *pa &#x3D; &amp;amp">
+<meta property="og:type" content="article">
+<meta property="og:title" content="cython生成dll踩坑记（三）---变量共享篇">
+<meta property="og:url" content="http://example.com/cython/cython3/index.html">
+<meta property="og:site_name" content="HvH洋的小站">
+<meta property="og:description" content="cython生成dll踩坑记（三）—变量共享篇2023-10-15前两期谈了谈cython的编译生成dll与打包的踩坑，现在来谈谈多线程。     坑点一, cython里extern并不能共享变量先看下面一行代码  12345678910&#x2F;&#x2F; py_import.h#pragma once#include &lt;Windows.h&gt; int a &#x3D; 0x03;int *pa &#x3D; &amp;amp">
+<meta property="og:locale">
+<meta property="article:published_time" content="2023-10-15T00:00:00.000Z">
+<meta property="article:modified_time" content="2025-05-06T10:36:36.112Z">
+<meta property="article:author" content="hvhghv">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Pisces',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://example.com/cython/cython3/"/>
+
+
+
+
+
+  <title>cython生成dll踩坑记（三）---变量共享篇 | HvH洋的小站</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/myBlog/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">HvH洋的小站</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/myBlog/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/myBlog/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/myBlog/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-github">
+          <a target="_blank" href="https://github.com/hvhghv" rel="section noopener">
+            
+              <i class="menu-item-icon fa fa-fw fa-github"></i> <br />
+            
+            GitHub
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://example.com/myBlog/cython/cython3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/myBlog/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HvH洋的小站">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">cython生成dll踩坑记（三）---变量共享篇</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2023-10-15T00:00:00+00:00">
+                2023-10-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/myBlog/categories/cython%E7%9A%84%E5%88%9D%E6%AD%A5%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index">
+                    <span itemprop="name">cython的初步学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="cython生成dll踩坑记（三）—变量共享篇"><a href="#cython生成dll踩坑记（三）—变量共享篇" class="headerlink" title="cython生成dll踩坑记（三）—变量共享篇"></a>cython生成dll踩坑记（三）—变量共享篇</h1><h2 id="2023-10-15"><a href="#2023-10-15" class="headerlink" title="2023-10-15"></a>2023-10-15</h2><p>前两期谈了谈cython的编译生成dll与打包的踩坑，现在来谈谈多线程。   </p>
+<ul>
+<li>坑点一, cython里extern并不能共享变量<br>先看下面一行代码</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">// py_import.h</span><br><span class="line">#pragma once</span><br><span class="line">#include &lt;Windows.h&gt;</span><br><span class="line"> </span><br><span class="line">int a = 0x03;</span><br><span class="line">int *pa = &amp;a;</span><br><span class="line"> </span><br><span class="line">void print_test(int test_a,int *test_pa)&#123;</span><br><span class="line">	printf(&quot;%x %x \n&quot;,test_a,test_pa);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"># test.pyx</span><br><span class="line"># </span><br><span class="line"># cython:language_level=3</span><br><span class="line">#</span><br><span class="line">cdef extern from &quot;py_import.h&quot;:</span><br><span class="line">    int a</span><br><span class="line">    int *pa</span><br><span class="line">    void print_test(int test_a,int *test_pa)</span><br><span class="line"># 只是为了生成头文件才写了这个_函数，不是我们的重点</span><br><span class="line">cdef public void _(): </span><br><span class="line">    pass</span><br><span class="line">print(&quot;from py &quot;)</span><br><span class="line">print_test(a,pa)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">// Dllmain.cpp</span><br><span class="line">#include &lt;Windows.h&gt;</span><br><span class="line">#include &quot;py_import.h&quot;</span><br><span class="line">#define EDLL extern &quot;C&quot; _declspec(dllexport)</span><br><span class="line"> </span><br><span class="line">// 这个是py解释器初始化函数，不是我们的重点</span><br><span class="line">EDLL int py_init() &#123;</span><br><span class="line">    </span><br><span class="line">    PyObject* pmodule = NULL;</span><br><span class="line">    PyImport_AppendInittab(PY_MOUDLE_NAME, PY_MOUDLE_INIT);</span><br><span class="line">    Py_Initialize();</span><br><span class="line">    pmodule = PyImport_ImportModule(PY_MOUDLE_NAME);</span><br><span class="line">    if (pmodule == NULL) &#123;</span><br><span class="line">        return 0;</span><br><span class="line">    &#125;</span><br><span class="line">    else</span><br><span class="line">    &#123;</span><br><span class="line">        return 1;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">// 这个是py解释器清除函数，不是我们的重点</span><br><span class="line">EDLL int py_exit() &#123;</span><br><span class="line">    return Py_FinalizeEx();</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">// 注意dllmain里调用了py_import.h里的print_test()</span><br><span class="line">BOOL APIENTRY DllMain( HMODULE hModule,</span><br><span class="line">                       DWORD  ul_reason_for_call,</span><br><span class="line">                       LPVOID lpReserved</span><br><span class="line">                     )</span><br><span class="line">&#123;</span><br><span class="line">    switch (ul_reason_for_call)</span><br><span class="line">    &#123;</span><br><span class="line">    case DLL_PROCESS_ATTACH:</span><br><span class="line">        printf(&quot;cpp:\n&quot;);</span><br><span class="line">        print_test(a, pa);</span><br><span class="line">        break;</span><br><span class="line">    case DLL_THREAD_ATTACH:</span><br><span class="line">        break;</span><br><span class="line">    case DLL_THREAD_DETACH:</span><br><span class="line">        break;</span><br><span class="line">    case DLL_PROCESS_DETACH:</span><br><span class="line">        break;</span><br><span class="line">    &#125;</span><br><span class="line">    return TRUE;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>简单来说，就是<code>test.pyx</code>和<code>Dllmain.cpp</code>都调用了<code>py_import.h</code>里的<code>print_test()</code>，输出a的数值和a的地址。<br>假如两个文件是cpp，他们的结果是一样的，但假如一个文件是<code>cython</code>，另一个是<code>cpp</code>呢？</p>
+<p>来测试一下吧</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">// 用这个文件生成exe来进行测试</span><br><span class="line"> </span><br><span class="line">#include &lt;Windows.h&gt;</span><br><span class="line"> </span><br><span class="line">typedef int (*py_init)();</span><br><span class="line">typedef void (*py_exit)();</span><br><span class="line"> </span><br><span class="line">int main()&#123;</span><br><span class="line">    HMODULE moudle = LoadLibrary(&quot;test.dll&quot;); // test.dll 就是上面编译出来的dll文件</span><br><span class="line">    py_init _init = (py_init)GetProcAddress(moudle,&quot;py_init&quot;);</span><br><span class="line">    py_exit _exit = (py_exit)GetProcAddress(moudle,&quot;py_exit&quot;);</span><br><span class="line">    _init();</span><br><span class="line">    _exit();</span><br><span class="line">    system(&quot;pause&quot;);</span><br><span class="line">&#125;</span><br><span class="line"> </span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">// 输出结果</span><br><span class="line"> </span><br><span class="line">cpp:</span><br><span class="line">3 e4146040</span><br><span class="line">from py</span><br><span class="line">3 e4146044</span><br><span class="line">请按任意键继续. . .</span><br><span class="line"> </span><br></pre></td></tr></table></figure>
+
+
+<p>根据结果，我们发现，cpp中的a地址和pyx中的a地址是不一样了，换句话说，pyx对<code>py_import.h</code>里的变量做了深拷贝   </p>
+<p>所以，cython里extern并没有与cpp共享变量  </p>
+<ul>
+<li>要共享变量，请使用public，在cython里声明</li>
+</ul>
+<p>现在，我们稍微改动一下代码,</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">// py_import.h</span><br><span class="line">// 注意，这两个变量声明地方换成了pyx</span><br><span class="line">#pragma once</span><br><span class="line">#include &lt;Windows.h&gt;</span><br><span class="line"> </span><br><span class="line">void print_test(int test_a,int *test_pa)&#123;</span><br><span class="line">	printf(&quot;%x %x \n&quot;,test_a,test_pa);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"># test.pyx</span><br><span class="line"># cython: language_level=3</span><br><span class="line">#</span><br><span class="line">cdef extern from &quot;py_import.h&quot;:</span><br><span class="line">    void print_test(int test_a,int *test_pa)</span><br><span class="line"># 注意，两个变量用public声明定义了</span><br><span class="line">cdef public int a = 0x03</span><br><span class="line">cdef public int *pa = &amp;a</span><br><span class="line"># 只是为了生成头文件才写了这个_函数，可忽略</span><br><span class="line">cdef public void _(): </span><br><span class="line">    pass</span><br><span class="line">print(&quot;from py &quot;)</span><br><span class="line">print_test(a,pa)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">// Dllmain.cpp</span><br><span class="line"> </span><br><span class="line">#include &lt;Windows.h&gt;</span><br><span class="line">#include &quot;py_import.h&quot;</span><br><span class="line">#define EDLL extern &quot;C&quot; _declspec(dllexport)</span><br><span class="line"> </span><br><span class="line">// 注意，调用print_test()放在了这里</span><br><span class="line">EDLL int py_init() &#123;</span><br><span class="line">    </span><br><span class="line">    PyObject* pmodule = NULL;</span><br><span class="line">    PyImport_AppendInittab(PY_MOUDLE_NAME, PY_MOUDLE_INIT);</span><br><span class="line">    Py_Initialize();</span><br><span class="line">    pmodule = PyImport_ImportModule(PY_MOUDLE_NAME);</span><br><span class="line">    if (pmodule == NULL) &#123;</span><br><span class="line">        return 0;</span><br><span class="line">    &#125;</span><br><span class="line">    else</span><br><span class="line">    &#123;</span><br><span class="line">        printf(&quot;cpp:\n&quot;);</span><br><span class="line">        print_test(a, pa);</span><br><span class="line">        return 1;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">// 这个是py解释器清除函数，不是我们的重点</span><br><span class="line">EDLL int py_exit() &#123;</span><br><span class="line">    return Py_FinalizeEx();</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">// 注意dllmain里print_test()放到了上面的初始化函数里</span><br><span class="line">BOOL APIENTRY DllMain( HMODULE hModule,</span><br><span class="line">                       DWORD  ul_reason_for_call,</span><br><span class="line">                       LPVOID lpReserved</span><br><span class="line">                     )</span><br><span class="line">&#123;</span><br><span class="line">    switch (ul_reason_for_call)</span><br><span class="line">    &#123;</span><br><span class="line">    case DLL_PROCESS_ATTACH:</span><br><span class="line">        break;</span><br><span class="line">    case DLL_THREAD_ATTACH:</span><br><span class="line">        break;</span><br><span class="line">    case DLL_THREAD_DETACH:</span><br><span class="line">        break;</span><br><span class="line">    case DLL_PROCESS_DETACH:</span><br><span class="line">        break;</span><br><span class="line">    &#125;</span><br><span class="line">    return TRUE;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>就改动这三个地方。<br>简单来说，原来是在<code>py_import.h</code>里声明，变成了在<code>test.pyx</code>里声明。  </p>
+<p>重新编译运行，看看结果</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">from py</span><br><span class="line">3 e41467d8</span><br><span class="line">cpp:</span><br><span class="line">3 e41467d8</span><br><span class="line">请按任意键继续. . .</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>坑点二，当放在pyx声明时，必须先初始化py解释后再调用该变量，否则变量处于未初始化状态。</li>
+</ul>
+<p>这次两个地方的地址就是一样了   </p>
+<p>因此，我们就知道，声明放在cython里，才能和cython共享变量   </p>
+<p>cython三期的踩坑记就这样完成了。<br>本来想说说多线程的，但可惜我能知道的东西也不多。     </p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/myBlog/cython/cython1/" rel="next" title="cython生成dll踩坑记（一）---基础篇">
+                <i class="fa fa-chevron-left"></i> cython生成dll踩坑记（一）---基础篇
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/myBlog/simple/2023-11-14/" rel="prev" title="初学汇编认识到的一些小玩意">
+                初学汇编认识到的一些小玩意 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/myBlog/archives">
+              
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/myBlog/categories/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/myBlog/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#cython%E7%94%9F%E6%88%90dll%E8%B8%A9%E5%9D%91%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89%E2%80%94%E5%8F%98%E9%87%8F%E5%85%B1%E4%BA%AB%E7%AF%87"><span class="nav-number">1.</span> <span class="nav-text">cython生成dll踩坑记（三）—变量共享篇</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2023-10-15"><span class="nav-number">1.1.</span> <span class="nav-text">2023-10-15</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">hvhghv</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/myBlog/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/myBlog/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/myBlog/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/myBlog/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/myBlog/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/myBlog/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/myBlog/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/myBlog/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/myBlog/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/myBlog/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/myBlog/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/myBlog/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/myBlog/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
