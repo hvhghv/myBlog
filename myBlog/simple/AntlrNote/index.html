@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/myBlog/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/myBlog/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/myBlog/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/myBlog/images/apple-touch-icon.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/myBlog/images/favicon-32x32.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/myBlog/images/favicon-16x16.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/myBlog/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+  <link rel="alternate" href="/myBlog/atom.xml" title="HvH洋的小站" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="Antlr学习与探索 注： 本篇属于博主早期学习编程时编写，可能会出现一些误区，不恰当，不适合的内容，仅供参考  2023-12-01刚开始建博客的时候，在markdown这里呢，没有适合我需求的框架。于是就自己去写。 不过回想起来，拿正则去解析markdown，未免也太抽象了~~~   最近了解到了antlr，发现确实是个好东西。于是就去学了学一下。 然后就用上自己的博客。 antlr的一些注意">
+<meta property="og:type" content="article">
+<meta property="og:title" content="初学汇编的一点笔记">
+<meta property="og:url" content="https://hvhghv.github.io/myBlog/simple/AntlrNote/index.html">
+<meta property="og:site_name" content="HvH洋的小站">
+<meta property="og:description" content="Antlr学习与探索 注： 本篇属于博主早期学习编程时编写，可能会出现一些误区，不恰当，不适合的内容，仅供参考  2023-12-01刚开始建博客的时候，在markdown这里呢，没有适合我需求的框架。于是就自己去写。 不过回想起来，拿正则去解析markdown，未免也太抽象了~~~   最近了解到了antlr，发现确实是个好东西。于是就去学了学一下。 然后就用上自己的博客。 antlr的一些注意">
+<meta property="og:locale">
+<meta property="article:published_time" content="2023-12-01T00:00:00.000Z">
+<meta property="article:modified_time" content="2025-05-07T08:12:27.541Z">
+<meta property="article:author" content="hvhghv">
+<meta property="article:tag" content="偶尔会更新一小下。也许一点小思路会自己长出来的 &gt;.&lt;">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Pisces',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://hvhghv.github.io/myBlog/simple/AntlrNote/"/>
+
+
+
+
+
+  <title>初学汇编的一点笔记 | HvH洋的小站</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/myBlog/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">HvH洋的小站</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">--在多睡一小会，一小会--</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/myBlog/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/myBlog/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/myBlog/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-messageboard">
+          <a href="/myBlog/messageboard/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-edit"></i> <br />
+            
+            留言板
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-github">
+          <a target="_blank" href="https://github.com/hvhghv" rel="section noopener">
+            
+              <i class="menu-item-icon fa fa-fw fa-github"></i> <br />
+            
+            GitHub
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://hvhghv.github.io/myBlog/myBlog/simple/AntlrNote/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/myBlog/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HvH洋的小站">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">初学汇编的一点笔记</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2023-12-01T00:00:00+00:00">
+                2023-12-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/myBlog/categories/%E9%9B%B6%E7%A2%8E%E7%9A%84%E5%B0%8F%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index">
+                    <span itemprop="name">零碎的小笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Antlr学习与探索"><a href="#Antlr学习与探索" class="headerlink" title="Antlr学习与探索"></a>Antlr学习与探索</h1><blockquote>
+<p>注： 本篇属于博主早期学习编程时编写，可能会出现一些误区，不恰当，不适合的内容，仅供参考</p>
+</blockquote>
+<h2 id="2023-12-01"><a href="#2023-12-01" class="headerlink" title="2023-12-01"></a>2023-12-01</h2><p>刚开始建博客的时候，在markdown这里呢，没有适合我需求的框架。于是就自己去写。</p>
+<p>不过回想起来，拿正则去解析markdown，未免也太抽象了~~~  </p>
+<p>最近了解到了antlr，发现确实是个好东西。于是就去学了学一下。</p>
+<p>然后就用上自己的博客。</p>
+<h3 id="antlr的一些注意事项"><a href="#antlr的一些注意事项" class="headerlink" title="antlr的一些注意事项"></a>antlr的一些注意事项</h3><ul>
+<li>语法解析器和词法解析器分别编写</li>
+</ul>
+<p>antlr可以直接一个文件直接写就行，不区分语法解析器和词法解析器，但是这样就少了词法解析器的一些比较好用的功能。</p>
+<p>所以，我的习惯是，新建两个文件，将语法解析器和词法解析器区分就好了。</p>
+<p>那么这个时候，两个文件的开头应该是这样</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// m.g4</span><br><span class="line">grammar m;</span><br><span class="line">options &#123; tokenVocab = mLexer; &#125;</span><br><span class="line"></span><br><span class="line">// ...</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// mLexer.g4</span><br><span class="line">lexer grammar mLexer;</span><br><span class="line"></span><br><span class="line">// ...</span><br></pre></td></tr></table></figure>
+
+<p>注意如果你的的第一个文件名为<code>m.g4</code>,那么另一个就应为<code>mLexer.g4</code>,要不然后期是编译不了的</p>
+<blockquote>
+<p>其实也可以把<code>m.g4</code>改为<code>mParser.g4</code>的，之后<code>mParser.g4</code>开头<code>grammar</code>改为<code>parser grammar</code>，不过笔者也没尝试过（程序能跑就行哈哈）</p>
+</blockquote>
+<h3 id="如何去编写antlr内容"><a href="#如何去编写antlr内容" class="headerlink" title="如何去编写antlr内容"></a>如何去编写antlr内容</h3><blockquote>
+<p>本文需要对antlr的语法有一定的了解</p>
+</blockquote>
+<p>本来，<code>antlr</code>拥有动作，语义判定，错误处理等强大的功能的。但是，这些似乎是语言相关的（笔者也没验证过，只是我是这样理解的）</p>
+<p>另一方面，也存在着解析的目标，逻辑比较复杂的情况</p>
+<p>所以，我就围绕着<code>antlr</code>的<code>pushMode</code>,<code>popMode</code>,<code>mode</code>这些功能来编写词法解析器。</p>
+<p>只需要按照这个下面这个简单的模板来设计，就能很快编写好词法解析器文件了</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">入口(pushMode) + 内容 + 出口(popMode)</span><br></pre></td></tr></table></figure>
+
+<p>有了词法解析器，也就能很快的编写语法解析器<br>而语法解析器，就对每一个mode内部各个词法进行打包一下，比如将一个字符组成一个字符串之类的<br>每一处语法对应一处词法的mode，之后再整合起来，就能实现一个完整的解析器了。</p>
+<p>下面这些是我总结出来的经验</p>
+<ul>
+<li><p>词法解析器里面少用<code>+</code>或者<code>*</code>号，这些建议留到语法解析器里面处理<br>因为这可能会导致词法解析器死啃一个词法导致其他词法失效的问题</p>
+</li>
+<li><p>只要有入口，有出口，就直接无脑写出一个mode来就好了。剩下的交给语法解析器</p>
+</li>
+</ul>
+<h3 id="自已编写的markdown"><a href="#自已编写的markdown" class="headerlink" title="自已编写的markdown"></a>自已编写的markdown</h3><p>下面就开源一份我自己编写的markdown的g4文件</p>
+<p>这份为<code>md.g4</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br></pre></td><td class="code"><pre><span class="line">grammar md;</span><br><span class="line">options &#123; tokenVocab = mdLexer; &#125;</span><br><span class="line"></span><br><span class="line">init: expr*;</span><br><span class="line"></span><br><span class="line">expr: </span><br><span class="line">	  h1_expr</span><br><span class="line">	| h2_expr</span><br><span class="line">	| h3_expr</span><br><span class="line">	| h4_expr</span><br><span class="line">	| h5_expr</span><br><span class="line">	| h6_expr</span><br><span class="line">	| code_text_expr</span><br><span class="line">	| divide_expr </span><br><span class="line">	| quote_expr</span><br><span class="line">	| list_expr</span><br><span class="line">	| text_expr</span><br><span class="line">	| space_expr</span><br><span class="line">	</span><br><span class="line">	;</span><br><span class="line"></span><br><span class="line">// EXPR</span><br><span class="line">h1_expr: h1_element;</span><br><span class="line">h2_expr: h2_element;</span><br><span class="line">h3_expr: h3_element;</span><br><span class="line">h4_expr: h4_element;</span><br><span class="line">h5_expr: h5_element;</span><br><span class="line">h6_expr: h6_element;</span><br><span class="line">code_text_expr: code_text_element;</span><br><span class="line">divide_expr: divide_element;</span><br><span class="line">list_expr: list_data;</span><br><span class="line">text_expr: text_element;</span><br><span class="line">quote_expr : quote_data;</span><br><span class="line">space_expr: space_element;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// head</span><br><span class="line">h1_element: H1 all_head_string STRINGEND;</span><br><span class="line">h2_element: H2 all_head_string STRINGEND;</span><br><span class="line">h3_element: H3 all_head_string STRINGEND;</span><br><span class="line">h4_element: H4 all_head_string STRINGEND;</span><br><span class="line">h5_element: H5 all_head_string STRINGEND;</span><br><span class="line">h6_element: H6 all_head_string STRINGEND;</span><br><span class="line">all_head_string: HEADSTRING+;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// CODE_TEXT_MODE_R</span><br><span class="line">code_text_element: CODE_TEXT all_code_text_string CODE_TEXT_END;</span><br><span class="line">all_code_text_string: CODE_TEXT_STRING+;</span><br><span class="line"></span><br><span class="line">// IF_LINK_IMAGE_TAB_MODE_R</span><br><span class="line">link_element:</span><br><span class="line">	(LINK_TAB | TEXT_LINK_TAB | QUOTE_LINK_TAB | LIST_LINK_TAB) all_link_image_string IF_LINK_IMAGE_TAB_MBT_END all_link_image_string IF_LINK_IMAGE_SBT_END;</span><br><span class="line"></span><br><span class="line">image_element:</span><br><span class="line">	(IMAGE_TAB | TEXT_IMAGE_TAB | QUOTE_IMAGE_TAB | LIST_IMAGE_TAB) all_link_image_string IF_LINK_IMAGE_TAB_MBT_END all_link_image_string IF_LINK_IMAGE_SBT_END;</span><br><span class="line"></span><br><span class="line">all_link_image_string: IF_LINK_IMAGE_TAB_STRING*;</span><br><span class="line"></span><br><span class="line">// BOLD_ITALIC_MODE_R</span><br><span class="line">bold_italic_element:</span><br><span class="line">	(BOLD_ITALIC | TEXT_BOLD_ITALIC | QUOTE_BOLD_ITALIC | LIST_BOLD_ITALIC) all_bold_italic_string BOLD_ITALIC_END;</span><br><span class="line"></span><br><span class="line">all_bold_italic_string: BOLD_ITALIC_STRING*;</span><br><span class="line"></span><br><span class="line">// BOLD_MODE_R</span><br><span class="line">bold_element:</span><br><span class="line">	(BOLD | TEXT_BOLD | QUOTE_BOLD | LIST_BOLD) all_bold_string BOLD_END;</span><br><span class="line">all_bold_string: BOLD_STRING*;</span><br><span class="line"></span><br><span class="line">// ITALIC_MODE_R</span><br><span class="line">italic_element:</span><br><span class="line">	(ITALIC | TEXT_ITALIC | QUOTE_ITALIC | LIST_ITALIC) all_italic_string ITALIC_END;</span><br><span class="line">all_italic_string: ITALIC_STRING*;</span><br><span class="line"></span><br><span class="line">// CODE_MODE_R</span><br><span class="line">code_element:</span><br><span class="line">	(CODE | TEXT_CODE | QUOTE_CODE | LIST_CODE) all_code_string CODE_END;</span><br><span class="line">all_code_string: CODE_STRING+;</span><br><span class="line"></span><br><span class="line">// TEXT_MODE_R</span><br><span class="line">text_element:</span><br><span class="line">	all_text_context* TEXT_END;</span><br><span class="line"></span><br><span class="line">all_text_context: </span><br><span class="line">	(link_element | image_element | bold_italic_element | bold_element | italic_element | code_element | commend_text_string | tranform_text_string);</span><br><span class="line"></span><br><span class="line">commend_text_string: (TEXT | TEXT_STRING)+;</span><br><span class="line">tranform_text_string: (TRAMFORM_MEAN_4 | TRAMFORM_MEAN |TEXT_TRAMFORM_4);</span><br><span class="line"></span><br><span class="line">// QUOTE_MODE_R</span><br><span class="line">quote_element:</span><br><span class="line">	quote_head all_quote_context* QUOTE_MODE_END;</span><br><span class="line"></span><br><span class="line">quote_head: QUOTE;</span><br><span class="line"></span><br><span class="line">all_quote_context:</span><br><span class="line">	(link_element | image_element | bold_italic_element | bold_element | italic_element | code_element | commend_quote_string | tranform_quote_string);</span><br><span class="line"></span><br><span class="line">commend_quote_string: QUOTE_MODE_STRING+;</span><br><span class="line">tranform_quote_string: QUOTE_TRAMFORM_4;</span><br><span class="line"></span><br><span class="line">// LIST_MODE_R</span><br><span class="line">list_element:</span><br><span class="line">	list_head all_list_context* LIST_TAB_END;</span><br><span class="line">list_head: LIST_TAB;</span><br><span class="line"></span><br><span class="line">all_list_context:</span><br><span class="line">	(link_element | image_element | bold_italic_element | bold_element | italic_element | code_element | commend_list_string | tranform_list_string);</span><br><span class="line"></span><br><span class="line">commend_list_string: LIST_TAB_STRING+;</span><br><span class="line">tranform_list_string: LIST_TRAMFORM_4;</span><br><span class="line"></span><br><span class="line">// DIVIDE_R</span><br><span class="line">divide_element: DIVIDE;</span><br><span class="line"></span><br><span class="line">// SPACE_R</span><br><span class="line">space_element: SPACE;</span><br><span class="line"></span><br><span class="line">// LIST_data quote_data</span><br><span class="line">list_data: </span><br><span class="line">	list_element all_list_quote_context*;</span><br><span class="line"></span><br><span class="line">quote_data: </span><br><span class="line">	quote_element all_list_quote_context*;</span><br><span class="line"></span><br><span class="line">all_list_quote_context:</span><br><span class="line">	(text_element | quote_element | list_element);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>这份为<code>mdLexer.g4</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br></pre></td><td class="code"><pre><span class="line">lexer grammar mdLexer;</span><br><span class="line"></span><br><span class="line">TRAMFORM_MEAN_4: (&#x27;\\\\&#x27;) -&gt; pushMode(TEXT_MODE);</span><br><span class="line">TRAMFORM_MEAN: (&#x27;\\&#x27;) -&gt; skip,pushMode(TEXT_MODE);</span><br><span class="line"></span><br><span class="line">H1: &#x27;#&#x27; (&#x27; &#x27; | &#x27;\t&#x27;)+ -&gt; pushMode(head);</span><br><span class="line">H2: &#x27;##&#x27; (&#x27; &#x27; | &#x27;\t&#x27;)+ -&gt; pushMode(head);</span><br><span class="line">H3: &#x27;###&#x27; (&#x27; &#x27; | &#x27;\t&#x27;)+ -&gt; pushMode(head);</span><br><span class="line">H4: &#x27;####&#x27; (&#x27; &#x27; | &#x27;\t&#x27;)+ -&gt; pushMode(head);</span><br><span class="line">H5: &#x27;#####&#x27; (&#x27; &#x27; | &#x27;\t&#x27;)+ -&gt; pushMode(head);</span><br><span class="line">H6: &#x27;######&#x27; (&#x27; &#x27; | &#x27;\t&#x27;)+ -&gt; pushMode(head);</span><br><span class="line"></span><br><span class="line">// 这里预留为CODE_TEXT</span><br><span class="line">DIVIDE:    (&#x27; &#x27; | &#x27;\t&#x27;)* (&#x27;--&#x27; | &#x27;**&#x27; | &#x27;__&#x27;) (&#x27;-&#x27; | &#x27;*&#x27; | &#x27;_&#x27;)+ &#x27; &#x27;* &#x27;\r&#x27;? &#x27;\n&#x27;;</span><br><span class="line">QUOTE:     (&#x27; &#x27; | &#x27;\t&#x27;)* (&#x27;&gt;&#x27;)+ -&gt; pushMode(QUOTE_MODE);</span><br><span class="line">LIST_TAB:  </span><br><span class="line">    (&#x27; &#x27; | &#x27;\t&#x27;)* ((([0-9])+ &#x27;.&#x27;) | ( &#x27;*&#x27; | &#x27;-&#x27; ))  (&#x27; &#x27; | &#x27;\t&#x27;)+ -&gt; pushMode(LIST_TAB_MODE);</span><br><span class="line"></span><br><span class="line">IMAGE_TAB: (&#x27; &#x27; | &#x27;\t&#x27;)* &#x27;![&#x27; -&gt; pushMode(IF_LINK_IMAGE_TAB_MODE);</span><br><span class="line">LINK_TAB: (&#x27; &#x27; | &#x27;\t&#x27;)* &#x27;[&#x27; -&gt; pushMode(IF_LINK_IMAGE_TAB_MODE);</span><br><span class="line">BOLD_ITALIC: (&#x27;***&#x27; | &#x27;___&#x27;) -&gt; pushMode(BOLD_ITALIC_MODE);</span><br><span class="line">BOLD: (&#x27;**&#x27; | &#x27;__&#x27;) -&gt; pushMode(BOLD_MODE);</span><br><span class="line">ITALIC: (&#x27;*&#x27; | &#x27;_&#x27;) -&gt; pushMode(ITALIC_MODE);</span><br><span class="line">CODE: (&#x27;`&#x27; | &#x27;~&#x27;) -&gt; pushMode(CODE_MODE);</span><br><span class="line"></span><br><span class="line">SPACE: (&#x27; &#x27;|&#x27;\t&#x27;)* &#x27;\r&#x27;? &#x27;\n&#x27;;</span><br><span class="line">WS: (&#x27; &#x27;|&#x27;\t&#x27;) -&gt; skip;</span><br><span class="line">TEXT: . -&gt; pushMode(TEXT_MODE);</span><br><span class="line"></span><br><span class="line">mode head;</span><br><span class="line"></span><br><span class="line">STRINGEND: &#x27; &#x27;* &#x27;\r&#x27;? &#x27;\n&#x27; -&gt; popMode;</span><br><span class="line">HEADSTRING: &#x27; &#x27; ~&#x27; &#x27; | ~&#x27; &#x27; ;</span><br><span class="line">HEAD_WS: &#x27; &#x27; -&gt; skip;</span><br><span class="line"></span><br><span class="line">mode CODE_TEXT_MODE;</span><br><span class="line"></span><br><span class="line">// 这里预留为CODE_TEXT_END</span><br><span class="line">CODE_TEXT_STRING: .;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">mode IF_LINK_IMAGE_TAB_MODE;</span><br><span class="line"></span><br><span class="line">IF_LINK_IMAGE_TAB_MBT_END: &#x27;](&#x27;;</span><br><span class="line">IF_LINK_IMAGE_SBT_END: &#x27;)&#x27; -&gt; popMode;</span><br><span class="line">IF_LINK_IMAGE_TAB_STRING: .;</span><br><span class="line"></span><br><span class="line">mode BOLD_ITALIC_MODE;</span><br><span class="line">BOLD_ITALIC_END: (&#x27;***&#x27; | &#x27;___&#x27;) -&gt; popMode;</span><br><span class="line">BOLD_ITALIC_STRING: .;</span><br><span class="line"></span><br><span class="line">mode BOLD_MODE;</span><br><span class="line">BOLD_END: (&#x27;**&#x27;| &#x27;__&#x27;) -&gt; popMode;</span><br><span class="line">BOLD_STRING: .;</span><br><span class="line"></span><br><span class="line">mode ITALIC_MODE;</span><br><span class="line">ITALIC_END: (&#x27;*&#x27;| &#x27;_&#x27;) -&gt; popMode;</span><br><span class="line">ITALIC_STRING: .;</span><br><span class="line"></span><br><span class="line">mode CODE_MODE;</span><br><span class="line">CODE_END: (&#x27;`&#x27; | &#x27;~&#x27;) -&gt; popMode;</span><br><span class="line">CODE_STRING: .;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">mode TEXT_MODE;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">TEXT_TRAMFORM_4:</span><br><span class="line">	&#x27;\\\\&#x27;</span><br><span class="line">	| &#x27;\\`&#x27;</span><br><span class="line">	| &#x27;\\*&#x27;</span><br><span class="line">	| &#x27;\\_&#x27;</span><br><span class="line">	| &#x27;\\[&#x27;</span><br><span class="line">	| &#x27;\\]&#x27;</span><br><span class="line">	| &#x27;\\(&#x27;</span><br><span class="line">	| &#x27;\\)&#x27;</span><br><span class="line">	| &#x27;\\&#123;&#x27;</span><br><span class="line">	| &#x27;\\&#125;&#x27;</span><br><span class="line">	| &#x27;\\#&#x27;</span><br><span class="line">	| &#x27;\\-&#x27;</span><br><span class="line">	| &#x27;\\+&#x27;</span><br><span class="line">	| &#x27;\\.&#x27;</span><br><span class="line">	| &#x27;\\!&#x27;</span><br><span class="line">	| &#x27;\\|&#x27;</span><br><span class="line">	| &#x27;\\~&#x27;;</span><br><span class="line">TEXT_END: &#x27;\r&#x27;? &#x27;\n&#x27; -&gt; popMode;</span><br><span class="line"></span><br><span class="line">TEXT_IMAGE_TAB: (&#x27; &#x27; | &#x27;\t&#x27;)? &#x27;![&#x27; -&gt; pushMode(IF_LINK_IMAGE_TAB_MODE);</span><br><span class="line">TEXT_LINK_TAB: (&#x27; &#x27; | &#x27;\t&#x27;)? &#x27;[&#x27; -&gt; pushMode(IF_LINK_IMAGE_TAB_MODE);</span><br><span class="line">TEXT_BOLD_ITALIC: (&#x27; &#x27; | &#x27;\t&#x27;)? (&#x27;***&#x27;| &#x27;___&#x27;) -&gt; pushMode(BOLD_ITALIC_MODE);</span><br><span class="line">TEXT_BOLD: (&#x27; &#x27; | &#x27;\t&#x27;)? (&#x27;**&#x27;| &#x27;__&#x27;) -&gt; pushMode(BOLD_MODE);</span><br><span class="line">TEXT_ITALIC: (&#x27; &#x27; | &#x27;\t&#x27;)? (&#x27;*&#x27;| &#x27;_&#x27;) -&gt; pushMode(ITALIC_MODE);</span><br><span class="line">TEXT_CODE: (&#x27; &#x27; | &#x27;\t&#x27;)? (&#x27;`&#x27; | &#x27;~&#x27;) -&gt; pushMode(CODE_MODE);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">TEXT_STRING: ~(&#x27; &#x27; | &#x27;\t&#x27; | &#x27;\r&#x27; | &#x27;\n&#x27;) | (&#x27; &#x27; | &#x27;\t&#x27;) ~(&#x27; &#x27; | &#x27;\t&#x27; | &#x27;\\&#x27; | &#x27;\r&#x27; | &#x27;\n&#x27;);</span><br><span class="line">TEXT_WS: (&#x27; &#x27; | &#x27;\t&#x27;) -&gt; skip;</span><br><span class="line"></span><br><span class="line">mode QUOTE_MODE;</span><br><span class="line">QUOTE_TRAMFORM_4:</span><br><span class="line">	&#x27;\\\\&#x27;</span><br><span class="line">	| &#x27;\\`&#x27;</span><br><span class="line">	| &#x27;\\*&#x27;</span><br><span class="line">	| &#x27;\\_&#x27;</span><br><span class="line">	| &#x27;\\[&#x27;</span><br><span class="line">	| &#x27;\\]&#x27;</span><br><span class="line">	| &#x27;\\(&#x27;</span><br><span class="line">	| &#x27;\\)&#x27;</span><br><span class="line">	| &#x27;\\&#123;&#x27;</span><br><span class="line">	| &#x27;\\&#125;&#x27;</span><br><span class="line">	| &#x27;\\#&#x27;</span><br><span class="line">	| &#x27;\\-&#x27;</span><br><span class="line">	| &#x27;\\+&#x27;</span><br><span class="line">	| &#x27;\\.&#x27;</span><br><span class="line">	| &#x27;\\!&#x27;</span><br><span class="line">	| &#x27;\\|&#x27;</span><br><span class="line">	| &#x27;\\~&#x27;;</span><br><span class="line"></span><br><span class="line">QUOTE_MODE_END: (&#x27; &#x27; | &#x27;\t&#x27;)* &#x27;\r&#x27;? &#x27;\n&#x27; -&gt; popMode;</span><br><span class="line"></span><br><span class="line">QUOTE_IMAGE_TAB: (&#x27; &#x27; | &#x27;\t&#x27;)? &#x27;![&#x27; -&gt; pushMode(IF_LINK_IMAGE_TAB_MODE);</span><br><span class="line">QUOTE_LINK_TAB: (&#x27; &#x27; | &#x27;\t&#x27;)? &#x27;[&#x27; -&gt; pushMode(IF_LINK_IMAGE_TAB_MODE);</span><br><span class="line">QUOTE_BOLD_ITALIC: (&#x27; &#x27; | &#x27;\t&#x27;)? (&#x27;***&#x27; | &#x27;___&#x27;) -&gt; pushMode(BOLD_ITALIC_MODE);</span><br><span class="line">QUOTE_BOLD: (&#x27; &#x27; | &#x27;\t&#x27;)? (&#x27;**&#x27; | &#x27;__&#x27;) -&gt; pushMode(BOLD_MODE);</span><br><span class="line">QUOTE_ITALIC: (&#x27; &#x27; | &#x27;\t&#x27;)? (&#x27;*&#x27; | &#x27;_&#x27;) -&gt; pushMode(ITALIC_MODE);</span><br><span class="line">QUOTE_CODE: (&#x27; &#x27; | &#x27;\t&#x27;)? (&#x27;`&#x27; | &#x27;~&#x27;) -&gt; pushMode(CODE_MODE);</span><br><span class="line"></span><br><span class="line">QUOTE_MODE_STRING: ~(&#x27; &#x27; | &#x27;\t&#x27; | &#x27;\r&#x27; | &#x27;\n&#x27;) | (&#x27; &#x27; | &#x27;\t&#x27;) ~(&#x27; &#x27; | &#x27;\t&#x27; | &#x27;\\&#x27; | &#x27;\r&#x27; | &#x27;\n&#x27;);</span><br><span class="line">QUOTE_WS: (&#x27; &#x27; | &#x27;\t&#x27;) -&gt; skip;</span><br><span class="line"></span><br><span class="line">mode LIST_TAB_MODE;</span><br><span class="line"></span><br><span class="line">LIST_TRAMFORM_4:</span><br><span class="line">	&#x27;\\\\&#x27;</span><br><span class="line">	| &#x27;\\`&#x27;</span><br><span class="line">	| &#x27;\\*&#x27;</span><br><span class="line">	| &#x27;\\_&#x27;</span><br><span class="line">	| &#x27;\\[&#x27;</span><br><span class="line">	| &#x27;\\]&#x27;</span><br><span class="line">	| &#x27;\\(&#x27;</span><br><span class="line">	| &#x27;\\)&#x27;</span><br><span class="line">	| &#x27;\\&#123;&#x27;</span><br><span class="line">	| &#x27;\\&#125;&#x27;</span><br><span class="line">	| &#x27;\\#&#x27;</span><br><span class="line">	| &#x27;\\-&#x27;</span><br><span class="line">	| &#x27;\\+&#x27;</span><br><span class="line">	| &#x27;\\.&#x27;</span><br><span class="line">	| &#x27;\\!&#x27;</span><br><span class="line">	| &#x27;\\|&#x27;</span><br><span class="line">	| &#x27;\\~&#x27;;</span><br><span class="line"></span><br><span class="line">LIST_TAB_END: (&#x27; &#x27; | &#x27;\t&#x27;)* &#x27;\r&#x27;? &#x27;\n&#x27; -&gt; popMode;</span><br><span class="line"></span><br><span class="line">LIST_IMAGE_TAB: (&#x27; &#x27; | &#x27;\t&#x27;)? &#x27;![&#x27; -&gt; pushMode(IF_LINK_IMAGE_TAB_MODE);</span><br><span class="line">LIST_LINK_TAB: (&#x27; &#x27; | &#x27;\t&#x27;)? &#x27;[&#x27; -&gt; pushMode(IF_LINK_IMAGE_TAB_MODE);</span><br><span class="line">LIST_BOLD_ITALIC: (&#x27; &#x27; | &#x27;\t&#x27;)? (&#x27;***&#x27; | &#x27;___&#x27;) -&gt; pushMode(BOLD_ITALIC_MODE);</span><br><span class="line">LIST_BOLD: (&#x27; &#x27; | &#x27;\t&#x27;)? (&#x27;**&#x27; | &#x27;__&#x27;) -&gt; pushMode(BOLD_MODE);</span><br><span class="line">LIST_ITALIC: (&#x27; &#x27; | &#x27;\t&#x27;)? (&#x27;*&#x27; | &#x27;_&#x27;) -&gt; pushMode(ITALIC_MODE);</span><br><span class="line">LIST_CODE: (&#x27; &#x27; | &#x27;\t&#x27;)? (&#x27;`&#x27; | &#x27;~&#x27;) -&gt; pushMode(CODE_MODE);</span><br><span class="line"></span><br><span class="line">LIST_TAB_STRING: ~(&#x27; &#x27; | &#x27;\t&#x27; | &#x27;\r&#x27; | &#x27;\n&#x27;) | (&#x27; &#x27; | &#x27;\t&#x27;) ~(&#x27; &#x27; | &#x27;\t&#x27; | &#x27;\\&#x27; | &#x27;\r&#x27; | &#x27;\n&#x27;);</span><br><span class="line">LIST_TAB_WS: (&#x27; &#x27; | &#x27;\t&#x27;) -&gt; skip;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>其中<code>CODE_TEXT</code>处为</p>
+<h6 id="CODE-TEXT-‘-‘-‘-t’-‘-’-‘-’-‘-n’-‘-n’-pushMode-CODE-TEXT-MODE"><a href="#CODE-TEXT-‘-‘-‘-t’-‘-’-‘-’-‘-n’-‘-n’-pushMode-CODE-TEXT-MODE" class="headerlink" title="CODE_TEXT: (‘ ‘ | ‘\t’)* (‘&#96;&#96;&#96;’ | ‘~~~’) ~(‘\n’)* ‘\n’ -&gt; pushMode(CODE_TEXT_MODE);"></a>CODE_TEXT: (‘ ‘ | ‘\t’)* (‘&#96;&#96;&#96;’ | ‘~~~’) ~(‘\n’)* ‘\n’ -&gt; pushMode(CODE_TEXT_MODE);</h6><p>而<code>CODE_TEXT_END</code>处为</p>
+<h6 id="CODE-TEXT-END-‘-‘-‘-t’-‘-’-‘-’-‘-n’-‘-n’-popMode"><a href="#CODE-TEXT-END-‘-‘-‘-t’-‘-’-‘-’-‘-n’-‘-n’-popMode" class="headerlink" title="CODE_TEXT_END: (‘ ‘ | ‘\t’)* (‘&#96;&#96;&#96;’ | ‘~~~’) ~(‘\n’)* ‘\n’ -&gt; popMode;"></a>CODE_TEXT_END: (‘ ‘ | ‘\t’)* (‘&#96;&#96;&#96;’ | ‘~~~’) ~(‘\n’)* ‘\n’ -&gt; popMode;</h6><p>你问我为什么不把这两个填到上面一起，因为这个博客就是用这个来解析markdown的，而我的markdown解析器在解析代码文本是存在bug的（就是一旦识别出两处代码文本的标记符，就直接归为代码文本了），而且也懒得去改了（反正一般情况下也不会出现）</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/myBlog/simple/2023-11-14/" rel="next" title="初学汇编认识到的一些小玩意">
+                <i class="fa fa-chevron-left"></i> 初学汇编认识到的一些小玩意
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/myBlog/mouth/mouth-1/blog/%E7%AC%AC1%E6%9C%9F%20-%20%E4%BB%8E%E8%BF%9C%E7%A8%8B%E5%8A%9E%E5%85%AC%E5%88%B0%E5%BC%82%E5%9C%B0%E7%BB%84%E7%BD%91%E5%86%8D%E5%88%B0%E4%B8%87%E7%89%A9%E4%BA%92%E8%81%94/" rel="prev" title="第1期 - 从远程办公到异地组网再到万物互联">
+                第1期 - 从远程办公到异地组网再到万物互联 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/myBlog/archives">
+              
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/myBlog/categories/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/myBlog/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Antlr%E5%AD%A6%E4%B9%A0%E4%B8%8E%E6%8E%A2%E7%B4%A2"><span class="nav-number">1.</span> <span class="nav-text">Antlr学习与探索</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2023-12-01"><span class="nav-number">1.1.</span> <span class="nav-text">2023-12-01</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#antlr%E7%9A%84%E4%B8%80%E4%BA%9B%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="nav-number">1.1.1.</span> <span class="nav-text">antlr的一些注意事项</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E5%8E%BB%E7%BC%96%E5%86%99antlr%E5%86%85%E5%AE%B9"><span class="nav-number">1.1.2.</span> <span class="nav-text">如何去编写antlr内容</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E5%B7%B2%E7%BC%96%E5%86%99%E7%9A%84markdown"><span class="nav-number">1.1.3.</span> <span class="nav-text">自已编写的markdown</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#CODE-TEXT-%E2%80%98-%E2%80%98-%E2%80%98-t%E2%80%99-%E2%80%98-%E2%80%99-%E2%80%98-%E2%80%99-%E2%80%98-n%E2%80%99-%E2%80%98-n%E2%80%99-pushMode-CODE-TEXT-MODE"><span class="nav-number">1.1.3.0.0.1.</span> <span class="nav-text">CODE_TEXT: (‘ ‘ | ‘\t’)* (‘&#96;&#96;&#96;’ | ‘~~~’) ~(‘\n’)* ‘\n’ -&gt; pushMode(CODE_TEXT_MODE);</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#CODE-TEXT-END-%E2%80%98-%E2%80%98-%E2%80%98-t%E2%80%99-%E2%80%98-%E2%80%99-%E2%80%98-%E2%80%99-%E2%80%98-n%E2%80%99-%E2%80%98-n%E2%80%99-popMode"><span class="nav-number">1.1.3.0.0.2.</span> <span class="nav-text">CODE_TEXT_END: (‘ ‘ | ‘\t’)* (‘&#96;&#96;&#96;’ | ‘~~~’) ~(‘\n’)* ‘\n’ -&gt; popMode;</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">hvhghv</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/myBlog/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/myBlog/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/myBlog/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/myBlog/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/myBlog/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/myBlog/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/myBlog/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/myBlog/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/myBlog/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/myBlog/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/myBlog/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/myBlog/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/myBlog/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
