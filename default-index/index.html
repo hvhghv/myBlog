@@ -83,7 +83,7 @@
 
 <meta property="og:type" content="website">
 <meta property="og:title" content="HvH洋的小站">
-<meta property="og:url" content="http://example.com/default-index/index.html">
+<meta property="og:url" content="https://hvhghv.github.io/myBlog/default-index/index.html">
 <meta property="og:site_name" content="HvH洋的小站">
 <meta property="og:locale">
 <meta property="article:author" content="hvhghv">
@@ -118,7 +118,7 @@
 
 
 
-  <link rel="canonical" href="http://example.com/default-index/"/>
+  <link rel="canonical" href="https://hvhghv.github.io/myBlog/default-index/"/>
 
 
 
@@ -262,7 +262,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://example.com/myBlog/mouth/mouth-3/doc/mouth-3/">
+    <link itemprop="mainEntityOfPage" href="https://hvhghv.github.io/myBlog/myBlog/mouth/mouth-3/doc/mouth-3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -365,8 +365,8 @@
 <h2 id="使用技巧"><a href="#使用技巧" class="headerlink" title="使用技巧"></a>使用技巧</h2><ol>
 <li>当前函数变量的查看<br>例如，下面有一个parse_mount_tag函数,其中如果我想查看full_path, mount_tag，open_path。如何通过堆栈视图查看里面的变量</li>
 </ol>
-<p><img src="/myBlog/mouth/mouth-3/doc/../_resources/903db277b8866f00614ff437b0e8783a.png" alt="903db277b8866f00614ff437b0e8783a.png"></p>
-<p><img src="/myBlog/mouth/mouth-3/doc/../_resources/45d2c396ec489dee2b060cc3cf137705.png" alt="45d2c396ec489dee2b060cc3cf137705.png"></p>
+<p><img src="/myBlog/myBlog/mouth/mouth-3/doc/../_resources/903db277b8866f00614ff437b0e8783a.png" alt="903db277b8866f00614ff437b0e8783a.png"></p>
+<p><img src="/myBlog/myBlog/mouth/mouth-3/doc/../_resources/45d2c396ec489dee2b060cc3cf137705.png" alt="45d2c396ec489dee2b060cc3cf137705.png"></p>
 <h4 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h4><h5 id="拿full-path举例"><a href="#拿full-path举例" class="headerlink" title="拿full_path举例"></a>拿full_path举例</h5><ol>
 <li><p>记住full_path是一个8字节的指针</p>
 </li>
@@ -378,28 +378,28 @@
 <blockquote>
 <p>单字节为1个字节，双字节为2个字节，双字为4个字节，四字为8字节</p>
 </blockquote>
-<h4 id="指针的指向"><a href="#指针的指向" class="headerlink" title="指针的指向"></a>指针的指向</h4><p><img src="/myBlog/mouth/mouth-3/doc/../_resources/8b199698174595ac392a770b62fa265e.png" alt="8b199698174595ac392a770b62fa265e.png"></p>
-<p><img src="/myBlog/mouth/mouth-3/doc/../_resources/022aa1bd65967b25e11e48b1c10860fa.png" alt="022aa1bd65967b25e11e48b1c10860fa.png"><br>再拿之前的full_path作举例，由于full_path是一个指针。对于指针，可以双击这个指针，直接跳转到指针指向的地址</p>
-<h4 id="结构体变量的查看"><a href="#结构体变量的查看" class="headerlink" title="结构体变量的查看"></a>结构体变量的查看</h4><p>ctx是一个结构体vfs_file_context_t_0指针，如何方便的查看里面的内容呢<br><img src="/myBlog/mouth/mouth-3/doc/../_resources/42274db8836ad190ee94cc986b01efd6.png" alt="42274db8836ad190ee94cc986b01efd6.png"></p>
+<h4 id="指针的指向"><a href="#指针的指向" class="headerlink" title="指针的指向"></a>指针的指向</h4><p><img src="/myBlog/myBlog/mouth/mouth-3/doc/../_resources/8b199698174595ac392a770b62fa265e.png" alt="8b199698174595ac392a770b62fa265e.png"></p>
+<p><img src="/myBlog/myBlog/mouth/mouth-3/doc/../_resources/022aa1bd65967b25e11e48b1c10860fa.png" alt="022aa1bd65967b25e11e48b1c10860fa.png"><br>再拿之前的full_path作举例，由于full_path是一个指针。对于指针，可以双击这个指针，直接跳转到指针指向的地址</p>
+<h4 id="结构体变量的查看"><a href="#结构体变量的查看" class="headerlink" title="结构体变量的查看"></a>结构体变量的查看</h4><p>ctx是一个结构体vfs_file_context_t_0指针，如何方便的查看里面的内容呢<br><img src="/myBlog/myBlog/mouth/mouth-3/doc/../_resources/42274db8836ad190ee94cc986b01efd6.png" alt="42274db8836ad190ee94cc986b01efd6.png"></p>
 <ol>
-<li>首先，在结构体视图中添加vfs_file_context_t_0结构体(一般ida已经自动添加了，可以直接进入下一步)<br><img src="/myBlog/mouth/mouth-3/doc/../_resources/705d9a4c88f5882b4ea6699b44021546.png" alt="705d9a4c88f5882b4ea6699b44021546.png"><br><img src="/myBlog/mouth/mouth-3/doc/../_resources/3a4b8d36061a71806d7d6bfbed11867f.png" alt="3a4b8d36061a71806d7d6bfbed11867f.png"></li>
+<li>首先，在结构体视图中添加vfs_file_context_t_0结构体(一般ida已经自动添加了，可以直接进入下一步)<br><img src="/myBlog/myBlog/mouth/mouth-3/doc/../_resources/705d9a4c88f5882b4ea6699b44021546.png" alt="705d9a4c88f5882b4ea6699b44021546.png"><br><img src="/myBlog/myBlog/mouth/mouth-3/doc/../_resources/3a4b8d36061a71806d7d6bfbed11867f.png" alt="3a4b8d36061a71806d7d6bfbed11867f.png"></li>
 </ol>
-<p><img src="/myBlog/mouth/mouth-3/doc/../_resources/61fd714b90ca7cf05f77e911243d9a2a.png" alt="61fd714b90ca7cf05f77e911243d9a2a.png"><br><img src="/myBlog/mouth/mouth-3/doc/../_resources/b88ccaae866e2e7524cbd03d8128235a.png" alt="b88ccaae866e2e7524cbd03d8128235a.png"></p>
+<p><img src="/myBlog/myBlog/mouth/mouth-3/doc/../_resources/61fd714b90ca7cf05f77e911243d9a2a.png" alt="61fd714b90ca7cf05f77e911243d9a2a.png"><br><img src="/myBlog/myBlog/mouth/mouth-3/doc/../_resources/b88ccaae866e2e7524cbd03d8128235a.png" alt="b88ccaae866e2e7524cbd03d8128235a.png"></p>
 <p>视图-&gt;结构体-&gt;空白处右键-&gt;点击添加结构体类型-&gt;Add standard structue-&gt;按ctrl+f-&gt;输入需要查看的结构体类型名称-&gt;双击需要查看的结构体类型名称-&gt;完成</p>
-<p>2.在堆栈中找到指针值，跳到指针指向的地址，在该地址处按alt+q（不建议通过右键去选择结构体，此处选择的结构体是不全的）<br><img src="/myBlog/mouth/mouth-3/doc/../_resources/6c1da90cc51e69b26da4628e7eee1304.png" alt="6c1da90cc51e69b26da4628e7eee1304.png"><br>3. 选择结构体（若找不到就跳到第一步），完成<br><img src="/myBlog/mouth/mouth-3/doc/../_resources/32ed30af5343d1d8b8a80796460f2716.png" alt="32ed30af5343d1d8b8a80796460f2716.png"></p>
-<p><img src="/myBlog/mouth/mouth-3/doc/../_resources/0935742dd40074bfabfdc6a76d43c996.png" alt="0935742dd40074bfabfdc6a76d43c996.png"></p>
+<p>2.在堆栈中找到指针值，跳到指针指向的地址，在该地址处按alt+q（不建议通过右键去选择结构体，此处选择的结构体是不全的）<br><img src="/myBlog/myBlog/mouth/mouth-3/doc/../_resources/6c1da90cc51e69b26da4628e7eee1304.png" alt="6c1da90cc51e69b26da4628e7eee1304.png"><br>3. 选择结构体（若找不到就跳到第一步），完成<br><img src="/myBlog/myBlog/mouth/mouth-3/doc/../_resources/32ed30af5343d1d8b8a80796460f2716.png" alt="32ed30af5343d1d8b8a80796460f2716.png"></p>
+<p><img src="/myBlog/myBlog/mouth/mouth-3/doc/../_resources/0935742dd40074bfabfdc6a76d43c996.png" alt="0935742dd40074bfabfdc6a76d43c996.png"></p>
 <h4 id="通过堆栈视图查询变量"><a href="#通过堆栈视图查询变量" class="headerlink" title="通过堆栈视图查询变量"></a>通过堆栈视图查询变量</h4><p>有些时候，追踪函数调用执行流时，会查看其中一两个函数的变量，由于此时的rbp，rsp已经改变，不能通过汇编视图直接跳转到堆栈里面去。此时就只能手算堆栈了。</p>
-<p>例如，我想查看vfs_write里面的变量，然而此时的rbp, rsp的环境是在vfs_process_read函数里，如何查看vfs_write的变量<br><img src="/myBlog/mouth/mouth-3/doc/../_resources/1740028ff8b4ea816178db71d10c0ad2.png" alt="1740028ff8b4ea816178db71d10c0ad2.png"></p>
+<p>例如，我想查看vfs_write里面的变量，然而此时的rbp, rsp的环境是在vfs_process_read函数里，如何查看vfs_write的变量<br><img src="/myBlog/myBlog/mouth/mouth-3/doc/../_resources/1740028ff8b4ea816178db71d10c0ad2.png" alt="1740028ff8b4ea816178db71d10c0ad2.png"></p>
 <p>根据x64的规范，进入一个函数后，就会先压一个函数返回地址和rbp<br>反过来，我们先寻找到这个函数返回地址，就能定位到原本的变量位置<br>由此，可以采取下列的方法</p>
 <ol>
-<li><p>在堆栈视图中寻找到vfs_write的返回地址，与vfs_write的调用函数返回地址（也就是vfs_write前一个函数test_simpple_vfs）<br><img src="/myBlog/mouth/mouth-3/doc/../_resources/7f3ec074fdff53e827a0ecf4e8378629.png" alt="7f3ec074fdff53e827a0ecf4e8378629.png"><br><img src="/myBlog/mouth/mouth-3/doc/../_resources/ec59e268bd3ab0a85ba46a97eb173171.png" alt="ec59e268bd3ab0a85ba46a97eb173171.png"></p>
+<li><p>在堆栈视图中寻找到vfs_write的返回地址，与vfs_write的调用函数返回地址（也就是vfs_write前一个函数test_simpple_vfs）<br><img src="/myBlog/myBlog/mouth/mouth-3/doc/../_resources/7f3ec074fdff53e827a0ecf4e8378629.png" alt="7f3ec074fdff53e827a0ecf4e8378629.png"><br><img src="/myBlog/myBlog/mouth/mouth-3/doc/../_resources/ec59e268bd3ab0a85ba46a97eb173171.png" alt="ec59e268bd3ab0a85ba46a97eb173171.png"></p>
 </li>
-<li><p>在汇编视图中记录好ida反汇编出来的变量的所在位置，<br><img src="/myBlog/mouth/mouth-3/doc/../_resources/dca6ca6e00af2a0ba12793d6a07a7a9b.png" alt="dca6ca6e00af2a0ba12793d6a07a7a9b.png"></p>
+<li><p>在汇编视图中记录好ida反汇编出来的变量的所在位置，<br><img src="/myBlog/myBlog/mouth/mouth-3/doc/../_resources/dca6ca6e00af2a0ba12793d6a07a7a9b.png" alt="dca6ca6e00af2a0ba12793d6a07a7a9b.png"></p>
 </li>
 <li><p>根据vfs_write的调用函数返回地址进行推断，（根据第二步的位置进行判断，-8为第二格，-10h为第三格，-18h为第四格，-20h为第5格），和变量的所在位置对应好就行</p>
 </li>
 </ol>
-<p><img src="/myBlog/mouth/mouth-3/doc/../_resources/7912d1e9d82dd9b35cc314a80c7dce29.png" alt="7912d1e9d82dd9b35cc314a80c7dce29.png"></p>
+<p><img src="/myBlog/myBlog/mouth/mouth-3/doc/../_resources/7912d1e9d82dd9b35cc314a80c7dce29.png" alt="7912d1e9d82dd9b35cc314a80c7dce29.png"></p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>ida还有交叉引用，dump为c、python数组，修补啥的功能太多就不讲了。总之真香。</p>
 
           
@@ -449,7 +449,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://example.com/myBlog/mouth/mouth-2/mouth-2/">
+    <link itemprop="mainEntityOfPage" href="https://hvhghv.github.io/myBlog/myBlog/mouth/mouth-2/mouth-2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -551,8 +551,8 @@
 </ul>
 <h2 id="接触RSS"><a href="#接触RSS" class="headerlink" title="接触RSS"></a>接触RSS</h2><p>搜代码搜东西啥的搜多了，总会发现一些比较有创意，有深度的文章。浏览文章的同时，我也很希望能收藏这一个博客。假如将来更新了那自己就能看得了更多。不过，也不是谁有那么多心思天天高强度刷新看有没有更新的。偶然的一次机会，我了解到了RSS，可以在博客更新时接收到更新信息。于是就有了折腾</p>
 <h2 id="RSS与其他资讯类app的不同（这一段写得好乱好杂）"><a href="#RSS与其他资讯类app的不同（这一段写得好乱好杂）" class="headerlink" title="RSS与其他资讯类app的不同（这一段写得好乱好杂）"></a>RSS与其他资讯类app的不同（这一段写得好乱好杂）</h2><p>可以说，最大的不同就是，没有算法下的迎合吧。其他资讯类app，推给你的内容都是大数据分析的。大数据认为你是这样，那内容就是这样。自己被动的接受这样的信息，成为大数据认为的这一类人。而rss是需要自己主动去订阅话题，博客，接收到的信息是自己想要希望要的。</p>
-<h2 id="效果图"><a href="#效果图" class="headerlink" title="效果图"></a>效果图</h2><p><img src="/myBlog/mouth/mouth-2/img/mouth-2/32fbdcf115b6c30d5fad80b014f19ba.jpg" alt="3DED8B7C-868C-4F40-B915-9E31A4FA7525.png"></p>
-<p><img src="/myBlog/mouth/mouth-2/img/mouth-2/a16dcf5bbd9fc897627f1bf03240edd.jpg" alt="9B349F38-2402-448E-BFA3-4AB9A4B5424D.jpg"></p>
+<h2 id="效果图"><a href="#效果图" class="headerlink" title="效果图"></a>效果图</h2><p><img src="/myBlog/myBlog/mouth/mouth-2/img/mouth-2/32fbdcf115b6c30d5fad80b014f19ba.jpg" alt="3DED8B7C-868C-4F40-B915-9E31A4FA7525.png"></p>
+<p><img src="/myBlog/myBlog/mouth/mouth-2/img/mouth-2/a16dcf5bbd9fc897627f1bf03240edd.jpg" alt="9B349F38-2402-448E-BFA3-4AB9A4B5424D.jpg"></p>
 <h2 id="搭建方式"><a href="#搭建方式" class="headerlink" title="搭建方式"></a>搭建方式</h2><h3 id="freshrss搭建"><a href="#freshrss搭建" class="headerlink" title="freshrss搭建"></a>freshrss搭建</h3><p>freshrss拿docker跑就好，下面附上docker-compose脚本</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">services:</span><br><span class="line">  freshrss:</span><br><span class="line">    image: freshrss/freshrss:latest</span><br><span class="line">    container_name: freshrss</span><br><span class="line">    environment:</span><br><span class="line">      - CRON_MIN=*/20       #每20分钟刷新一次</span><br><span class="line">      - TZ=Asia/Shanghai</span><br><span class="line">      - FRESHRSS_INSTALL=--default-user=admin --api-enabled</span><br><span class="line">      - FRESHRSS_USER=--user=admin --api-password=12345678 --password=12345678&quot;    #两个密码要改改</span><br><span class="line">    volumes:</span><br><span class="line">      - ./data:/var/www/FreshRSS/data</span><br><span class="line">      - ./extensions:/var/www/FreshRSS/extensions</span><br><span class="line">    ports:</span><br><span class="line">      - 7753:80        #左边的8080可以改成服务器上没有用过的端口</span><br><span class="line">    depends_on:</span><br><span class="line">      - postgres</span><br><span class="line">    restart: always</span><br><span class="line"></span><br><span class="line">  postgres:</span><br><span class="line">    image: postgres:alpine</span><br><span class="line">    container_name: freshrss-postgres</span><br><span class="line">    environment:</span><br><span class="line">      - POSTGRES_USER=freshrss</span><br><span class="line">      - POSTGRES_PASSWORD=freshrss    #密码可以自己修改</span><br><span class="line">      - POSTGRES_DB=freshrss</span><br><span class="line">    volumes:</span><br><span class="line">      - ./freshrss-postgres-data:/var/lib/postgresql/data</span><br><span class="line">    restart: always</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
@@ -566,9 +566,9 @@
 
 
 <h2 id="freshrss通过xpath爬取网站"><a href="#freshrss通过xpath爬取网站" class="headerlink" title="freshrss通过xpath爬取网站"></a>freshrss通过xpath爬取网站</h2><p>对于没有rss源，或者rss源无法使用的网站，可以通过分析xpath方式来爬。下面给出个参考</p>
-<p><img src="/myBlog/mouth/mouth-2/img/mouth-2/a8664c7fe43803704a7a3265b38ceff.jpg" alt="C4B93A66-DB6D-46BA-A7C8-0868439A222B.png"></p>
-<p><img src="/myBlog/mouth/mouth-2/img/mouth-2/cbde1b80c76f187c76a806adea2e1d7.jpg" alt="CAC30757-4A9D-4CA3-A2BA-B236F750D1CF.png"></p>
-<p><img src="/myBlog/mouth/mouth-2/img/mouth-2/6a8779fb08bb82690ef27b249a89055.jpg" alt="C77B1DBB-4B85-4C03-A594-D0D394A7D367.png"></p>
+<p><img src="/myBlog/myBlog/mouth/mouth-2/img/mouth-2/a8664c7fe43803704a7a3265b38ceff.jpg" alt="C4B93A66-DB6D-46BA-A7C8-0868439A222B.png"></p>
+<p><img src="/myBlog/myBlog/mouth/mouth-2/img/mouth-2/cbde1b80c76f187c76a806adea2e1d7.jpg" alt="CAC30757-4A9D-4CA3-A2BA-B236F750D1CF.png"></p>
+<p><img src="/myBlog/myBlog/mouth/mouth-2/img/mouth-2/6a8779fb08bb82690ef27b249a89055.jpg" alt="C77B1DBB-4B85-4C03-A594-D0D394A7D367.png"></p>
 <p>xpath定位文章这里，定位到每一个文章栏。有多少个栏目，就会爬取多少篇文章。<br>剩下的选项，基本都要带上descendant</p>
 <p>其实浏览器安装个xpath-helper插件，摸索30分钟差不多就学会了</p>
 <p>当然，对于一些爬取带cookie的网站，又得docker搭个cookie管理器，配合起来爬，不过太多不展开了</p>
@@ -621,7 +621,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://example.com/myBlog/mouth/mouth-1/blog/%E7%AC%AC1%E6%9C%9F%20-%20%E4%BB%8E%E8%BF%9C%E7%A8%8B%E5%8A%9E%E5%85%AC%E5%88%B0%E5%BC%82%E5%9C%B0%E7%BB%84%E7%BD%91%E5%86%8D%E5%88%B0%E4%B8%87%E7%89%A9%E4%BA%92%E8%81%94/">
+    <link itemprop="mainEntityOfPage" href="https://hvhghv.github.io/myBlog/myBlog/mouth/mouth-1/blog/%E7%AC%AC1%E6%9C%9F%20-%20%E4%BB%8E%E8%BF%9C%E7%A8%8B%E5%8A%9E%E5%85%AC%E5%88%B0%E5%BC%82%E5%9C%B0%E7%BB%84%E7%BD%91%E5%86%8D%E5%88%B0%E4%B8%87%E7%89%A9%E4%BA%92%E8%81%94/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -777,7 +777,196 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://example.com/myBlog/simple/2023-11-14/">
+    <link itemprop="mainEntityOfPage" href="https://hvhghv.github.io/myBlog/myBlog/simple/AntlrNote/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/myBlog/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HvH洋的小站">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/myBlog/simple/AntlrNote/" itemprop="url">初学汇编的一点笔记</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2023-12-01T00:00:00+00:00">
+                2023-12-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/myBlog/categories/%E9%9B%B6%E7%A2%8E%E7%9A%84%E5%B0%8F%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index">
+                    <span itemprop="name">零碎的小笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Antlr学习与探索"><a href="#Antlr学习与探索" class="headerlink" title="Antlr学习与探索"></a>Antlr学习与探索</h1><blockquote>
+<p>注： 本篇属于博主早期学习编程时编写，可能会出现一些误区，不恰当，不适合的内容，仅供参考</p>
+</blockquote>
+<h2 id="2023-12-01"><a href="#2023-12-01" class="headerlink" title="2023-12-01"></a>2023-12-01</h2><p>刚开始建博客的时候，在markdown这里呢，没有适合我需求的框架。于是就自己去写。</p>
+<p>不过回想起来，拿正则去解析markdown，未免也太抽象了~~~  </p>
+<p>最近了解到了antlr，发现确实是个好东西。于是就去学了学一下。</p>
+<p>然后就用上自己的博客。</p>
+<h3 id="antlr的一些注意事项"><a href="#antlr的一些注意事项" class="headerlink" title="antlr的一些注意事项"></a>antlr的一些注意事项</h3><ul>
+<li>语法解析器和词法解析器分别编写</li>
+</ul>
+<p>antlr可以直接一个文件直接写就行，不区分语法解析器和词法解析器，但是这样就少了词法解析器的一些比较好用的功能。</p>
+<p>所以，我的习惯是，新建两个文件，将语法解析器和词法解析器区分就好了。</p>
+<p>那么这个时候，两个文件的开头应该是这样</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// m.g4</span><br><span class="line">grammar m;</span><br><span class="line">options &#123; tokenVocab = mLexer; &#125;</span><br><span class="line"></span><br><span class="line">// ...</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// mLexer.g4</span><br><span class="line">lexer grammar mLexer;</span><br><span class="line"></span><br><span class="line">// ...</span><br></pre></td></tr></table></figure>
+
+<p>注意如果你的的第一个文件名为<code>m.g4</code>,那么另一个就应为<code>mLexer.g4</code>,要不然后期是编译不了的</p>
+<blockquote>
+<p>其实也可以把<code>m.g4</code>改为<code>mParser.g4</code>的，之后<code>mParser.g4</code>开头<code>grammar</code>改为<code>parser grammar</code>，不过笔者也没尝试过（程序能跑就行哈哈）</p>
+</blockquote>
+<h3 id="如何去编写antlr内容"><a href="#如何去编写antlr内容" class="headerlink" title="如何去编写antlr内容"></a>如何去编写antlr内容</h3><blockquote>
+<p>本文需要对antlr的语法有一定的了解</p>
+</blockquote>
+<p>本来，<code>antlr</code>拥有动作，语义判定，错误处理等强大的功能的。但是，这些似乎是语言相关的（笔者也没验证过，只是我是这样理解的）</p>
+<p>另一方面，也存在着解析的目标，逻辑比较复杂的情况</p>
+<p>所以，我就围绕着<code>antlr</code>的<code>pushMode</code>,<code>popMode</code>,<code>mode</code>这些功能来编写词法解析器。</p>
+<p>只需要按照这个下面这个简单的模板来设计，就能很快编写好词法解析器文件了</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">入口(pushMode) + 内容 + 出口(popMode)</span><br></pre></td></tr></table></figure>
+
+<p>有了词法解析器，也就能很快的编写语法解析器<br>而语法解析器，就对每一个mode内部各个词法进行打包一下，比如将一个字符组成一个字符串之类的<br>每一处语法对应一处词法的mode，之后再整合起来，就能实现一个完整的解析器了。</p>
+<p>下面这些是我总结出来的经验</p>
+<ul>
+<li><p>词法解析器里面少用<code>+</code>或者<code>*</code>号，这些建议留到语法解析器里面处理<br>因为这可能会导致词法解析器死啃一个词法导致其他词法失效的问题</p>
+</li>
+<li><p>只要有入口，有出口，就直接无脑写出一个mode来就好了。剩下的交给语法解析器</p>
+</li>
+</ul>
+<h3 id="自已编写的markdown"><a href="#自已编写的markdown" class="headerlink" title="自已编写的markdown"></a>自已编写的markdown</h3><p>下面就开源一份我自己编写的markdown的g4文件</p>
+<p>这份为<code>md.g4</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br></pre></td><td class="code"><pre><span class="line">grammar md;</span><br><span class="line">options &#123; tokenVocab = mdLexer; &#125;</span><br><span class="line"></span><br><span class="line">init: expr*;</span><br><span class="line"></span><br><span class="line">expr: </span><br><span class="line">	  h1_expr</span><br><span class="line">	| h2_expr</span><br><span class="line">	| h3_expr</span><br><span class="line">	| h4_expr</span><br><span class="line">	| h5_expr</span><br><span class="line">	| h6_expr</span><br><span class="line">	| code_text_expr</span><br><span class="line">	| divide_expr </span><br><span class="line">	| quote_expr</span><br><span class="line">	| list_expr</span><br><span class="line">	| text_expr</span><br><span class="line">	| space_expr</span><br><span class="line">	</span><br><span class="line">	;</span><br><span class="line"></span><br><span class="line">// EXPR</span><br><span class="line">h1_expr: h1_element;</span><br><span class="line">h2_expr: h2_element;</span><br><span class="line">h3_expr: h3_element;</span><br><span class="line">h4_expr: h4_element;</span><br><span class="line">h5_expr: h5_element;</span><br><span class="line">h6_expr: h6_element;</span><br><span class="line">code_text_expr: code_text_element;</span><br><span class="line">divide_expr: divide_element;</span><br><span class="line">list_expr: list_data;</span><br><span class="line">text_expr: text_element;</span><br><span class="line">quote_expr : quote_data;</span><br><span class="line">space_expr: space_element;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// head</span><br><span class="line">h1_element: H1 all_head_string STRINGEND;</span><br><span class="line">h2_element: H2 all_head_string STRINGEND;</span><br><span class="line">h3_element: H3 all_head_string STRINGEND;</span><br><span class="line">h4_element: H4 all_head_string STRINGEND;</span><br><span class="line">h5_element: H5 all_head_string STRINGEND;</span><br><span class="line">h6_element: H6 all_head_string STRINGEND;</span><br><span class="line">all_head_string: HEADSTRING+;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// CODE_TEXT_MODE_R</span><br><span class="line">code_text_element: CODE_TEXT all_code_text_string CODE_TEXT_END;</span><br><span class="line">all_code_text_string: CODE_TEXT_STRING+;</span><br><span class="line"></span><br><span class="line">// IF_LINK_IMAGE_TAB_MODE_R</span><br><span class="line">link_element:</span><br><span class="line">	(LINK_TAB | TEXT_LINK_TAB | QUOTE_LINK_TAB | LIST_LINK_TAB) all_link_image_string IF_LINK_IMAGE_TAB_MBT_END all_link_image_string IF_LINK_IMAGE_SBT_END;</span><br><span class="line"></span><br><span class="line">image_element:</span><br><span class="line">	(IMAGE_TAB | TEXT_IMAGE_TAB | QUOTE_IMAGE_TAB | LIST_IMAGE_TAB) all_link_image_string IF_LINK_IMAGE_TAB_MBT_END all_link_image_string IF_LINK_IMAGE_SBT_END;</span><br><span class="line"></span><br><span class="line">all_link_image_string: IF_LINK_IMAGE_TAB_STRING*;</span><br><span class="line"></span><br><span class="line">// BOLD_ITALIC_MODE_R</span><br><span class="line">bold_italic_element:</span><br><span class="line">	(BOLD_ITALIC | TEXT_BOLD_ITALIC | QUOTE_BOLD_ITALIC | LIST_BOLD_ITALIC) all_bold_italic_string BOLD_ITALIC_END;</span><br><span class="line"></span><br><span class="line">all_bold_italic_string: BOLD_ITALIC_STRING*;</span><br><span class="line"></span><br><span class="line">// BOLD_MODE_R</span><br><span class="line">bold_element:</span><br><span class="line">	(BOLD | TEXT_BOLD | QUOTE_BOLD | LIST_BOLD) all_bold_string BOLD_END;</span><br><span class="line">all_bold_string: BOLD_STRING*;</span><br><span class="line"></span><br><span class="line">// ITALIC_MODE_R</span><br><span class="line">italic_element:</span><br><span class="line">	(ITALIC | TEXT_ITALIC | QUOTE_ITALIC | LIST_ITALIC) all_italic_string ITALIC_END;</span><br><span class="line">all_italic_string: ITALIC_STRING*;</span><br><span class="line"></span><br><span class="line">// CODE_MODE_R</span><br><span class="line">code_element:</span><br><span class="line">	(CODE | TEXT_CODE | QUOTE_CODE | LIST_CODE) all_code_string CODE_END;</span><br><span class="line">all_code_string: CODE_STRING+;</span><br><span class="line"></span><br><span class="line">// TEXT_MODE_R</span><br><span class="line">text_element:</span><br><span class="line">	all_text_context* TEXT_END;</span><br><span class="line"></span><br><span class="line">all_text_context: </span><br><span class="line">	(link_element | image_element | bold_italic_element | bold_element | italic_element | code_element | commend_text_string | tranform_text_string);</span><br><span class="line"></span><br><span class="line">commend_text_string: (TEXT | TEXT_STRING)+;</span><br><span class="line">tranform_text_string: (TRAMFORM_MEAN_4 | TRAMFORM_MEAN |TEXT_TRAMFORM_4);</span><br><span class="line"></span><br><span class="line">// QUOTE_MODE_R</span><br><span class="line">quote_element:</span><br><span class="line">	quote_head all_quote_context* QUOTE_MODE_END;</span><br><span class="line"></span><br><span class="line">quote_head: QUOTE;</span><br><span class="line"></span><br><span class="line">all_quote_context:</span><br><span class="line">	(link_element | image_element | bold_italic_element | bold_element | italic_element | code_element | commend_quote_string | tranform_quote_string);</span><br><span class="line"></span><br><span class="line">commend_quote_string: QUOTE_MODE_STRING+;</span><br><span class="line">tranform_quote_string: QUOTE_TRAMFORM_4;</span><br><span class="line"></span><br><span class="line">// LIST_MODE_R</span><br><span class="line">list_element:</span><br><span class="line">	list_head all_list_context* LIST_TAB_END;</span><br><span class="line">list_head: LIST_TAB;</span><br><span class="line"></span><br><span class="line">all_list_context:</span><br><span class="line">	(link_element | image_element | bold_italic_element | bold_element | italic_element | code_element | commend_list_string | tranform_list_string);</span><br><span class="line"></span><br><span class="line">commend_list_string: LIST_TAB_STRING+;</span><br><span class="line">tranform_list_string: LIST_TRAMFORM_4;</span><br><span class="line"></span><br><span class="line">// DIVIDE_R</span><br><span class="line">divide_element: DIVIDE;</span><br><span class="line"></span><br><span class="line">// SPACE_R</span><br><span class="line">space_element: SPACE;</span><br><span class="line"></span><br><span class="line">// LIST_data quote_data</span><br><span class="line">list_data: </span><br><span class="line">	list_element all_list_quote_context*;</span><br><span class="line"></span><br><span class="line">quote_data: </span><br><span class="line">	quote_element all_list_quote_context*;</span><br><span class="line"></span><br><span class="line">all_list_quote_context:</span><br><span class="line">	(text_element | quote_element | list_element);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>这份为<code>mdLexer.g4</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br></pre></td><td class="code"><pre><span class="line">lexer grammar mdLexer;</span><br><span class="line"></span><br><span class="line">TRAMFORM_MEAN_4: (&#x27;\\\\&#x27;) -&gt; pushMode(TEXT_MODE);</span><br><span class="line">TRAMFORM_MEAN: (&#x27;\\&#x27;) -&gt; skip,pushMode(TEXT_MODE);</span><br><span class="line"></span><br><span class="line">H1: &#x27;#&#x27; (&#x27; &#x27; | &#x27;\t&#x27;)+ -&gt; pushMode(head);</span><br><span class="line">H2: &#x27;##&#x27; (&#x27; &#x27; | &#x27;\t&#x27;)+ -&gt; pushMode(head);</span><br><span class="line">H3: &#x27;###&#x27; (&#x27; &#x27; | &#x27;\t&#x27;)+ -&gt; pushMode(head);</span><br><span class="line">H4: &#x27;####&#x27; (&#x27; &#x27; | &#x27;\t&#x27;)+ -&gt; pushMode(head);</span><br><span class="line">H5: &#x27;#####&#x27; (&#x27; &#x27; | &#x27;\t&#x27;)+ -&gt; pushMode(head);</span><br><span class="line">H6: &#x27;######&#x27; (&#x27; &#x27; | &#x27;\t&#x27;)+ -&gt; pushMode(head);</span><br><span class="line"></span><br><span class="line">// 这里预留为CODE_TEXT</span><br><span class="line">DIVIDE:    (&#x27; &#x27; | &#x27;\t&#x27;)* (&#x27;--&#x27; | &#x27;**&#x27; | &#x27;__&#x27;) (&#x27;-&#x27; | &#x27;*&#x27; | &#x27;_&#x27;)+ &#x27; &#x27;* &#x27;\r&#x27;? &#x27;\n&#x27;;</span><br><span class="line">QUOTE:     (&#x27; &#x27; | &#x27;\t&#x27;)* (&#x27;&gt;&#x27;)+ -&gt; pushMode(QUOTE_MODE);</span><br><span class="line">LIST_TAB:  </span><br><span class="line">    (&#x27; &#x27; | &#x27;\t&#x27;)* ((([0-9])+ &#x27;.&#x27;) | ( &#x27;*&#x27; | &#x27;-&#x27; ))  (&#x27; &#x27; | &#x27;\t&#x27;)+ -&gt; pushMode(LIST_TAB_MODE);</span><br><span class="line"></span><br><span class="line">IMAGE_TAB: (&#x27; &#x27; | &#x27;\t&#x27;)* &#x27;![&#x27; -&gt; pushMode(IF_LINK_IMAGE_TAB_MODE);</span><br><span class="line">LINK_TAB: (&#x27; &#x27; | &#x27;\t&#x27;)* &#x27;[&#x27; -&gt; pushMode(IF_LINK_IMAGE_TAB_MODE);</span><br><span class="line">BOLD_ITALIC: (&#x27;***&#x27; | &#x27;___&#x27;) -&gt; pushMode(BOLD_ITALIC_MODE);</span><br><span class="line">BOLD: (&#x27;**&#x27; | &#x27;__&#x27;) -&gt; pushMode(BOLD_MODE);</span><br><span class="line">ITALIC: (&#x27;*&#x27; | &#x27;_&#x27;) -&gt; pushMode(ITALIC_MODE);</span><br><span class="line">CODE: (&#x27;`&#x27; | &#x27;~&#x27;) -&gt; pushMode(CODE_MODE);</span><br><span class="line"></span><br><span class="line">SPACE: (&#x27; &#x27;|&#x27;\t&#x27;)* &#x27;\r&#x27;? &#x27;\n&#x27;;</span><br><span class="line">WS: (&#x27; &#x27;|&#x27;\t&#x27;) -&gt; skip;</span><br><span class="line">TEXT: . -&gt; pushMode(TEXT_MODE);</span><br><span class="line"></span><br><span class="line">mode head;</span><br><span class="line"></span><br><span class="line">STRINGEND: &#x27; &#x27;* &#x27;\r&#x27;? &#x27;\n&#x27; -&gt; popMode;</span><br><span class="line">HEADSTRING: &#x27; &#x27; ~&#x27; &#x27; | ~&#x27; &#x27; ;</span><br><span class="line">HEAD_WS: &#x27; &#x27; -&gt; skip;</span><br><span class="line"></span><br><span class="line">mode CODE_TEXT_MODE;</span><br><span class="line"></span><br><span class="line">// 这里预留为CODE_TEXT_END</span><br><span class="line">CODE_TEXT_STRING: .;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">mode IF_LINK_IMAGE_TAB_MODE;</span><br><span class="line"></span><br><span class="line">IF_LINK_IMAGE_TAB_MBT_END: &#x27;](&#x27;;</span><br><span class="line">IF_LINK_IMAGE_SBT_END: &#x27;)&#x27; -&gt; popMode;</span><br><span class="line">IF_LINK_IMAGE_TAB_STRING: .;</span><br><span class="line"></span><br><span class="line">mode BOLD_ITALIC_MODE;</span><br><span class="line">BOLD_ITALIC_END: (&#x27;***&#x27; | &#x27;___&#x27;) -&gt; popMode;</span><br><span class="line">BOLD_ITALIC_STRING: .;</span><br><span class="line"></span><br><span class="line">mode BOLD_MODE;</span><br><span class="line">BOLD_END: (&#x27;**&#x27;| &#x27;__&#x27;) -&gt; popMode;</span><br><span class="line">BOLD_STRING: .;</span><br><span class="line"></span><br><span class="line">mode ITALIC_MODE;</span><br><span class="line">ITALIC_END: (&#x27;*&#x27;| &#x27;_&#x27;) -&gt; popMode;</span><br><span class="line">ITALIC_STRING: .;</span><br><span class="line"></span><br><span class="line">mode CODE_MODE;</span><br><span class="line">CODE_END: (&#x27;`&#x27; | &#x27;~&#x27;) -&gt; popMode;</span><br><span class="line">CODE_STRING: .;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">mode TEXT_MODE;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">TEXT_TRAMFORM_4:</span><br><span class="line">	&#x27;\\\\&#x27;</span><br><span class="line">	| &#x27;\\`&#x27;</span><br><span class="line">	| &#x27;\\*&#x27;</span><br><span class="line">	| &#x27;\\_&#x27;</span><br><span class="line">	| &#x27;\\[&#x27;</span><br><span class="line">	| &#x27;\\]&#x27;</span><br><span class="line">	| &#x27;\\(&#x27;</span><br><span class="line">	| &#x27;\\)&#x27;</span><br><span class="line">	| &#x27;\\&#123;&#x27;</span><br><span class="line">	| &#x27;\\&#125;&#x27;</span><br><span class="line">	| &#x27;\\#&#x27;</span><br><span class="line">	| &#x27;\\-&#x27;</span><br><span class="line">	| &#x27;\\+&#x27;</span><br><span class="line">	| &#x27;\\.&#x27;</span><br><span class="line">	| &#x27;\\!&#x27;</span><br><span class="line">	| &#x27;\\|&#x27;</span><br><span class="line">	| &#x27;\\~&#x27;;</span><br><span class="line">TEXT_END: &#x27;\r&#x27;? &#x27;\n&#x27; -&gt; popMode;</span><br><span class="line"></span><br><span class="line">TEXT_IMAGE_TAB: (&#x27; &#x27; | &#x27;\t&#x27;)? &#x27;![&#x27; -&gt; pushMode(IF_LINK_IMAGE_TAB_MODE);</span><br><span class="line">TEXT_LINK_TAB: (&#x27; &#x27; | &#x27;\t&#x27;)? &#x27;[&#x27; -&gt; pushMode(IF_LINK_IMAGE_TAB_MODE);</span><br><span class="line">TEXT_BOLD_ITALIC: (&#x27; &#x27; | &#x27;\t&#x27;)? (&#x27;***&#x27;| &#x27;___&#x27;) -&gt; pushMode(BOLD_ITALIC_MODE);</span><br><span class="line">TEXT_BOLD: (&#x27; &#x27; | &#x27;\t&#x27;)? (&#x27;**&#x27;| &#x27;__&#x27;) -&gt; pushMode(BOLD_MODE);</span><br><span class="line">TEXT_ITALIC: (&#x27; &#x27; | &#x27;\t&#x27;)? (&#x27;*&#x27;| &#x27;_&#x27;) -&gt; pushMode(ITALIC_MODE);</span><br><span class="line">TEXT_CODE: (&#x27; &#x27; | &#x27;\t&#x27;)? (&#x27;`&#x27; | &#x27;~&#x27;) -&gt; pushMode(CODE_MODE);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">TEXT_STRING: ~(&#x27; &#x27; | &#x27;\t&#x27; | &#x27;\r&#x27; | &#x27;\n&#x27;) | (&#x27; &#x27; | &#x27;\t&#x27;) ~(&#x27; &#x27; | &#x27;\t&#x27; | &#x27;\\&#x27; | &#x27;\r&#x27; | &#x27;\n&#x27;);</span><br><span class="line">TEXT_WS: (&#x27; &#x27; | &#x27;\t&#x27;) -&gt; skip;</span><br><span class="line"></span><br><span class="line">mode QUOTE_MODE;</span><br><span class="line">QUOTE_TRAMFORM_4:</span><br><span class="line">	&#x27;\\\\&#x27;</span><br><span class="line">	| &#x27;\\`&#x27;</span><br><span class="line">	| &#x27;\\*&#x27;</span><br><span class="line">	| &#x27;\\_&#x27;</span><br><span class="line">	| &#x27;\\[&#x27;</span><br><span class="line">	| &#x27;\\]&#x27;</span><br><span class="line">	| &#x27;\\(&#x27;</span><br><span class="line">	| &#x27;\\)&#x27;</span><br><span class="line">	| &#x27;\\&#123;&#x27;</span><br><span class="line">	| &#x27;\\&#125;&#x27;</span><br><span class="line">	| &#x27;\\#&#x27;</span><br><span class="line">	| &#x27;\\-&#x27;</span><br><span class="line">	| &#x27;\\+&#x27;</span><br><span class="line">	| &#x27;\\.&#x27;</span><br><span class="line">	| &#x27;\\!&#x27;</span><br><span class="line">	| &#x27;\\|&#x27;</span><br><span class="line">	| &#x27;\\~&#x27;;</span><br><span class="line"></span><br><span class="line">QUOTE_MODE_END: (&#x27; &#x27; | &#x27;\t&#x27;)* &#x27;\r&#x27;? &#x27;\n&#x27; -&gt; popMode;</span><br><span class="line"></span><br><span class="line">QUOTE_IMAGE_TAB: (&#x27; &#x27; | &#x27;\t&#x27;)? &#x27;![&#x27; -&gt; pushMode(IF_LINK_IMAGE_TAB_MODE);</span><br><span class="line">QUOTE_LINK_TAB: (&#x27; &#x27; | &#x27;\t&#x27;)? &#x27;[&#x27; -&gt; pushMode(IF_LINK_IMAGE_TAB_MODE);</span><br><span class="line">QUOTE_BOLD_ITALIC: (&#x27; &#x27; | &#x27;\t&#x27;)? (&#x27;***&#x27; | &#x27;___&#x27;) -&gt; pushMode(BOLD_ITALIC_MODE);</span><br><span class="line">QUOTE_BOLD: (&#x27; &#x27; | &#x27;\t&#x27;)? (&#x27;**&#x27; | &#x27;__&#x27;) -&gt; pushMode(BOLD_MODE);</span><br><span class="line">QUOTE_ITALIC: (&#x27; &#x27; | &#x27;\t&#x27;)? (&#x27;*&#x27; | &#x27;_&#x27;) -&gt; pushMode(ITALIC_MODE);</span><br><span class="line">QUOTE_CODE: (&#x27; &#x27; | &#x27;\t&#x27;)? (&#x27;`&#x27; | &#x27;~&#x27;) -&gt; pushMode(CODE_MODE);</span><br><span class="line"></span><br><span class="line">QUOTE_MODE_STRING: ~(&#x27; &#x27; | &#x27;\t&#x27; | &#x27;\r&#x27; | &#x27;\n&#x27;) | (&#x27; &#x27; | &#x27;\t&#x27;) ~(&#x27; &#x27; | &#x27;\t&#x27; | &#x27;\\&#x27; | &#x27;\r&#x27; | &#x27;\n&#x27;);</span><br><span class="line">QUOTE_WS: (&#x27; &#x27; | &#x27;\t&#x27;) -&gt; skip;</span><br><span class="line"></span><br><span class="line">mode LIST_TAB_MODE;</span><br><span class="line"></span><br><span class="line">LIST_TRAMFORM_4:</span><br><span class="line">	&#x27;\\\\&#x27;</span><br><span class="line">	| &#x27;\\`&#x27;</span><br><span class="line">	| &#x27;\\*&#x27;</span><br><span class="line">	| &#x27;\\_&#x27;</span><br><span class="line">	| &#x27;\\[&#x27;</span><br><span class="line">	| &#x27;\\]&#x27;</span><br><span class="line">	| &#x27;\\(&#x27;</span><br><span class="line">	| &#x27;\\)&#x27;</span><br><span class="line">	| &#x27;\\&#123;&#x27;</span><br><span class="line">	| &#x27;\\&#125;&#x27;</span><br><span class="line">	| &#x27;\\#&#x27;</span><br><span class="line">	| &#x27;\\-&#x27;</span><br><span class="line">	| &#x27;\\+&#x27;</span><br><span class="line">	| &#x27;\\.&#x27;</span><br><span class="line">	| &#x27;\\!&#x27;</span><br><span class="line">	| &#x27;\\|&#x27;</span><br><span class="line">	| &#x27;\\~&#x27;;</span><br><span class="line"></span><br><span class="line">LIST_TAB_END: (&#x27; &#x27; | &#x27;\t&#x27;)* &#x27;\r&#x27;? &#x27;\n&#x27; -&gt; popMode;</span><br><span class="line"></span><br><span class="line">LIST_IMAGE_TAB: (&#x27; &#x27; | &#x27;\t&#x27;)? &#x27;![&#x27; -&gt; pushMode(IF_LINK_IMAGE_TAB_MODE);</span><br><span class="line">LIST_LINK_TAB: (&#x27; &#x27; | &#x27;\t&#x27;)? &#x27;[&#x27; -&gt; pushMode(IF_LINK_IMAGE_TAB_MODE);</span><br><span class="line">LIST_BOLD_ITALIC: (&#x27; &#x27; | &#x27;\t&#x27;)? (&#x27;***&#x27; | &#x27;___&#x27;) -&gt; pushMode(BOLD_ITALIC_MODE);</span><br><span class="line">LIST_BOLD: (&#x27; &#x27; | &#x27;\t&#x27;)? (&#x27;**&#x27; | &#x27;__&#x27;) -&gt; pushMode(BOLD_MODE);</span><br><span class="line">LIST_ITALIC: (&#x27; &#x27; | &#x27;\t&#x27;)? (&#x27;*&#x27; | &#x27;_&#x27;) -&gt; pushMode(ITALIC_MODE);</span><br><span class="line">LIST_CODE: (&#x27; &#x27; | &#x27;\t&#x27;)? (&#x27;`&#x27; | &#x27;~&#x27;) -&gt; pushMode(CODE_MODE);</span><br><span class="line"></span><br><span class="line">LIST_TAB_STRING: ~(&#x27; &#x27; | &#x27;\t&#x27; | &#x27;\r&#x27; | &#x27;\n&#x27;) | (&#x27; &#x27; | &#x27;\t&#x27;) ~(&#x27; &#x27; | &#x27;\t&#x27; | &#x27;\\&#x27; | &#x27;\r&#x27; | &#x27;\n&#x27;);</span><br><span class="line">LIST_TAB_WS: (&#x27; &#x27; | &#x27;\t&#x27;) -&gt; skip;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>其中<code>CODE_TEXT</code>处为</p>
+<h6 id="CODE-TEXT-‘-‘-‘-t’-‘-’-‘-’-‘-n’-‘-n’-pushMode-CODE-TEXT-MODE"><a href="#CODE-TEXT-‘-‘-‘-t’-‘-’-‘-’-‘-n’-‘-n’-pushMode-CODE-TEXT-MODE" class="headerlink" title="CODE_TEXT: (‘ ‘ | ‘\t’)* (‘&#96;&#96;&#96;’ | ‘~~~’) ~(‘\n’)* ‘\n’ -&gt; pushMode(CODE_TEXT_MODE);"></a>CODE_TEXT: (‘ ‘ | ‘\t’)* (‘&#96;&#96;&#96;’ | ‘~~~’) ~(‘\n’)* ‘\n’ -&gt; pushMode(CODE_TEXT_MODE);</h6><p>而<code>CODE_TEXT_END</code>处为</p>
+<h6 id="CODE-TEXT-END-‘-‘-‘-t’-‘-’-‘-’-‘-n’-‘-n’-popMode"><a href="#CODE-TEXT-END-‘-‘-‘-t’-‘-’-‘-’-‘-n’-‘-n’-popMode" class="headerlink" title="CODE_TEXT_END: (‘ ‘ | ‘\t’)* (‘&#96;&#96;&#96;’ | ‘~~~’) ~(‘\n’)* ‘\n’ -&gt; popMode;"></a>CODE_TEXT_END: (‘ ‘ | ‘\t’)* (‘&#96;&#96;&#96;’ | ‘~~~’) ~(‘\n’)* ‘\n’ -&gt; popMode;</h6><p>你问我为什么不把这两个填到上面一起，因为这个博客就是用这个来解析markdown的，而我的markdown解析器在解析代码文本是存在bug的（就是一旦识别出两处代码文本的标记符，就直接归为代码文本了），而且也懒得去改了（反正一般情况下也不会出现）</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://hvhghv.github.io/myBlog/myBlog/simple/2023-11-14/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -933,7 +1122,164 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://example.com/myBlog/cython/cython3/">
+    <link itemprop="mainEntityOfPage" href="https://hvhghv.github.io/myBlog/myBlog/simple/CompilationNote1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/myBlog/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HvH洋的小站">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/myBlog/simple/CompilationNote1/" itemprop="url">初学汇编的一点笔记</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2023-11-14T00:00:00+00:00">
+                2023-11-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/myBlog/categories/%E9%9B%B6%E7%A2%8E%E7%9A%84%E5%B0%8F%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index">
+                    <span itemprop="name">零碎的小笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="1-中括号-作取值符号时，只有用在寄存器上才是有效的。"><a href="#1-中括号-作取值符号时，只有用在寄存器上才是有效的。" class="headerlink" title="1. 中括号[]作取值符号时，只有用在寄存器上才是有效的。"></a>1. 中括号[]作取值符号时，只有用在寄存器上才是有效的。</h2><ul>
+<li>mov ecx,[eax] （有效，相当于取地址为eax的值）</li>
+<li>mov ecx,[temp] (无效，不论加不加括号都是取temp的值)</li>
+</ul>
+<h2 id="2-mov-右边为寄存器取值操作时，左边也为寄存器"><a href="#2-mov-右边为寄存器取值操作时，左边也为寄存器" class="headerlink" title="2. mov 右边为寄存器取值操作时，左边也为寄存器"></a>2. mov 右边为寄存器取值操作时，左边也为寄存器</h2><ul>
+<li>mov ecx,[eax] （正确）   </li>
+<li>mov temp,[eax] （错误）</li>
+</ul>
+<h2 id="3-mov-与-取值符号搭配时，两者均为寄存器，左边的寄存器可以用低位"><a href="#3-mov-与-取值符号搭配时，两者均为寄存器，左边的寄存器可以用低位" class="headerlink" title="3. mov 与 取值符号搭配时，两者均为寄存器，左边的寄存器可以用低位"></a>3. mov 与 取值符号搭配时，两者均为寄存器，左边的寄存器可以用低位</h2><ul>
+<li>mov al,[eax] （正确）</li>
+</ul>
+<h2 id="4-强制类型转换-ptr"><a href="#4-强制类型转换-ptr" class="headerlink" title="4. 强制类型转换(* ptr)"></a>4. 强制类型转换(* ptr)</h2><ul>
+<li>mov byte ptr temp,eax （取eax的前1个字节，放到temp中）   </li>
+<li>mov word ptr temp,eax （取eax的前2个字节，放到temp中）</li>
+<li>mov word ptr [ecx + 2],eax （取eax的前2个字节，放到地址为ecx + 2中）</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://hvhghv.github.io/myBlog/myBlog/cython/cython3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -1117,7 +1463,196 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://example.com/myBlog/cython/cython1/">
+    <link itemprop="mainEntityOfPage" href="https://hvhghv.github.io/myBlog/myBlog/cython/cython2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/myBlog/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HvH洋的小站">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/myBlog/cython/cython2/" itemprop="url">cython生成dll踩坑记（二）---打包篇</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2023-10-14T00:00:00+00:00">
+                2023-10-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/myBlog/categories/cython%E7%9A%84%E5%88%9D%E6%AD%A5%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index">
+                    <span itemprop="name">cython的初步学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="cython生成dll踩坑记（二）—打包篇"><a href="#cython生成dll踩坑记（二）—打包篇" class="headerlink" title="cython生成dll踩坑记（二）—打包篇"></a>cython生成dll踩坑记（二）—打包篇</h1><h2 id="2023-10-14"><a href="#2023-10-14" class="headerlink" title="2023-10-14"></a>2023-10-14</h2><p>上一期简单谈谈了cython生成dll的一些坑。  </p>
+<p>这一期呢，就打算谈谈怎么打包了。   </p>
+<p>假如你已经生成好dll了，然后写好exe调用这个dll，现在呢，你想这这些东西发布出去，结果发现在别人电脑里运行不了。。。。   </p>
+<p>一看，发现这个cython生成的dll依赖python3x.dll，可每个人都不会全是程序猿呀，没有python的环境。。。</p>
+<p>而且有时候，有python环境，反而会造成程序运行不了。。。  </p>
+<p>不当谜语人了，直接开始吧   </p>
+<ul>
+<li>通过embed包进行打包</li>
+</ul>
+<p>python官网中除了标准包，还有一种embed包，里面集成了基本的python环境。下载才6m，解压后就10m。用来制作发布包十分合适。</p>
+<ul>
+<li>坑点1，3.7.2embed包无法使用<br>起初我是下了3.7.2embed包，发现居然用不了。后来下了3.8.1embed包。这个包就能直接用（不知道是什么问题。。）</li>
+</ul>
+<p>下完后，会发现里面没有pip，没有tk库之类的（不过我还没有研究tk库，就只针对没有pip的情况）。   </p>
+<p>所以，我们就把pip下回来，然后把第三方模块安装。当然，pip占用10m，还是比较大的。所以我们最后再把pip卸载掉。（直接uninstall pip，setuptools就好，而且这个卸载还也确实挺干净的）   </p>
+<ul>
+<li>下面是我的方式</li>
+</ul>
+<p>首先，在embed包中，找到<code>python3x._pth</code>结尾的文件（x是版本号），修改里面内容，将site的#删去。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">改成下面这样</span><br><span class="line"></span><br><span class="line">python38.zip</span><br><span class="line">.</span><br><span class="line"></span><br><span class="line"># Uncomment to run site.main() automatically</span><br><span class="line">import site</span><br><span class="line">```  </span><br><span class="line"></span><br><span class="line">之后，把pip装回来。你可以采用get-pip.py的方式或者将电脑上另一个python标准包中的pip，setuptools，easy_install.py,pkg_resources复制到Lib/site-packages里（当然这个文件夹需要你自己新建）</span><br><span class="line"></span><br><span class="line">接着，下载需要的第三方模块</span><br></pre></td></tr></table></figure>
+<p>python -m pip install xxx</p>
+<pre><code>
+最后，将pip，setuptools卸载掉（只需卸载这两个就行啦）   
+
+* 坑点二，先卸setuptools，再卸pip，不要问为什么。。。。。
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">python -m pip uninstall setuptools</span><br><span class="line">python -m pip uninstall pip</span><br><span class="line">~~~  </span><br><span class="line"></span><br><span class="line">现在，基本的python打包环境就已经安装好了。直接把cython生成的dll拖进embed包里，然后exe加载这个dll就行了。     </span><br><span class="line"></span><br><span class="line">这样就解决了依赖python3x.dll的问题。    </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">好了，接下来我们来谈另一个问题，上面的内容都走了一遍，结果发现运行后闪退。。。   </span><br><span class="line"></span><br><span class="line">假如你电脑上还有另一个python环境，而且是相同版本的，那么，下面内容也许对你有帮助，假如不是，那就检查一下自己的代码，或者另寻他路。  </span><br><span class="line"></span><br><span class="line">当时我遇到这个问题时，我也一直没想出个所以然。之后吃饭的时候，我突然意识到dll加载顺序问题。    </span><br><span class="line">拿出调试器一看，果然,cython生成的dll需要python3x.dll，但是它并没有加载embed包下的python3x.dll，而是顺着系统环境变量直接找另一个标准包上的python3x.dll了。   </span><br><span class="line">* 解决办法很简单，在加载cython的dll前提前加载embed包下的python3x.dll就行了   </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+    
+// 之前的代码是这样的
+// test.dll 是cython生成的dll
+    
+HMODULE moudle = LoadLibrary(&quot;test.dll&quot;);
+ 
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+ 
+// 修改后
+ 
+LoadLibrary(&quot;python-3.8.1-embed-win32/python38.dll&quot;);
+HMODULE moudle = LoadLibrary(&quot;test.dll&quot;);
+ 
+~~~
+ 
+test.dll依赖python38.dll，但我们提前加载好python38.dll，win装载器不会傻愣愣地顺着环境变量跑去另一个python环境，而且系统也不会重新装载，于是就解决问题了。   
+
+打包的问题解决了，那exe也就能发布出去了    
+
+下一期是关于cython变量共享踩坑记。
+
+</code></pre>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://hvhghv.github.io/myBlog/myBlog/cython/cython1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -1314,195 +1849,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://example.com/myBlog/cython/cython2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/myBlog/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="HvH洋的小站">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/myBlog/cython/cython2/" itemprop="url">cython生成dll踩坑记（二）---打包篇</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2023-10-14T00:00:00+00:00">
-                2023-10-14
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/myBlog/categories/cython%E7%9A%84%E5%88%9D%E6%AD%A5%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index">
-                    <span itemprop="name">cython的初步学习</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="cython生成dll踩坑记（二）—打包篇"><a href="#cython生成dll踩坑记（二）—打包篇" class="headerlink" title="cython生成dll踩坑记（二）—打包篇"></a>cython生成dll踩坑记（二）—打包篇</h1><h2 id="2023-10-14"><a href="#2023-10-14" class="headerlink" title="2023-10-14"></a>2023-10-14</h2><p>上一期简单谈谈了cython生成dll的一些坑。  </p>
-<p>这一期呢，就打算谈谈怎么打包了。   </p>
-<p>假如你已经生成好dll了，然后写好exe调用这个dll，现在呢，你想这这些东西发布出去，结果发现在别人电脑里运行不了。。。。   </p>
-<p>一看，发现这个cython生成的dll依赖python3x.dll，可每个人都不会全是程序猿呀，没有python的环境。。。</p>
-<p>而且有时候，有python环境，反而会造成程序运行不了。。。  </p>
-<p>不当谜语人了，直接开始吧   </p>
-<ul>
-<li>通过embed包进行打包</li>
-</ul>
-<p>python官网中除了标准包，还有一种embed包，里面集成了基本的python环境。下载才6m，解压后就10m。用来制作发布包十分合适。</p>
-<ul>
-<li>坑点1，3.7.2embed包无法使用<br>起初我是下了3.7.2embed包，发现居然用不了。后来下了3.8.1embed包。这个包就能直接用（不知道是什么问题。。）</li>
-</ul>
-<p>下完后，会发现里面没有pip，没有tk库之类的（不过我还没有研究tk库，就只针对没有pip的情况）。   </p>
-<p>所以，我们就把pip下回来，然后把第三方模块安装。当然，pip占用10m，还是比较大的。所以我们最后再把pip卸载掉。（直接uninstall pip，setuptools就好，而且这个卸载还也确实挺干净的）   </p>
-<ul>
-<li>下面是我的方式</li>
-</ul>
-<p>首先，在embed包中，找到<code>python3x._pth</code>结尾的文件（x是版本号），修改里面内容，将site的#删去。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">改成下面这样</span><br><span class="line"></span><br><span class="line">python38.zip</span><br><span class="line">.</span><br><span class="line"></span><br><span class="line"># Uncomment to run site.main() automatically</span><br><span class="line">import site</span><br><span class="line">```  </span><br><span class="line"></span><br><span class="line">之后，把pip装回来。你可以采用get-pip.py的方式或者将电脑上另一个python标准包中的pip，setuptools，easy_install.py,pkg_resources复制到Lib/site-packages里（当然这个文件夹需要你自己新建）</span><br><span class="line"></span><br><span class="line">接着，下载需要的第三方模块</span><br></pre></td></tr></table></figure>
-<p>python -m pip install xxx</p>
-<pre><code>
-最后，将pip，setuptools卸载掉（只需卸载这两个就行啦）   
-
-* 坑点二，先卸setuptools，再卸pip，不要问为什么。。。。。
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">python -m pip uninstall setuptools</span><br><span class="line">python -m pip uninstall pip</span><br><span class="line">~~~  </span><br><span class="line"></span><br><span class="line">现在，基本的python打包环境就已经安装好了。直接把cython生成的dll拖进embed包里，然后exe加载这个dll就行了。     </span><br><span class="line"></span><br><span class="line">这样就解决了依赖python3x.dll的问题。    </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">好了，接下来我们来谈另一个问题，上面的内容都走了一遍，结果发现运行后闪退。。。   </span><br><span class="line"></span><br><span class="line">假如你电脑上还有另一个python环境，而且是相同版本的，那么，下面内容也许对你有帮助，假如不是，那就检查一下自己的代码，或者另寻他路。  </span><br><span class="line"></span><br><span class="line">当时我遇到这个问题时，我也一直没想出个所以然。之后吃饭的时候，我突然意识到dll加载顺序问题。    </span><br><span class="line">拿出调试器一看，果然,cython生成的dll需要python3x.dll，但是它并没有加载embed包下的python3x.dll，而是顺着系统环境变量直接找另一个标准包上的python3x.dll了。   </span><br><span class="line">* 解决办法很简单，在加载cython的dll前提前加载embed包下的python3x.dll就行了   </span><br><span class="line"></span><br></pre></td></tr></table></figure>
-    
-// 之前的代码是这样的
-// test.dll 是cython生成的dll
-    
-HMODULE moudle = LoadLibrary(&quot;test.dll&quot;);
- 
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
- 
-// 修改后
- 
-LoadLibrary(&quot;python-3.8.1-embed-win32/python38.dll&quot;);
-HMODULE moudle = LoadLibrary(&quot;test.dll&quot;);
- 
-~~~
- 
-test.dll依赖python38.dll，但我们提前加载好python38.dll，win装载器不会傻愣愣地顺着环境变量跑去另一个python环境，而且系统也不会重新装载，于是就解决问题了。   
-
-打包的问题解决了，那exe也就能发布出去了    
-
-下一期是关于cython变量共享踩坑记。
-
-</code></pre>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1549,7 +1895,7 @@ test.dll依赖python38.dll，但我们提前加载好python38.dll，win装载器
               
                 <a href="/myBlog/archives">
               
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
