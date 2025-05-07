@@ -74,7 +74,7 @@
 
 
 
-  <link rel="alternate" href="/myBlog/atom.xml" title="HvH洋的小站" type="application/atom+xml" />
+  <link rel="alternate" href="/myBlog/rss.xml" title="HvH洋的小站" type="application/atom+xml" />
 
 
 
@@ -966,6 +966,162 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://hvhghv.github.io/myBlog/myBlog/simple/2023-11-14/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/myBlog/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HvH洋的小站">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/myBlog/simple/2023-11-14/" itemprop="url">初学汇编认识到的一些小玩意</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2023-11-14T00:00:00+00:00">
+                2023-11-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/myBlog/categories/%E9%9B%B6%E7%A2%8E%E7%9A%84%E5%B0%8F%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index">
+                    <span itemprop="name">零碎的小笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="初学汇编认识到的一些小玩意"><a href="#初学汇编认识到的一些小玩意" class="headerlink" title="初学汇编认识到的一些小玩意"></a>初学汇编认识到的一些小玩意</h1><ul>
+<li>sp尽量64字节对齐，不然一些window api 直接报c05错误</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">;sp对齐方式</span><br><span class="line">    and sp,0FF00h	</span><br></pre></td></tr></table></figure>
+
+<p>在调用WindowsApi时，有时候会用到xmm0,ymm0,zmm0等这些寄存器。其中的一些指令是需要内存对齐的。假如sp没有对齐，就会导致内存访问错误。</p>
+<ul>
+<li>调试时，假如出现错误但总找不到错误原因时，那可能错误原因在指令上。</li>
+</ul>
+<p>有些指令的调用是需要一定条件的</p>
+<ul>
+<li>64位调用WindowsApi时,需要预留一些栈空间。（32位不清楚）</li>
+</ul>
+<p>调试时发现，调用WindowsApi时，会在开辟栈空间前，使用部分原有的栈空间。</p>
+<p>也就是说，假如call了WindowsApi，调用完后发现[sp]里面的数据已经变了。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://hvhghv.github.io/myBlog/myBlog/simple/CompilationNote1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1075,162 +1231,6 @@
 <li>mov word ptr temp,eax （取eax的前2个字节，放到temp中）</li>
 <li>mov word ptr [ecx + 2],eax （取eax的前2个字节，放到地址为ecx + 2中）</li>
 </ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://hvhghv.github.io/myBlog/myBlog/simple/2023-11-14/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/myBlog/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="HvH洋的小站">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/myBlog/simple/2023-11-14/" itemprop="url">初学汇编认识到的一些小玩意</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2023-11-14T00:00:00+00:00">
-                2023-11-14
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/myBlog/categories/%E9%9B%B6%E7%A2%8E%E7%9A%84%E5%B0%8F%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index">
-                    <span itemprop="name">零碎的小笔记</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="初学汇编认识到的一些小玩意"><a href="#初学汇编认识到的一些小玩意" class="headerlink" title="初学汇编认识到的一些小玩意"></a>初学汇编认识到的一些小玩意</h1><ul>
-<li>sp尽量64字节对齐，不然一些window api 直接报c05错误</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">;sp对齐方式</span><br><span class="line">    and sp,0FF00h	</span><br></pre></td></tr></table></figure>
-
-<p>在调用WindowsApi时，有时候会用到xmm0,ymm0,zmm0等这些寄存器。其中的一些指令是需要内存对齐的。假如sp没有对齐，就会导致内存访问错误。</p>
-<ul>
-<li>调试时，假如出现错误但总找不到错误原因时，那可能错误原因在指令上。</li>
-</ul>
-<p>有些指令的调用是需要一定条件的</p>
-<ul>
-<li>64位调用WindowsApi时,需要预留一些栈空间。（32位不清楚）</li>
-</ul>
-<p>调试时发现，调用WindowsApi时，会在开辟栈空间前，使用部分原有的栈空间。</p>
-<p>也就是说，假如call了WindowsApi，调用完后发现[sp]里面的数据已经变了。</p>
 
           
         
@@ -1918,7 +1918,7 @@ test.dll依赖python38.dll，但我们提前加载好python38.dll，win装载器
 
           
             <div class="feed-link motion-element">
-              <a href="/myBlog/atom.xml" rel="alternate">
+              <a href="/myBlog/rss.xml" rel="alternate">
                 <i class="fa fa-rss"></i>
                 RSS
               </a>
