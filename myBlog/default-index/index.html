@@ -211,6 +211,16 @@
         </li>
       
         
+        <li class="menu-item menu-item-messageboard">
+          <a href="/myBlog/messageboard/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-edit"></i> <br />
+            
+            留言板
+          </a>
+        </li>
+      
+        
         <li class="menu-item menu-item-github">
           <a target="_blank" href="https://github.com/hvhghv" rel="section noopener">
             
@@ -1108,6 +1118,195 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://example.com/myBlog/cython/cython2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/myBlog/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HvH洋的小站">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/myBlog/cython/cython2/" itemprop="url">cython生成dll踩坑记（二）---打包篇</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2023-10-14T00:00:00+00:00">
+                2023-10-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/myBlog/categories/cython%E7%9A%84%E5%88%9D%E6%AD%A5%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index">
+                    <span itemprop="name">cython的初步学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="cython生成dll踩坑记（二）—打包篇"><a href="#cython生成dll踩坑记（二）—打包篇" class="headerlink" title="cython生成dll踩坑记（二）—打包篇"></a>cython生成dll踩坑记（二）—打包篇</h1><h2 id="2023-10-14"><a href="#2023-10-14" class="headerlink" title="2023-10-14"></a>2023-10-14</h2><p>上一期简单谈谈了cython生成dll的一些坑。  </p>
+<p>这一期呢，就打算谈谈怎么打包了。   </p>
+<p>假如你已经生成好dll了，然后写好exe调用这个dll，现在呢，你想这这些东西发布出去，结果发现在别人电脑里运行不了。。。。   </p>
+<p>一看，发现这个cython生成的dll依赖python3x.dll，可每个人都不会全是程序猿呀，没有python的环境。。。</p>
+<p>而且有时候，有python环境，反而会造成程序运行不了。。。  </p>
+<p>不当谜语人了，直接开始吧   </p>
+<ul>
+<li>通过embed包进行打包</li>
+</ul>
+<p>python官网中除了标准包，还有一种embed包，里面集成了基本的python环境。下载才6m，解压后就10m。用来制作发布包十分合适。</p>
+<ul>
+<li>坑点1，3.7.2embed包无法使用<br>起初我是下了3.7.2embed包，发现居然用不了。后来下了3.8.1embed包。这个包就能直接用（不知道是什么问题。。）</li>
+</ul>
+<p>下完后，会发现里面没有pip，没有tk库之类的（不过我还没有研究tk库，就只针对没有pip的情况）。   </p>
+<p>所以，我们就把pip下回来，然后把第三方模块安装。当然，pip占用10m，还是比较大的。所以我们最后再把pip卸载掉。（直接uninstall pip，setuptools就好，而且这个卸载还也确实挺干净的）   </p>
+<ul>
+<li>下面是我的方式</li>
+</ul>
+<p>首先，在embed包中，找到<code>python3x._pth</code>结尾的文件（x是版本号），修改里面内容，将site的#删去。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">改成下面这样</span><br><span class="line"></span><br><span class="line">python38.zip</span><br><span class="line">.</span><br><span class="line"></span><br><span class="line"># Uncomment to run site.main() automatically</span><br><span class="line">import site</span><br><span class="line">```  </span><br><span class="line"></span><br><span class="line">之后，把pip装回来。你可以采用get-pip.py的方式或者将电脑上另一个python标准包中的pip，setuptools，easy_install.py,pkg_resources复制到Lib/site-packages里（当然这个文件夹需要你自己新建）</span><br><span class="line"></span><br><span class="line">接着，下载需要的第三方模块</span><br></pre></td></tr></table></figure>
+<p>python -m pip install xxx</p>
+<pre><code>
+最后，将pip，setuptools卸载掉（只需卸载这两个就行啦）   
+
+* 坑点二，先卸setuptools，再卸pip，不要问为什么。。。。。
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">python -m pip uninstall setuptools</span><br><span class="line">python -m pip uninstall pip</span><br><span class="line">~~~  </span><br><span class="line"></span><br><span class="line">现在，基本的python打包环境就已经安装好了。直接把cython生成的dll拖进embed包里，然后exe加载这个dll就行了。     </span><br><span class="line"></span><br><span class="line">这样就解决了依赖python3x.dll的问题。    </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">好了，接下来我们来谈另一个问题，上面的内容都走了一遍，结果发现运行后闪退。。。   </span><br><span class="line"></span><br><span class="line">假如你电脑上还有另一个python环境，而且是相同版本的，那么，下面内容也许对你有帮助，假如不是，那就检查一下自己的代码，或者另寻他路。  </span><br><span class="line"></span><br><span class="line">当时我遇到这个问题时，我也一直没想出个所以然。之后吃饭的时候，我突然意识到dll加载顺序问题。    </span><br><span class="line">拿出调试器一看，果然,cython生成的dll需要python3x.dll，但是它并没有加载embed包下的python3x.dll，而是顺着系统环境变量直接找另一个标准包上的python3x.dll了。   </span><br><span class="line">* 解决办法很简单，在加载cython的dll前提前加载embed包下的python3x.dll就行了   </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+    
+// 之前的代码是这样的
+// test.dll 是cython生成的dll
+    
+HMODULE moudle = LoadLibrary(&quot;test.dll&quot;);
+ 
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+ 
+// 修改后
+ 
+LoadLibrary(&quot;python-3.8.1-embed-win32/python38.dll&quot;);
+HMODULE moudle = LoadLibrary(&quot;test.dll&quot;);
+ 
+~~~
+ 
+test.dll依赖python38.dll，但我们提前加载好python38.dll，win装载器不会傻愣愣地顺着环境变量跑去另一个python环境，而且系统也不会重新装载，于是就解决问题了。   
+
+打包的问题解决了，那exe也就能发布出去了    
+
+下一期是关于cython变量共享踩坑记。
+
+</code></pre>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://example.com/myBlog/cython/cython1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1270,195 +1469,6 @@
 <ul>
 <li>最后给个小提示，在开发时，把多用try把代码包起来，然后在except中print错误信息，能极大提高找bug效率</li>
 </ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://example.com/myBlog/cython/cython2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/myBlog/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="HvH洋的小站">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/myBlog/cython/cython2/" itemprop="url">cython生成dll踩坑记（二）---打包篇</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2023-10-14T00:00:00+00:00">
-                2023-10-14
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/myBlog/categories/cython%E7%9A%84%E5%88%9D%E6%AD%A5%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index">
-                    <span itemprop="name">cython的初步学习</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="cython生成dll踩坑记（二）—打包篇"><a href="#cython生成dll踩坑记（二）—打包篇" class="headerlink" title="cython生成dll踩坑记（二）—打包篇"></a>cython生成dll踩坑记（二）—打包篇</h1><h2 id="2023-10-14"><a href="#2023-10-14" class="headerlink" title="2023-10-14"></a>2023-10-14</h2><p>上一期简单谈谈了cython生成dll的一些坑。  </p>
-<p>这一期呢，就打算谈谈怎么打包了。   </p>
-<p>假如你已经生成好dll了，然后写好exe调用这个dll，现在呢，你想这这些东西发布出去，结果发现在别人电脑里运行不了。。。。   </p>
-<p>一看，发现这个cython生成的dll依赖python3x.dll，可每个人都不会全是程序猿呀，没有python的环境。。。</p>
-<p>而且有时候，有python环境，反而会造成程序运行不了。。。  </p>
-<p>不当谜语人了，直接开始吧   </p>
-<ul>
-<li>通过embed包进行打包</li>
-</ul>
-<p>python官网中除了标准包，还有一种embed包，里面集成了基本的python环境。下载才6m，解压后就10m。用来制作发布包十分合适。</p>
-<ul>
-<li>坑点1，3.7.2embed包无法使用<br>起初我是下了3.7.2embed包，发现居然用不了。后来下了3.8.1embed包。这个包就能直接用（不知道是什么问题。。）</li>
-</ul>
-<p>下完后，会发现里面没有pip，没有tk库之类的（不过我还没有研究tk库，就只针对没有pip的情况）。   </p>
-<p>所以，我们就把pip下回来，然后把第三方模块安装。当然，pip占用10m，还是比较大的。所以我们最后再把pip卸载掉。（直接uninstall pip，setuptools就好，而且这个卸载还也确实挺干净的）   </p>
-<ul>
-<li>下面是我的方式</li>
-</ul>
-<p>首先，在embed包中，找到<code>python3x._pth</code>结尾的文件（x是版本号），修改里面内容，将site的#删去。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">改成下面这样</span><br><span class="line"></span><br><span class="line">python38.zip</span><br><span class="line">.</span><br><span class="line"></span><br><span class="line"># Uncomment to run site.main() automatically</span><br><span class="line">import site</span><br><span class="line">```  </span><br><span class="line"></span><br><span class="line">之后，把pip装回来。你可以采用get-pip.py的方式或者将电脑上另一个python标准包中的pip，setuptools，easy_install.py,pkg_resources复制到Lib/site-packages里（当然这个文件夹需要你自己新建）</span><br><span class="line"></span><br><span class="line">接着，下载需要的第三方模块</span><br></pre></td></tr></table></figure>
-<p>python -m pip install xxx</p>
-<pre><code>
-最后，将pip，setuptools卸载掉（只需卸载这两个就行啦）   
-
-* 坑点二，先卸setuptools，再卸pip，不要问为什么。。。。。
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">python -m pip uninstall setuptools</span><br><span class="line">python -m pip uninstall pip</span><br><span class="line">~~~  </span><br><span class="line"></span><br><span class="line">现在，基本的python打包环境就已经安装好了。直接把cython生成的dll拖进embed包里，然后exe加载这个dll就行了。     </span><br><span class="line"></span><br><span class="line">这样就解决了依赖python3x.dll的问题。    </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">好了，接下来我们来谈另一个问题，上面的内容都走了一遍，结果发现运行后闪退。。。   </span><br><span class="line"></span><br><span class="line">假如你电脑上还有另一个python环境，而且是相同版本的，那么，下面内容也许对你有帮助，假如不是，那就检查一下自己的代码，或者另寻他路。  </span><br><span class="line"></span><br><span class="line">当时我遇到这个问题时，我也一直没想出个所以然。之后吃饭的时候，我突然意识到dll加载顺序问题。    </span><br><span class="line">拿出调试器一看，果然,cython生成的dll需要python3x.dll，但是它并没有加载embed包下的python3x.dll，而是顺着系统环境变量直接找另一个标准包上的python3x.dll了。   </span><br><span class="line">* 解决办法很简单，在加载cython的dll前提前加载embed包下的python3x.dll就行了   </span><br><span class="line"></span><br></pre></td></tr></table></figure>
-    
-// 之前的代码是这样的
-// test.dll 是cython生成的dll
-    
-HMODULE moudle = LoadLibrary(&quot;test.dll&quot;);
- 
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
- 
-// 修改后
- 
-LoadLibrary(&quot;python-3.8.1-embed-win32/python38.dll&quot;);
-HMODULE moudle = LoadLibrary(&quot;test.dll&quot;);
- 
-~~~
- 
-test.dll依赖python38.dll，但我们提前加载好python38.dll，win装载器不会傻愣愣地顺着环境变量跑去另一个python环境，而且系统也不会重新装载，于是就解决问题了。   
-
-打包的问题解决了，那exe也就能发布出去了    
-
-下一期是关于cython变量共享踩坑记。
-
-</code></pre>
 
           
         
