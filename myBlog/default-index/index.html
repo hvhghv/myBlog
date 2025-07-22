@@ -371,7 +371,7 @@
 <p>找一个蓝牙键鼠连接平板，方便后面操作。</p>
 <p>在<code>Ubuntu-22.04-proot</code>内部安装sshd, 方便文件传输。另外有点奇怪的是通过apt安装的<code>openssh-server</code>, <code>dropbear</code>没一个能跑。后面只能找自己以前电脑上的<code>dropbear-2016</code>源码编译安装。而且还跑不了证书登陆，于是就只能跑密码登陆了。</p>
 <p>修改<code>/etc/profile</code>， 添加下面两行</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">export XDG_RUNTIME_DIR=/run/user/$(id -u)</span><br><span class="line">export DISPLAY=&#x27;:2&#x27;</span><br></pre></td></tr></table></figure>
+<figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line"><span class="built_in">export</span> <span class="attribute">XDG_RUNTIME_DIR</span>=/run/user/$(id -u)</span><br><span class="line"><span class="built_in">export</span> <span class="attribute">DISPLAY</span>=<span class="string">&#x27;:2&#x27;</span></span><br></pre></td></tr></table></figure>
 
 <p>修改<code>/etc/passwd</code>文件，把<code>root</code>里面的登陆用shell改为<code>bash</code>（这个<code>zsh</code>）卡得要死，卸了</p>
 <p>通过<code>debian-i</code>或者<code>apt</code>去里面装些想装的软件， 这样容器环境就差不多搭好了。</p>
@@ -379,7 +379,7 @@
 <p>改改<code>$PREFIX/var/server/tx11</code>里面的启动命令，改为<code>exec termux-x11: 2</code>，之后敲<code>sv-enable tx11</code>设置自启</p>
 <p>安装<code>screen</code>用于容器包活。这个<code>proot</code>容器有个特点就是，只要没有终端存在，就会把所有杀死所有容器内部的进程。所以我们需要一个虚拟终端来保证容器能持久运行</p>
 <p>回到安卓环境，停止termux后重新进入，敲下列代码</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">screen -S &quot;ub-xfce&quot; -X quit</span><br><span class="line">screen -pipe &quot;ub-xfce&quot;</span><br><span class="line">screen -dmS &quot;ub-xfce&quot; /bin/bash -c &quot;exec /bin/bash&quot;</span><br><span class="line">screen -S &quot;ub-xfce&quot; -X stuff &quot;debian\n&quot;</span><br><span class="line">screen -S &quot;ub-xfce&quot; -X stuff &quot;startxfce4\n&quot;</span><br></pre></td></tr></table></figure>
+<figure class="highlight hsp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">screen</span> -S <span class="string">&quot;ub-xfce&quot;</span> -X quit</span><br><span class="line"><span class="keyword">screen</span> -pipe <span class="string">&quot;ub-xfce&quot;</span></span><br><span class="line"><span class="keyword">screen</span> -dmS <span class="string">&quot;ub-xfce&quot;</span> /bin/bash -c <span class="string">&quot;exec /bin/bash&quot;</span></span><br><span class="line"><span class="keyword">screen</span> -S <span class="string">&quot;ub-xfce&quot;</span> -X stuff <span class="string">&quot;debian\n&quot;</span></span><br><span class="line"><span class="keyword">screen</span> -S <span class="string">&quot;ub-xfce&quot;</span> -X stuff <span class="string">&quot;startxfce4\n&quot;</span></span><br></pre></td></tr></table></figure>
 
 <p>回到安卓环境，打开termux:x11软件，等大概3分钟（启动挺慢的，但超过5分钟没反应那就是环境没搭好），就应该会有桌面环境了。打开<code>termux:x11</code>的设置选项，在<code>output</code>里设置<code>Screen orientation</code>为<code>landscape</code>，关闭<code>Reseed screen while soft keyboard is open</code>。在<code>keyboard</code>里打开所有开关，进入<code>Show additional keyboard</code>，调整<code>Opacity of extra keys bar, %</code>为10（这里是调整下框栏的透明度）</p>
 <p>退出termux:x11，回到安卓环境，修改输入法为<code>小企鹅输入法</code>，重进<code>termux:x11</code>软件，按右下角的键盘图标，敲一下蓝牙键盘的shirt键（没反应重复10次），理论上就会有中文输入法了。按下键盘shirt键切换中英文。</p>
@@ -724,15 +724,15 @@
 <h2 id="效果图"><a href="#效果图" class="headerlink" title="效果图"></a>效果图</h2><p><img src="/myBlog/mouth/mouth-2/img/mouth-2/32fbdcf115b6c30d5fad80b014f19ba.jpg" alt="3DED8B7C-868C-4F40-B915-9E31A4FA7525.png"></p>
 <p><img src="/myBlog/mouth/mouth-2/img/mouth-2/a16dcf5bbd9fc897627f1bf03240edd.jpg" alt="9B349F38-2402-448E-BFA3-4AB9A4B5424D.jpg"></p>
 <h2 id="搭建方式"><a href="#搭建方式" class="headerlink" title="搭建方式"></a>搭建方式</h2><h3 id="freshrss搭建"><a href="#freshrss搭建" class="headerlink" title="freshrss搭建"></a>freshrss搭建</h3><p>freshrss拿docker跑就好，下面附上docker-compose脚本</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">services:</span><br><span class="line">  freshrss:</span><br><span class="line">    image: freshrss/freshrss:latest</span><br><span class="line">    container_name: freshrss</span><br><span class="line">    environment:</span><br><span class="line">      - CRON_MIN=*/20       #每20分钟刷新一次</span><br><span class="line">      - TZ=Asia/Shanghai</span><br><span class="line">      - FRESHRSS_INSTALL=--default-user=admin --api-enabled</span><br><span class="line">      - FRESHRSS_USER=--user=admin --api-password=12345678 --password=12345678&quot;    #两个密码要改改</span><br><span class="line">    volumes:</span><br><span class="line">      - ./data:/var/www/FreshRSS/data</span><br><span class="line">      - ./extensions:/var/www/FreshRSS/extensions</span><br><span class="line">    ports:</span><br><span class="line">      - 7753:80        #左边的8080可以改成服务器上没有用过的端口</span><br><span class="line">    depends_on:</span><br><span class="line">      - postgres</span><br><span class="line">    restart: always</span><br><span class="line"></span><br><span class="line">  postgres:</span><br><span class="line">    image: postgres:alpine</span><br><span class="line">    container_name: freshrss-postgres</span><br><span class="line">    environment:</span><br><span class="line">      - POSTGRES_USER=freshrss</span><br><span class="line">      - POSTGRES_PASSWORD=freshrss    #密码可以自己修改</span><br><span class="line">      - POSTGRES_DB=freshrss</span><br><span class="line">    volumes:</span><br><span class="line">      - ./freshrss-postgres-data:/var/lib/postgresql/data</span><br><span class="line">    restart: always</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight nestedtext"><table><tr><td class="code"><pre><span class="line"><span class="attribute">services</span><span class="punctuation">:</span></span><br><span class="line">  <span class="attribute">freshrss</span><span class="punctuation">:</span></span><br><span class="line">    <span class="attribute">image</span><span class="punctuation">:</span> <span class="string">freshrss/freshrss:latest</span></span><br><span class="line">    <span class="attribute">container_name</span><span class="punctuation">:</span> <span class="string">freshrss</span></span><br><span class="line">    <span class="attribute">environment</span><span class="punctuation">:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">CRON_MIN=*/20       #每20分钟刷新一次</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">TZ=Asia/Shanghai</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">FRESHRSS_INSTALL=--default-user=admin --api-enabled</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">FRESHRSS_USER=--user=admin --api-password=12345678 --password=12345678&quot;    #两个密码要改改</span></span><br><span class="line">    <span class="attribute">volumes</span><span class="punctuation">:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./data:/var/www/FreshRSS/data</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./extensions:/var/www/FreshRSS/extensions</span></span><br><span class="line">    <span class="attribute">ports</span><span class="punctuation">:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">7753:80        #左边的8080可以改成服务器上没有用过的端口</span></span><br><span class="line">    <span class="attribute">depends_on</span><span class="punctuation">:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">postgres</span></span><br><span class="line">    <span class="attribute">restart</span><span class="punctuation">:</span> <span class="string">always</span></span><br><span class="line"></span><br><span class="line">  <span class="attribute">postgres</span><span class="punctuation">:</span></span><br><span class="line">    <span class="attribute">image</span><span class="punctuation">:</span> <span class="string">postgres:alpine</span></span><br><span class="line">    <span class="attribute">container_name</span><span class="punctuation">:</span> <span class="string">freshrss-postgres</span></span><br><span class="line">    <span class="attribute">environment</span><span class="punctuation">:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">POSTGRES_USER=freshrss</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">POSTGRES_PASSWORD=freshrss    #密码可以自己修改</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">POSTGRES_DB=freshrss</span></span><br><span class="line">    <span class="attribute">volumes</span><span class="punctuation">:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./freshrss-postgres-data:/var/lib/postgresql/data</span></span><br><span class="line">    <span class="attribute">restart</span><span class="punctuation">:</span> <span class="string">always</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <p>搭好后就能直接进入freshrss后台了。<br>随便找一个rss源，把网址填上去就弄好了</p>
 <h3 id="readyou搭建"><a href="#readyou搭建" class="headerlink" title="readyou搭建"></a>readyou搭建</h3><p>添加帐户，自托管里选Google Reader（不知道为什么选FreshRSS跑不起来），填帐号密码服务器地址</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">服务器地址参考，根据实际进行修改</span><br><span class="line">http://10.8.0.1:7753/api/greader.php/</span><br></pre></td></tr></table></figure>
+<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">服务器地址参考，根据实际进行修改</span><br><span class="line">http:<span class="regexp">//</span><span class="number">10.8</span>.<span class="number">0.1</span>:<span class="number">7753</span><span class="regexp">/api/g</span>reader.php/</span><br></pre></td></tr></table></figure>
 
 <p>这样就能在手机上享受rss了。</p>
 <h2 id="rsshub爬取热门网站"><a href="#rsshub爬取热门网站" class="headerlink" title="rsshub爬取热门网站"></a>rsshub爬取热门网站</h2><p>有些博客网站没有rss源，但有许多大佬通过rsshub创造出rss源出来。通过docker部署rsshub，浏览器安装rsshub插件实现功能。<br>下面只附上rsshub的docker-compose脚本</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">version: &#x27;3&#x27;</span><br><span class="line"></span><br><span class="line">services:</span><br><span class="line">    rsshub:</span><br><span class="line">        # two ways to enable puppeteer:</span><br><span class="line">        # * (only on amd64/x86_64) comment out marked lines, then use this image instead: diygod/rsshub:chromium-bundled</span><br><span class="line">        # * (on all supported architectures, but consumes more disk space and memory) leave anything unchanged</span><br><span class="line">        image: diygod/rsshub</span><br><span class="line">        restart: always</span><br><span class="line">        ports:</span><br><span class="line">            - &#x27;7691:1200&#x27; # 按需修改</span><br><span class="line">        environment:</span><br><span class="line">            NODE_ENV: production</span><br><span class="line">            CACHE_TYPE: redis</span><br><span class="line">            REDIS_URL: &#x27;redis://redis:6379/&#x27;</span><br><span class="line">            PUPPETEER_WS_ENDPOINT: &#x27;ws://browserless:3000&#x27;  # marked</span><br><span class="line">        depends_on:</span><br><span class="line">            - redis</span><br><span class="line">            - browserless  # marked</span><br><span class="line"></span><br><span class="line">    browserless:  # marked</span><br><span class="line">        image: browserless/chrome  # marked</span><br><span class="line">        restart: always  # marked</span><br><span class="line">        ulimits:  # marked</span><br><span class="line">          core:  # marked</span><br><span class="line">            hard: 0  # marked</span><br><span class="line">            soft: 0  # marked</span><br><span class="line"></span><br><span class="line">    redis:</span><br><span class="line">        image: redis:alpine</span><br><span class="line">        restart: always</span><br><span class="line">        volumes:</span><br><span class="line">            - ./redis-data:/data</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight nix"><table><tr><td class="code"><pre><span class="line"><span class="params">version:</span> &#x27;<span class="number">3</span>&#x27;</span><br><span class="line"></span><br><span class="line"><span class="params">services:</span></span><br><span class="line">    <span class="params">rsshub:</span></span><br><span class="line">        <span class="comment"># two ways to enable puppeteer:</span></span><br><span class="line">        <span class="comment"># * (only on amd64/x86_64) comment out marked lines, then use this image instead: diygod/rsshub:chromium-bundled</span></span><br><span class="line">        <span class="comment"># * (on all supported architectures, but consumes more disk space and memory) leave anything unchanged</span></span><br><span class="line">        <span class="params">image:</span> diygod<span class="symbol">/rsshub</span></span><br><span class="line">        <span class="params">restart:</span> always</span><br><span class="line">        <span class="params">ports:</span></span><br><span class="line">            <span class="operator">-</span> &#x27;<span class="number">7691</span>:<span class="number">1200</span>&#x27; <span class="comment"># 按需修改</span></span><br><span class="line">        <span class="params">environment:</span></span><br><span class="line">            <span class="params">NODE_ENV:</span> production</span><br><span class="line">            <span class="params">CACHE_TYPE:</span> redis</span><br><span class="line">            <span class="params">REDIS_URL:</span> &#x27;redis:<span class="operator">//</span>redis:<span class="number">6379</span><span class="operator">/</span>&#x27;</span><br><span class="line">            <span class="params">PUPPETEER_WS_ENDPOINT:</span> &#x27;ws:<span class="operator">//</span>browserless:<span class="number">3000</span>&#x27;  <span class="comment"># marked</span></span><br><span class="line">        <span class="params">depends_on:</span></span><br><span class="line">            <span class="operator">-</span> redis</span><br><span class="line">            <span class="operator">-</span> browserless  <span class="comment"># marked</span></span><br><span class="line"></span><br><span class="line">    <span class="params">browserless:</span>  <span class="comment"># marked</span></span><br><span class="line">        <span class="params">image:</span> browserless<span class="symbol">/chrome</span>  <span class="comment"># marked</span></span><br><span class="line">        <span class="params">restart:</span> always  <span class="comment"># marked</span></span><br><span class="line">        <span class="params">ulimits:</span>  <span class="comment"># marked</span></span><br><span class="line">          <span class="params">core:</span>  <span class="comment"># marked</span></span><br><span class="line">            <span class="params">hard:</span> <span class="number">0</span>  <span class="comment"># marked</span></span><br><span class="line">            <span class="params">soft:</span> <span class="number">0</span>  <span class="comment"># marked</span></span><br><span class="line"></span><br><span class="line">    <span class="params">redis:</span></span><br><span class="line">        <span class="params">image:</span> redis:alpine</span><br><span class="line">        <span class="params">restart:</span> always</span><br><span class="line">        <span class="params">volumes:</span></span><br><span class="line">            <span class="operator">-</span> .<span class="operator">/</span>redis-data:<span class="symbol">/data</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 
 <h2 id="freshrss通过xpath爬取网站"><a href="#freshrss通过xpath爬取网站" class="headerlink" title="freshrss通过xpath爬取网站"></a>freshrss通过xpath爬取网站</h2><p>对于没有rss源，或者rss源无法使用的网站，可以通过分析xpath方式来爬。下面给出个参考</p>
@@ -1053,9 +1053,9 @@
 <p>antlr可以直接一个文件直接写就行，不区分语法解析器和词法解析器，但是这样就少了词法解析器的一些比较好用的功能。</p>
 <p>所以，我的习惯是，新建两个文件，将语法解析器和词法解析器区分就好了。</p>
 <p>那么这个时候，两个文件的开头应该是这样</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// m.g4</span><br><span class="line">grammar m;</span><br><span class="line">options &#123; tokenVocab = mLexer; &#125;</span><br><span class="line"></span><br><span class="line">// ...</span><br></pre></td></tr></table></figure>
+<figure class="highlight abnf"><table><tr><td class="code"><pre><span class="line">// m.g4</span><br><span class="line">grammar m<span class="comment">;</span></span><br><span class="line">options &#123; tokenVocab <span class="operator">=</span> mLexer<span class="comment">; &#125;</span></span><br><span class="line"></span><br><span class="line">// ...</span><br></pre></td></tr></table></figure>
 
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// mLexer.g4</span><br><span class="line">lexer grammar mLexer;</span><br><span class="line"></span><br><span class="line">// ...</span><br></pre></td></tr></table></figure>
+<figure class="highlight jboss-cli"><table><tr><td class="code"><pre><span class="line"><span class="string">//</span> mLexer.g4</span><br><span class="line">lexer grammar mLexer;</span><br><span class="line"></span><br><span class="line"><span class="string">//</span> <span class="string">...</span></span><br></pre></td></tr></table></figure>
 
 <p>注意如果你的的第一个文件名为<code>m.g4</code>,那么另一个就应为<code>mLexer.g4</code>,要不然后期是编译不了的</p>
 <blockquote>
@@ -1068,7 +1068,7 @@
 <p>另一方面，也存在着解析的目标，逻辑比较复杂的情况</p>
 <p>所以，我就围绕着<code>antlr</code>的<code>pushMode</code>,<code>popMode</code>,<code>mode</code>这些功能来编写词法解析器。</p>
 <p>只需要按照这个下面这个简单的模板来设计，就能很快编写好词法解析器文件了</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">入口(pushMode) + 内容 + 出口(popMode)</span><br></pre></td></tr></table></figure>
+<figure class="highlight scss"><table><tr><td class="code"><pre><span class="line">入口(pushMode) + 内容 + 出口(popMode)</span><br></pre></td></tr></table></figure>
 
 <p>有了词法解析器，也就能很快的编写语法解析器<br>而语法解析器，就对每一个mode内部各个词法进行打包一下，比如将一个字符组成一个字符串之类的<br>每一处语法对应一处词法的mode，之后再整合起来，就能实现一个完整的解析器了。</p>
 <p>下面这些是我总结出来的经验</p>
@@ -1080,170 +1080,14 @@
 </ul>
 <h3 id="自已编写的markdown"><a href="#自已编写的markdown" class="headerlink" title="自已编写的markdown"></a>自已编写的markdown</h3><p>下面就开源一份我自己编写的markdown的g4文件</p>
 <p>这份为<code>md.g4</code></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br></pre></td><td class="code"><pre><span class="line">grammar md;</span><br><span class="line">options &#123; tokenVocab = mdLexer; &#125;</span><br><span class="line"></span><br><span class="line">init: expr*;</span><br><span class="line"></span><br><span class="line">expr: </span><br><span class="line">	  h1_expr</span><br><span class="line">	| h2_expr</span><br><span class="line">	| h3_expr</span><br><span class="line">	| h4_expr</span><br><span class="line">	| h5_expr</span><br><span class="line">	| h6_expr</span><br><span class="line">	| code_text_expr</span><br><span class="line">	| divide_expr </span><br><span class="line">	| quote_expr</span><br><span class="line">	| list_expr</span><br><span class="line">	| text_expr</span><br><span class="line">	| space_expr</span><br><span class="line">	</span><br><span class="line">	;</span><br><span class="line"></span><br><span class="line">// EXPR</span><br><span class="line">h1_expr: h1_element;</span><br><span class="line">h2_expr: h2_element;</span><br><span class="line">h3_expr: h3_element;</span><br><span class="line">h4_expr: h4_element;</span><br><span class="line">h5_expr: h5_element;</span><br><span class="line">h6_expr: h6_element;</span><br><span class="line">code_text_expr: code_text_element;</span><br><span class="line">divide_expr: divide_element;</span><br><span class="line">list_expr: list_data;</span><br><span class="line">text_expr: text_element;</span><br><span class="line">quote_expr : quote_data;</span><br><span class="line">space_expr: space_element;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// head</span><br><span class="line">h1_element: H1 all_head_string STRINGEND;</span><br><span class="line">h2_element: H2 all_head_string STRINGEND;</span><br><span class="line">h3_element: H3 all_head_string STRINGEND;</span><br><span class="line">h4_element: H4 all_head_string STRINGEND;</span><br><span class="line">h5_element: H5 all_head_string STRINGEND;</span><br><span class="line">h6_element: H6 all_head_string STRINGEND;</span><br><span class="line">all_head_string: HEADSTRING+;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// CODE_TEXT_MODE_R</span><br><span class="line">code_text_element: CODE_TEXT all_code_text_string CODE_TEXT_END;</span><br><span class="line">all_code_text_string: CODE_TEXT_STRING+;</span><br><span class="line"></span><br><span class="line">// IF_LINK_IMAGE_TAB_MODE_R</span><br><span class="line">link_element:</span><br><span class="line">	(LINK_TAB | TEXT_LINK_TAB | QUOTE_LINK_TAB | LIST_LINK_TAB) all_link_image_string IF_LINK_IMAGE_TAB_MBT_END all_link_image_string IF_LINK_IMAGE_SBT_END;</span><br><span class="line"></span><br><span class="line">image_element:</span><br><span class="line">	(IMAGE_TAB | TEXT_IMAGE_TAB | QUOTE_IMAGE_TAB | LIST_IMAGE_TAB) all_link_image_string IF_LINK_IMAGE_TAB_MBT_END all_link_image_string IF_LINK_IMAGE_SBT_END;</span><br><span class="line"></span><br><span class="line">all_link_image_string: IF_LINK_IMAGE_TAB_STRING*;</span><br><span class="line"></span><br><span class="line">// BOLD_ITALIC_MODE_R</span><br><span class="line">bold_italic_element:</span><br><span class="line">	(BOLD_ITALIC | TEXT_BOLD_ITALIC | QUOTE_BOLD_ITALIC | LIST_BOLD_ITALIC) all_bold_italic_string BOLD_ITALIC_END;</span><br><span class="line"></span><br><span class="line">all_bold_italic_string: BOLD_ITALIC_STRING*;</span><br><span class="line"></span><br><span class="line">// BOLD_MODE_R</span><br><span class="line">bold_element:</span><br><span class="line">	(BOLD | TEXT_BOLD | QUOTE_BOLD | LIST_BOLD) all_bold_string BOLD_END;</span><br><span class="line">all_bold_string: BOLD_STRING*;</span><br><span class="line"></span><br><span class="line">// ITALIC_MODE_R</span><br><span class="line">italic_element:</span><br><span class="line">	(ITALIC | TEXT_ITALIC | QUOTE_ITALIC | LIST_ITALIC) all_italic_string ITALIC_END;</span><br><span class="line">all_italic_string: ITALIC_STRING*;</span><br><span class="line"></span><br><span class="line">// CODE_MODE_R</span><br><span class="line">code_element:</span><br><span class="line">	(CODE | TEXT_CODE | QUOTE_CODE | LIST_CODE) all_code_string CODE_END;</span><br><span class="line">all_code_string: CODE_STRING+;</span><br><span class="line"></span><br><span class="line">// TEXT_MODE_R</span><br><span class="line">text_element:</span><br><span class="line">	all_text_context* TEXT_END;</span><br><span class="line"></span><br><span class="line">all_text_context: </span><br><span class="line">	(link_element | image_element | bold_italic_element | bold_element | italic_element | code_element | commend_text_string | tranform_text_string);</span><br><span class="line"></span><br><span class="line">commend_text_string: (TEXT | TEXT_STRING)+;</span><br><span class="line">tranform_text_string: (TRAMFORM_MEAN_4 | TRAMFORM_MEAN |TEXT_TRAMFORM_4);</span><br><span class="line"></span><br><span class="line">// QUOTE_MODE_R</span><br><span class="line">quote_element:</span><br><span class="line">	quote_head all_quote_context* QUOTE_MODE_END;</span><br><span class="line"></span><br><span class="line">quote_head: QUOTE;</span><br><span class="line"></span><br><span class="line">all_quote_context:</span><br><span class="line">	(link_element | image_element | bold_italic_element | bold_element | italic_element | code_element | commend_quote_string | tranform_quote_string);</span><br><span class="line"></span><br><span class="line">commend_quote_string: QUOTE_MODE_STRING+;</span><br><span class="line">tranform_quote_string: QUOTE_TRAMFORM_4;</span><br><span class="line"></span><br><span class="line">// LIST_MODE_R</span><br><span class="line">list_element:</span><br><span class="line">	list_head all_list_context* LIST_TAB_END;</span><br><span class="line">list_head: LIST_TAB;</span><br><span class="line"></span><br><span class="line">all_list_context:</span><br><span class="line">	(link_element | image_element | bold_italic_element | bold_element | italic_element | code_element | commend_list_string | tranform_list_string);</span><br><span class="line"></span><br><span class="line">commend_list_string: LIST_TAB_STRING+;</span><br><span class="line">tranform_list_string: LIST_TRAMFORM_4;</span><br><span class="line"></span><br><span class="line">// DIVIDE_R</span><br><span class="line">divide_element: DIVIDE;</span><br><span class="line"></span><br><span class="line">// SPACE_R</span><br><span class="line">space_element: SPACE;</span><br><span class="line"></span><br><span class="line">// LIST_data quote_data</span><br><span class="line">list_data: </span><br><span class="line">	list_element all_list_quote_context*;</span><br><span class="line"></span><br><span class="line">quote_data: </span><br><span class="line">	quote_element all_list_quote_context*;</span><br><span class="line"></span><br><span class="line">all_list_quote_context:</span><br><span class="line">	(text_element | quote_element | list_element);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight dts"><table><tr><td class="code"><pre><span class="line">grammar <span class="attr">md</span><span class="punctuation">;</span></span><br><span class="line"><span class="title class_">options</span> <span class="punctuation">&#123;</span> tokenV<span class="attr">ocab</span> <span class="operator">=</span> mdL<span class="attr">exer</span><span class="punctuation">;</span> <span class="punctuation">&#125;</span></span><br><span class="line"><span class="symbol"></span></span><br><span class="line"><span class="symbol">init:</span> expr*<span class="punctuation">;</span></span><br><span class="line"><span class="symbol"></span></span><br><span class="line"><span class="symbol">expr:</span> </span><br><span class="line">	  h1_expr</span><br><span class="line">	| h2_expr</span><br><span class="line">	| h3_expr</span><br><span class="line">	| h4_expr</span><br><span class="line">	| h5_expr</span><br><span class="line">	| h6_expr</span><br><span class="line">	| code_text_expr</span><br><span class="line">	| divide_expr </span><br><span class="line">	| quote_expr</span><br><span class="line">	| list_expr</span><br><span class="line">	| text_expr</span><br><span class="line">	| space_expr</span><br><span class="line">	</span><br><span class="line">	<span class="punctuation">;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// EXPR</span></span><br><span class="line"><span class="symbol">h1_expr:</span> h1_<span class="attr">element</span><span class="punctuation">;</span></span><br><span class="line"><span class="symbol">h2_expr:</span> h2_<span class="attr">element</span><span class="punctuation">;</span></span><br><span class="line"><span class="symbol">h3_expr:</span> h3_<span class="attr">element</span><span class="punctuation">;</span></span><br><span class="line"><span class="symbol">h4_expr:</span> h4_<span class="attr">element</span><span class="punctuation">;</span></span><br><span class="line"><span class="symbol">h5_expr:</span> h5_<span class="attr">element</span><span class="punctuation">;</span></span><br><span class="line"><span class="symbol">h6_expr:</span> h6_<span class="attr">element</span><span class="punctuation">;</span></span><br><span class="line"><span class="symbol">code_text_expr:</span> code_text_<span class="attr">element</span><span class="punctuation">;</span></span><br><span class="line"><span class="symbol">divide_expr:</span> divide_<span class="attr">element</span><span class="punctuation">;</span></span><br><span class="line"><span class="symbol">list_expr:</span> list_<span class="attr">data</span><span class="punctuation">;</span></span><br><span class="line"><span class="symbol">text_expr:</span> text_<span class="attr">element</span><span class="punctuation">;</span></span><br><span class="line">quote_expr : quote_<span class="attr">data</span><span class="punctuation">;</span></span><br><span class="line"><span class="symbol">space_expr:</span> space_<span class="attr">element</span><span class="punctuation">;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// head</span></span><br><span class="line"><span class="symbol">h1_element:</span> H1 all_head_string STRINGEND<span class="punctuation">;</span></span><br><span class="line"><span class="symbol">h2_element:</span> H2 all_head_string STRINGEND<span class="punctuation">;</span></span><br><span class="line"><span class="symbol">h3_element:</span> H3 all_head_string STRINGEND<span class="punctuation">;</span></span><br><span class="line"><span class="symbol">h4_element:</span> H4 all_head_string STRINGEND<span class="punctuation">;</span></span><br><span class="line"><span class="symbol">h5_element:</span> H5 all_head_string STRINGEND<span class="punctuation">;</span></span><br><span class="line"><span class="symbol">h6_element:</span> H6 all_head_string STRINGEND<span class="punctuation">;</span></span><br><span class="line"><span class="symbol">all_head_string:</span> HEADSTRING+<span class="punctuation">;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// CODE_TEXT_MODE_R</span></span><br><span class="line"><span class="symbol">code_text_element:</span> CODE_TEXT all_code_text_string CODE_TEXT_END<span class="punctuation">;</span></span><br><span class="line"><span class="symbol">all_code_text_string:</span> CODE_TEXT_STRING+<span class="punctuation">;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// IF_LINK_IMAGE_TAB_MODE_R</span></span><br><span class="line"><span class="symbol">link_element:</span></span><br><span class="line">	(LINK_TAB | TEXT_LINK_TAB | QUOTE_LINK_TAB | LIST_LINK_TAB) all_link_image_string IF_LINK_IMAGE_TAB_MBT_END all_link_image_string IF_LINK_IMAGE_SBT_END<span class="punctuation">;</span></span><br><span class="line"><span class="symbol"></span></span><br><span class="line"><span class="symbol">image_element:</span></span><br><span class="line">	(IMAGE_TAB | TEXT_IMAGE_TAB | QUOTE_IMAGE_TAB | LIST_IMAGE_TAB) all_link_image_string IF_LINK_IMAGE_TAB_MBT_END all_link_image_string IF_LINK_IMAGE_SBT_END<span class="punctuation">;</span></span><br><span class="line"><span class="symbol"></span></span><br><span class="line"><span class="symbol">all_link_image_string:</span> IF_LINK_IMAGE_TAB_STRING*<span class="punctuation">;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// BOLD_ITALIC_MODE_R</span></span><br><span class="line"><span class="symbol">bold_italic_element:</span></span><br><span class="line">	(BOLD_ITALIC | TEXT_BOLD_ITALIC | QUOTE_BOLD_ITALIC | LIST_BOLD_ITALIC) all_bold_italic_string BOLD_ITALIC_END<span class="punctuation">;</span></span><br><span class="line"><span class="symbol"></span></span><br><span class="line"><span class="symbol">all_bold_italic_string:</span> BOLD_ITALIC_STRING*<span class="punctuation">;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// BOLD_MODE_R</span></span><br><span class="line"><span class="symbol">bold_element:</span></span><br><span class="line">	(BOLD | TEXT_BOLD | QUOTE_BOLD | LIST_BOLD) all_bold_string BOLD_END<span class="punctuation">;</span></span><br><span class="line"><span class="symbol">all_bold_string:</span> BOLD_STRING*<span class="punctuation">;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// ITALIC_MODE_R</span></span><br><span class="line"><span class="symbol">italic_element:</span></span><br><span class="line">	(ITALIC | TEXT_ITALIC | QUOTE_ITALIC | LIST_ITALIC) all_italic_string ITALIC_END<span class="punctuation">;</span></span><br><span class="line"><span class="symbol">all_italic_string:</span> ITALIC_STRING*<span class="punctuation">;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// CODE_MODE_R</span></span><br><span class="line"><span class="symbol">code_element:</span></span><br><span class="line">	(CODE | TEXT_CODE | QUOTE_CODE | LIST_CODE) all_code_string CODE_END<span class="punctuation">;</span></span><br><span class="line"><span class="symbol">all_code_string:</span> CODE_STRING+<span class="punctuation">;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// TEXT_MODE_R</span></span><br><span class="line"><span class="symbol">text_element:</span></span><br><span class="line">	all_text_context* TEXT_END<span class="punctuation">;</span></span><br><span class="line"><span class="symbol"></span></span><br><span class="line"><span class="symbol">all_text_context:</span> </span><br><span class="line">	(link_element | image_element | bold_italic_element | bold_element | italic_element | code_element | commend_text_string | tranform_text_string)<span class="punctuation">;</span></span><br><span class="line"><span class="symbol"></span></span><br><span class="line"><span class="symbol">commend_text_string:</span> (TEXT | TEXT_STRING)+<span class="punctuation">;</span></span><br><span class="line"><span class="symbol">tranform_text_string:</span> (TRAMFORM_MEAN_4 | TRAMFORM_MEAN |TEXT_TRAMFORM_4)<span class="punctuation">;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// QUOTE_MODE_R</span></span><br><span class="line"><span class="symbol">quote_element:</span></span><br><span class="line">	quote_head all_quote_context* QUOTE_MODE_END<span class="punctuation">;</span></span><br><span class="line"><span class="symbol"></span></span><br><span class="line"><span class="symbol">quote_head:</span> QUOTE<span class="punctuation">;</span></span><br><span class="line"><span class="symbol"></span></span><br><span class="line"><span class="symbol">all_quote_context:</span></span><br><span class="line">	(link_element | image_element | bold_italic_element | bold_element | italic_element | code_element | commend_quote_string | tranform_quote_string)<span class="punctuation">;</span></span><br><span class="line"><span class="symbol"></span></span><br><span class="line"><span class="symbol">commend_quote_string:</span> QUOTE_MODE_STRING+<span class="punctuation">;</span></span><br><span class="line"><span class="symbol">tranform_quote_string:</span> QUOTE_TRAMFORM_4<span class="punctuation">;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// LIST_MODE_R</span></span><br><span class="line"><span class="symbol">list_element:</span></span><br><span class="line">	list_head all_list_context* LIST_TAB_END<span class="punctuation">;</span></span><br><span class="line"><span class="symbol">list_head:</span> LIST_TAB<span class="punctuation">;</span></span><br><span class="line"><span class="symbol"></span></span><br><span class="line"><span class="symbol">all_list_context:</span></span><br><span class="line">	(link_element | image_element | bold_italic_element | bold_element | italic_element | code_element | commend_list_string | tranform_list_string)<span class="punctuation">;</span></span><br><span class="line"><span class="symbol"></span></span><br><span class="line"><span class="symbol">commend_list_string:</span> LIST_TAB_STRING+<span class="punctuation">;</span></span><br><span class="line"><span class="symbol">tranform_list_string:</span> LIST_TRAMFORM_4<span class="punctuation">;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// DIVIDE_R</span></span><br><span class="line"><span class="symbol">divide_element:</span> DIVIDE<span class="punctuation">;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// SPACE_R</span></span><br><span class="line"><span class="symbol">space_element:</span> SPACE<span class="punctuation">;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// LIST_data quote_data</span></span><br><span class="line"><span class="symbol">list_data:</span> </span><br><span class="line">	list_element all_list_quote_context*<span class="punctuation">;</span></span><br><span class="line"><span class="symbol"></span></span><br><span class="line"><span class="symbol">quote_data:</span> </span><br><span class="line">	quote_element all_list_quote_context*<span class="punctuation">;</span></span><br><span class="line"><span class="symbol"></span></span><br><span class="line"><span class="symbol">all_list_quote_context:</span></span><br><span class="line">	(text_element | quote_element | list_element)<span class="punctuation">;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <p>这份为<code>mdLexer.g4</code></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br></pre></td><td class="code"><pre><span class="line">lexer grammar mdLexer;</span><br><span class="line"></span><br><span class="line">TRAMFORM_MEAN_4: (&#x27;\\\\&#x27;) -&gt; pushMode(TEXT_MODE);</span><br><span class="line">TRAMFORM_MEAN: (&#x27;\\&#x27;) -&gt; skip,pushMode(TEXT_MODE);</span><br><span class="line"></span><br><span class="line">H1: &#x27;#&#x27; (&#x27; &#x27; | &#x27;\t&#x27;)+ -&gt; pushMode(head);</span><br><span class="line">H2: &#x27;##&#x27; (&#x27; &#x27; | &#x27;\t&#x27;)+ -&gt; pushMode(head);</span><br><span class="line">H3: &#x27;###&#x27; (&#x27; &#x27; | &#x27;\t&#x27;)+ -&gt; pushMode(head);</span><br><span class="line">H4: &#x27;####&#x27; (&#x27; &#x27; | &#x27;\t&#x27;)+ -&gt; pushMode(head);</span><br><span class="line">H5: &#x27;#####&#x27; (&#x27; &#x27; | &#x27;\t&#x27;)+ -&gt; pushMode(head);</span><br><span class="line">H6: &#x27;######&#x27; (&#x27; &#x27; | &#x27;\t&#x27;)+ -&gt; pushMode(head);</span><br><span class="line"></span><br><span class="line">// 这里预留为CODE_TEXT</span><br><span class="line">DIVIDE:    (&#x27; &#x27; | &#x27;\t&#x27;)* (&#x27;--&#x27; | &#x27;**&#x27; | &#x27;__&#x27;) (&#x27;-&#x27; | &#x27;*&#x27; | &#x27;_&#x27;)+ &#x27; &#x27;* &#x27;\r&#x27;? &#x27;\n&#x27;;</span><br><span class="line">QUOTE:     (&#x27; &#x27; | &#x27;\t&#x27;)* (&#x27;&gt;&#x27;)+ -&gt; pushMode(QUOTE_MODE);</span><br><span class="line">LIST_TAB:  </span><br><span class="line">    (&#x27; &#x27; | &#x27;\t&#x27;)* ((([0-9])+ &#x27;.&#x27;) | ( &#x27;*&#x27; | &#x27;-&#x27; ))  (&#x27; &#x27; | &#x27;\t&#x27;)+ -&gt; pushMode(LIST_TAB_MODE);</span><br><span class="line"></span><br><span class="line">IMAGE_TAB: (&#x27; &#x27; | &#x27;\t&#x27;)* &#x27;![&#x27; -&gt; pushMode(IF_LINK_IMAGE_TAB_MODE);</span><br><span class="line">LINK_TAB: (&#x27; &#x27; | &#x27;\t&#x27;)* &#x27;[&#x27; -&gt; pushMode(IF_LINK_IMAGE_TAB_MODE);</span><br><span class="line">BOLD_ITALIC: (&#x27;***&#x27; | &#x27;___&#x27;) -&gt; pushMode(BOLD_ITALIC_MODE);</span><br><span class="line">BOLD: (&#x27;**&#x27; | &#x27;__&#x27;) -&gt; pushMode(BOLD_MODE);</span><br><span class="line">ITALIC: (&#x27;*&#x27; | &#x27;_&#x27;) -&gt; pushMode(ITALIC_MODE);</span><br><span class="line">CODE: (&#x27;`&#x27; | &#x27;~&#x27;) -&gt; pushMode(CODE_MODE);</span><br><span class="line"></span><br><span class="line">SPACE: (&#x27; &#x27;|&#x27;\t&#x27;)* &#x27;\r&#x27;? &#x27;\n&#x27;;</span><br><span class="line">WS: (&#x27; &#x27;|&#x27;\t&#x27;) -&gt; skip;</span><br><span class="line">TEXT: . -&gt; pushMode(TEXT_MODE);</span><br><span class="line"></span><br><span class="line">mode head;</span><br><span class="line"></span><br><span class="line">STRINGEND: &#x27; &#x27;* &#x27;\r&#x27;? &#x27;\n&#x27; -&gt; popMode;</span><br><span class="line">HEADSTRING: &#x27; &#x27; ~&#x27; &#x27; | ~&#x27; &#x27; ;</span><br><span class="line">HEAD_WS: &#x27; &#x27; -&gt; skip;</span><br><span class="line"></span><br><span class="line">mode CODE_TEXT_MODE;</span><br><span class="line"></span><br><span class="line">// 这里预留为CODE_TEXT_END</span><br><span class="line">CODE_TEXT_STRING: .;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">mode IF_LINK_IMAGE_TAB_MODE;</span><br><span class="line"></span><br><span class="line">IF_LINK_IMAGE_TAB_MBT_END: &#x27;](&#x27;;</span><br><span class="line">IF_LINK_IMAGE_SBT_END: &#x27;)&#x27; -&gt; popMode;</span><br><span class="line">IF_LINK_IMAGE_TAB_STRING: .;</span><br><span class="line"></span><br><span class="line">mode BOLD_ITALIC_MODE;</span><br><span class="line">BOLD_ITALIC_END: (&#x27;***&#x27; | &#x27;___&#x27;) -&gt; popMode;</span><br><span class="line">BOLD_ITALIC_STRING: .;</span><br><span class="line"></span><br><span class="line">mode BOLD_MODE;</span><br><span class="line">BOLD_END: (&#x27;**&#x27;| &#x27;__&#x27;) -&gt; popMode;</span><br><span class="line">BOLD_STRING: .;</span><br><span class="line"></span><br><span class="line">mode ITALIC_MODE;</span><br><span class="line">ITALIC_END: (&#x27;*&#x27;| &#x27;_&#x27;) -&gt; popMode;</span><br><span class="line">ITALIC_STRING: .;</span><br><span class="line"></span><br><span class="line">mode CODE_MODE;</span><br><span class="line">CODE_END: (&#x27;`&#x27; | &#x27;~&#x27;) -&gt; popMode;</span><br><span class="line">CODE_STRING: .;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">mode TEXT_MODE;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">TEXT_TRAMFORM_4:</span><br><span class="line">	&#x27;\\\\&#x27;</span><br><span class="line">	| &#x27;\\`&#x27;</span><br><span class="line">	| &#x27;\\*&#x27;</span><br><span class="line">	| &#x27;\\_&#x27;</span><br><span class="line">	| &#x27;\\[&#x27;</span><br><span class="line">	| &#x27;\\]&#x27;</span><br><span class="line">	| &#x27;\\(&#x27;</span><br><span class="line">	| &#x27;\\)&#x27;</span><br><span class="line">	| &#x27;\\&#123;&#x27;</span><br><span class="line">	| &#x27;\\&#125;&#x27;</span><br><span class="line">	| &#x27;\\#&#x27;</span><br><span class="line">	| &#x27;\\-&#x27;</span><br><span class="line">	| &#x27;\\+&#x27;</span><br><span class="line">	| &#x27;\\.&#x27;</span><br><span class="line">	| &#x27;\\!&#x27;</span><br><span class="line">	| &#x27;\\|&#x27;</span><br><span class="line">	| &#x27;\\~&#x27;;</span><br><span class="line">TEXT_END: &#x27;\r&#x27;? &#x27;\n&#x27; -&gt; popMode;</span><br><span class="line"></span><br><span class="line">TEXT_IMAGE_TAB: (&#x27; &#x27; | &#x27;\t&#x27;)? &#x27;![&#x27; -&gt; pushMode(IF_LINK_IMAGE_TAB_MODE);</span><br><span class="line">TEXT_LINK_TAB: (&#x27; &#x27; | &#x27;\t&#x27;)? &#x27;[&#x27; -&gt; pushMode(IF_LINK_IMAGE_TAB_MODE);</span><br><span class="line">TEXT_BOLD_ITALIC: (&#x27; &#x27; | &#x27;\t&#x27;)? (&#x27;***&#x27;| &#x27;___&#x27;) -&gt; pushMode(BOLD_ITALIC_MODE);</span><br><span class="line">TEXT_BOLD: (&#x27; &#x27; | &#x27;\t&#x27;)? (&#x27;**&#x27;| &#x27;__&#x27;) -&gt; pushMode(BOLD_MODE);</span><br><span class="line">TEXT_ITALIC: (&#x27; &#x27; | &#x27;\t&#x27;)? (&#x27;*&#x27;| &#x27;_&#x27;) -&gt; pushMode(ITALIC_MODE);</span><br><span class="line">TEXT_CODE: (&#x27; &#x27; | &#x27;\t&#x27;)? (&#x27;`&#x27; | &#x27;~&#x27;) -&gt; pushMode(CODE_MODE);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">TEXT_STRING: ~(&#x27; &#x27; | &#x27;\t&#x27; | &#x27;\r&#x27; | &#x27;\n&#x27;) | (&#x27; &#x27; | &#x27;\t&#x27;) ~(&#x27; &#x27; | &#x27;\t&#x27; | &#x27;\\&#x27; | &#x27;\r&#x27; | &#x27;\n&#x27;);</span><br><span class="line">TEXT_WS: (&#x27; &#x27; | &#x27;\t&#x27;) -&gt; skip;</span><br><span class="line"></span><br><span class="line">mode QUOTE_MODE;</span><br><span class="line">QUOTE_TRAMFORM_4:</span><br><span class="line">	&#x27;\\\\&#x27;</span><br><span class="line">	| &#x27;\\`&#x27;</span><br><span class="line">	| &#x27;\\*&#x27;</span><br><span class="line">	| &#x27;\\_&#x27;</span><br><span class="line">	| &#x27;\\[&#x27;</span><br><span class="line">	| &#x27;\\]&#x27;</span><br><span class="line">	| &#x27;\\(&#x27;</span><br><span class="line">	| &#x27;\\)&#x27;</span><br><span class="line">	| &#x27;\\&#123;&#x27;</span><br><span class="line">	| &#x27;\\&#125;&#x27;</span><br><span class="line">	| &#x27;\\#&#x27;</span><br><span class="line">	| &#x27;\\-&#x27;</span><br><span class="line">	| &#x27;\\+&#x27;</span><br><span class="line">	| &#x27;\\.&#x27;</span><br><span class="line">	| &#x27;\\!&#x27;</span><br><span class="line">	| &#x27;\\|&#x27;</span><br><span class="line">	| &#x27;\\~&#x27;;</span><br><span class="line"></span><br><span class="line">QUOTE_MODE_END: (&#x27; &#x27; | &#x27;\t&#x27;)* &#x27;\r&#x27;? &#x27;\n&#x27; -&gt; popMode;</span><br><span class="line"></span><br><span class="line">QUOTE_IMAGE_TAB: (&#x27; &#x27; | &#x27;\t&#x27;)? &#x27;![&#x27; -&gt; pushMode(IF_LINK_IMAGE_TAB_MODE);</span><br><span class="line">QUOTE_LINK_TAB: (&#x27; &#x27; | &#x27;\t&#x27;)? &#x27;[&#x27; -&gt; pushMode(IF_LINK_IMAGE_TAB_MODE);</span><br><span class="line">QUOTE_BOLD_ITALIC: (&#x27; &#x27; | &#x27;\t&#x27;)? (&#x27;***&#x27; | &#x27;___&#x27;) -&gt; pushMode(BOLD_ITALIC_MODE);</span><br><span class="line">QUOTE_BOLD: (&#x27; &#x27; | &#x27;\t&#x27;)? (&#x27;**&#x27; | &#x27;__&#x27;) -&gt; pushMode(BOLD_MODE);</span><br><span class="line">QUOTE_ITALIC: (&#x27; &#x27; | &#x27;\t&#x27;)? (&#x27;*&#x27; | &#x27;_&#x27;) -&gt; pushMode(ITALIC_MODE);</span><br><span class="line">QUOTE_CODE: (&#x27; &#x27; | &#x27;\t&#x27;)? (&#x27;`&#x27; | &#x27;~&#x27;) -&gt; pushMode(CODE_MODE);</span><br><span class="line"></span><br><span class="line">QUOTE_MODE_STRING: ~(&#x27; &#x27; | &#x27;\t&#x27; | &#x27;\r&#x27; | &#x27;\n&#x27;) | (&#x27; &#x27; | &#x27;\t&#x27;) ~(&#x27; &#x27; | &#x27;\t&#x27; | &#x27;\\&#x27; | &#x27;\r&#x27; | &#x27;\n&#x27;);</span><br><span class="line">QUOTE_WS: (&#x27; &#x27; | &#x27;\t&#x27;) -&gt; skip;</span><br><span class="line"></span><br><span class="line">mode LIST_TAB_MODE;</span><br><span class="line"></span><br><span class="line">LIST_TRAMFORM_4:</span><br><span class="line">	&#x27;\\\\&#x27;</span><br><span class="line">	| &#x27;\\`&#x27;</span><br><span class="line">	| &#x27;\\*&#x27;</span><br><span class="line">	| &#x27;\\_&#x27;</span><br><span class="line">	| &#x27;\\[&#x27;</span><br><span class="line">	| &#x27;\\]&#x27;</span><br><span class="line">	| &#x27;\\(&#x27;</span><br><span class="line">	| &#x27;\\)&#x27;</span><br><span class="line">	| &#x27;\\&#123;&#x27;</span><br><span class="line">	| &#x27;\\&#125;&#x27;</span><br><span class="line">	| &#x27;\\#&#x27;</span><br><span class="line">	| &#x27;\\-&#x27;</span><br><span class="line">	| &#x27;\\+&#x27;</span><br><span class="line">	| &#x27;\\.&#x27;</span><br><span class="line">	| &#x27;\\!&#x27;</span><br><span class="line">	| &#x27;\\|&#x27;</span><br><span class="line">	| &#x27;\\~&#x27;;</span><br><span class="line"></span><br><span class="line">LIST_TAB_END: (&#x27; &#x27; | &#x27;\t&#x27;)* &#x27;\r&#x27;? &#x27;\n&#x27; -&gt; popMode;</span><br><span class="line"></span><br><span class="line">LIST_IMAGE_TAB: (&#x27; &#x27; | &#x27;\t&#x27;)? &#x27;![&#x27; -&gt; pushMode(IF_LINK_IMAGE_TAB_MODE);</span><br><span class="line">LIST_LINK_TAB: (&#x27; &#x27; | &#x27;\t&#x27;)? &#x27;[&#x27; -&gt; pushMode(IF_LINK_IMAGE_TAB_MODE);</span><br><span class="line">LIST_BOLD_ITALIC: (&#x27; &#x27; | &#x27;\t&#x27;)? (&#x27;***&#x27; | &#x27;___&#x27;) -&gt; pushMode(BOLD_ITALIC_MODE);</span><br><span class="line">LIST_BOLD: (&#x27; &#x27; | &#x27;\t&#x27;)? (&#x27;**&#x27; | &#x27;__&#x27;) -&gt; pushMode(BOLD_MODE);</span><br><span class="line">LIST_ITALIC: (&#x27; &#x27; | &#x27;\t&#x27;)? (&#x27;*&#x27; | &#x27;_&#x27;) -&gt; pushMode(ITALIC_MODE);</span><br><span class="line">LIST_CODE: (&#x27; &#x27; | &#x27;\t&#x27;)? (&#x27;`&#x27; | &#x27;~&#x27;) -&gt; pushMode(CODE_MODE);</span><br><span class="line"></span><br><span class="line">LIST_TAB_STRING: ~(&#x27; &#x27; | &#x27;\t&#x27; | &#x27;\r&#x27; | &#x27;\n&#x27;) | (&#x27; &#x27; | &#x27;\t&#x27;) ~(&#x27; &#x27; | &#x27;\t&#x27; | &#x27;\\&#x27; | &#x27;\r&#x27; | &#x27;\n&#x27;);</span><br><span class="line">LIST_TAB_WS: (&#x27; &#x27; | &#x27;\t&#x27;) -&gt; skip;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line">lexer grammar mdLexer;</span><br><span class="line"></span><br><span class="line">TRAMFORM_MEAN_4: (<span class="string">&#x27;\\\\&#x27;</span>) -&gt; <span class="built_in">pushMode</span>(TEXT_MODE);</span><br><span class="line">TRAMFORM_MEAN: (<span class="string">&#x27;\\&#x27;</span>) -&gt; skip,<span class="built_in">pushMode</span>(TEXT_MODE);</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">H1</span>: <span class="string">&#x27;#&#x27;</span> (<span class="string">&#x27; &#x27;</span> | <span class="string">&#x27;\t&#x27;</span>)+ -&gt; <span class="built_in">pushMode</span>(head);</span><br><span class="line"><span class="selector-tag">H2</span>: <span class="string">&#x27;##&#x27;</span> (<span class="string">&#x27; &#x27;</span> | <span class="string">&#x27;\t&#x27;</span>)+ -&gt; <span class="built_in">pushMode</span>(head);</span><br><span class="line"><span class="selector-tag">H3</span>: <span class="string">&#x27;###&#x27;</span> (<span class="string">&#x27; &#x27;</span> | <span class="string">&#x27;\t&#x27;</span>)+ -&gt; <span class="built_in">pushMode</span>(head);</span><br><span class="line"><span class="selector-tag">H4</span>: <span class="string">&#x27;####&#x27;</span> (<span class="string">&#x27; &#x27;</span> | <span class="string">&#x27;\t&#x27;</span>)+ -&gt; <span class="built_in">pushMode</span>(head);</span><br><span class="line"><span class="selector-tag">H5</span>: <span class="string">&#x27;#####&#x27;</span> (<span class="string">&#x27; &#x27;</span> | <span class="string">&#x27;\t&#x27;</span>)+ -&gt; <span class="built_in">pushMode</span>(head);</span><br><span class="line"><span class="selector-tag">H6</span>: <span class="string">&#x27;######&#x27;</span> (<span class="string">&#x27; &#x27;</span> | <span class="string">&#x27;\t&#x27;</span>)+ -&gt; <span class="built_in">pushMode</span>(head);</span><br><span class="line"></span><br><span class="line">// 这里预留为CODE_TEXT</span><br><span class="line">DIVIDE:    (<span class="string">&#x27; &#x27;</span> | <span class="string">&#x27;\t&#x27;</span>)* (<span class="string">&#x27;--&#x27;</span> | <span class="string">&#x27;**&#x27;</span> | <span class="string">&#x27;__&#x27;</span>) (<span class="string">&#x27;-&#x27;</span> | <span class="string">&#x27;*&#x27;</span> | <span class="string">&#x27;_&#x27;</span>)+ <span class="string">&#x27; &#x27;</span>* <span class="string">&#x27;\r&#x27;</span>? <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line"><span class="selector-tag">QUOTE</span>:     (<span class="string">&#x27; &#x27;</span> | <span class="string">&#x27;\t&#x27;</span>)* (<span class="string">&#x27;&gt;&#x27;</span>)+ -&gt; <span class="built_in">pushMode</span>(QUOTE_MODE);</span><br><span class="line">LIST_TAB:  </span><br><span class="line">    (<span class="string">&#x27; &#x27;</span> | <span class="string">&#x27;\t&#x27;</span>)* ((([<span class="number">0</span>-<span class="number">9</span>])+ <span class="string">&#x27;.&#x27;</span>) | ( <span class="string">&#x27;*&#x27;</span> | <span class="string">&#x27;-&#x27;</span> ))  (<span class="string">&#x27; &#x27;</span> | <span class="string">&#x27;\t&#x27;</span>)+ -&gt; <span class="built_in">pushMode</span>(LIST_TAB_MODE);</span><br><span class="line"></span><br><span class="line">IMAGE_TAB: (<span class="string">&#x27; &#x27;</span> | <span class="string">&#x27;\t&#x27;</span>)* <span class="string">&#x27;![&#x27;</span> -&gt; <span class="built_in">pushMode</span>(IF_LINK_IMAGE_TAB_MODE);</span><br><span class="line">LINK_TAB: (<span class="string">&#x27; &#x27;</span> | <span class="string">&#x27;\t&#x27;</span>)* <span class="string">&#x27;[&#x27;</span> -&gt; <span class="built_in">pushMode</span>(IF_LINK_IMAGE_TAB_MODE);</span><br><span class="line">BOLD_ITALIC: (<span class="string">&#x27;***&#x27;</span> | <span class="string">&#x27;___&#x27;</span>) -&gt; <span class="built_in">pushMode</span>(BOLD_ITALIC_MODE);</span><br><span class="line">BOLD: (<span class="string">&#x27;**&#x27;</span> | <span class="string">&#x27;__&#x27;</span>) -&gt; <span class="built_in">pushMode</span>(BOLD_MODE);</span><br><span class="line">ITALIC: (<span class="string">&#x27;*&#x27;</span> | <span class="string">&#x27;_&#x27;</span>) -&gt; <span class="built_in">pushMode</span>(ITALIC_MODE);</span><br><span class="line"><span class="selector-tag">CODE</span>: (<span class="string">&#x27;`&#x27;</span> | <span class="string">&#x27;~&#x27;</span>) -&gt; <span class="built_in">pushMode</span>(CODE_MODE);</span><br><span class="line"></span><br><span class="line">SPACE: (<span class="string">&#x27; &#x27;</span>|<span class="string">&#x27;\t&#x27;</span>)* <span class="string">&#x27;\r&#x27;</span>? <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">WS: (<span class="string">&#x27; &#x27;</span>|<span class="string">&#x27;\t&#x27;</span>) -&gt; skip;</span><br><span class="line"><span class="selector-tag">TEXT</span>: . -&gt; <span class="built_in">pushMode</span>(TEXT_MODE);</span><br><span class="line"></span><br><span class="line">mode head;</span><br><span class="line"></span><br><span class="line">STRINGEND: <span class="string">&#x27; &#x27;</span>* <span class="string">&#x27;\r&#x27;</span>? <span class="string">&#x27;\n&#x27;</span> -&gt; popMode;</span><br><span class="line">HEADSTRING: <span class="string">&#x27; &#x27;</span> ~<span class="string">&#x27; &#x27;</span> | ~<span class="string">&#x27; &#x27;</span> ;</span><br><span class="line">HEAD_WS: <span class="string">&#x27; &#x27;</span> -&gt; skip;</span><br><span class="line"></span><br><span class="line">mode CODE_TEXT_MODE;</span><br><span class="line"></span><br><span class="line">// 这里预留为CODE_TEXT_END</span><br><span class="line">CODE_TEXT_STRING: .;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">mode IF_LINK_IMAGE_TAB_MODE;</span><br><span class="line"></span><br><span class="line">IF_LINK_IMAGE_TAB_MBT_END: <span class="string">&#x27;](&#x27;</span>;</span><br><span class="line">IF_LINK_IMAGE_SBT_END: <span class="string">&#x27;)&#x27;</span> -&gt; popMode;</span><br><span class="line">IF_LINK_IMAGE_TAB_STRING: .;</span><br><span class="line"></span><br><span class="line">mode BOLD_ITALIC_MODE;</span><br><span class="line">BOLD_ITALIC_END: (<span class="string">&#x27;***&#x27;</span> | <span class="string">&#x27;___&#x27;</span>) -&gt; popMode;</span><br><span class="line">BOLD_ITALIC_STRING: .;</span><br><span class="line"></span><br><span class="line">mode BOLD_MODE;</span><br><span class="line">BOLD_END: (<span class="string">&#x27;**&#x27;</span>| <span class="string">&#x27;__&#x27;</span>) -&gt; popMode;</span><br><span class="line">BOLD_STRING: .;</span><br><span class="line"></span><br><span class="line">mode ITALIC_MODE;</span><br><span class="line">ITALIC_END: (<span class="string">&#x27;*&#x27;</span>| <span class="string">&#x27;_&#x27;</span>) -&gt; popMode;</span><br><span class="line">ITALIC_STRING: .;</span><br><span class="line"></span><br><span class="line">mode CODE_MODE;</span><br><span class="line">CODE_END: (<span class="string">&#x27;`&#x27;</span> | <span class="string">&#x27;~&#x27;</span>) -&gt; popMode;</span><br><span class="line">CODE_STRING: .;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">mode TEXT_MODE;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">TEXT_TRAMFORM_4:</span><br><span class="line">	<span class="string">&#x27;\\\\&#x27;</span></span><br><span class="line">	| <span class="string">&#x27;\\`&#x27;</span></span><br><span class="line">	| <span class="string">&#x27;\\*&#x27;</span></span><br><span class="line">	| <span class="string">&#x27;\\_&#x27;</span></span><br><span class="line">	| <span class="string">&#x27;\\[&#x27;</span></span><br><span class="line">	| <span class="string">&#x27;\\]&#x27;</span></span><br><span class="line">	| <span class="string">&#x27;\\(&#x27;</span></span><br><span class="line">	| <span class="string">&#x27;\\)&#x27;</span></span><br><span class="line">	| <span class="string">&#x27;\\&#123;&#x27;</span></span><br><span class="line">	| <span class="string">&#x27;\\&#125;&#x27;</span></span><br><span class="line">	| <span class="string">&#x27;\\#&#x27;</span></span><br><span class="line">	| <span class="string">&#x27;\\-&#x27;</span></span><br><span class="line">	| <span class="string">&#x27;\\+&#x27;</span></span><br><span class="line">	| <span class="string">&#x27;\\.&#x27;</span></span><br><span class="line">	| <span class="string">&#x27;\\!&#x27;</span></span><br><span class="line">	| <span class="string">&#x27;\\|&#x27;</span></span><br><span class="line">	| <span class="string">&#x27;\\~&#x27;</span>;</span><br><span class="line">TEXT_END: <span class="string">&#x27;\r&#x27;</span>? <span class="string">&#x27;\n&#x27;</span> -&gt; popMode;</span><br><span class="line"></span><br><span class="line">TEXT_IMAGE_TAB: (<span class="string">&#x27; &#x27;</span> | <span class="string">&#x27;\t&#x27;</span>)? <span class="string">&#x27;![&#x27;</span> -&gt; <span class="built_in">pushMode</span>(IF_LINK_IMAGE_TAB_MODE);</span><br><span class="line">TEXT_LINK_TAB: (<span class="string">&#x27; &#x27;</span> | <span class="string">&#x27;\t&#x27;</span>)? <span class="string">&#x27;[&#x27;</span> -&gt; <span class="built_in">pushMode</span>(IF_LINK_IMAGE_TAB_MODE);</span><br><span class="line">TEXT_BOLD_ITALIC: (<span class="string">&#x27; &#x27;</span> | <span class="string">&#x27;\t&#x27;</span>)? (<span class="string">&#x27;***&#x27;</span>| <span class="string">&#x27;___&#x27;</span>) -&gt; <span class="built_in">pushMode</span>(BOLD_ITALIC_MODE);</span><br><span class="line">TEXT_BOLD: (<span class="string">&#x27; &#x27;</span> | <span class="string">&#x27;\t&#x27;</span>)? (<span class="string">&#x27;**&#x27;</span>| <span class="string">&#x27;__&#x27;</span>) -&gt; <span class="built_in">pushMode</span>(BOLD_MODE);</span><br><span class="line">TEXT_ITALIC: (<span class="string">&#x27; &#x27;</span> | <span class="string">&#x27;\t&#x27;</span>)? (<span class="string">&#x27;*&#x27;</span>| <span class="string">&#x27;_&#x27;</span>) -&gt; <span class="built_in">pushMode</span>(ITALIC_MODE);</span><br><span class="line">TEXT_CODE: (<span class="string">&#x27; &#x27;</span> | <span class="string">&#x27;\t&#x27;</span>)? (<span class="string">&#x27;`&#x27;</span> | <span class="string">&#x27;~&#x27;</span>) -&gt; <span class="built_in">pushMode</span>(CODE_MODE);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">TEXT_STRING: ~(<span class="string">&#x27; &#x27;</span> | <span class="string">&#x27;\t&#x27;</span> | <span class="string">&#x27;\r&#x27;</span> | <span class="string">&#x27;\n&#x27;</span>) | (<span class="string">&#x27; &#x27;</span> | <span class="string">&#x27;\t&#x27;</span>) ~(<span class="string">&#x27; &#x27;</span> | <span class="string">&#x27;\t&#x27;</span> | <span class="string">&#x27;\\&#x27;</span> | <span class="string">&#x27;\r&#x27;</span> | <span class="string">&#x27;\n&#x27;</span>);</span><br><span class="line">TEXT_WS: (<span class="string">&#x27; &#x27;</span> | <span class="string">&#x27;\t&#x27;</span>) -&gt; skip;</span><br><span class="line"></span><br><span class="line">mode QUOTE_MODE;</span><br><span class="line">QUOTE_TRAMFORM_4:</span><br><span class="line">	<span class="string">&#x27;\\\\&#x27;</span></span><br><span class="line">	| <span class="string">&#x27;\\`&#x27;</span></span><br><span class="line">	| <span class="string">&#x27;\\*&#x27;</span></span><br><span class="line">	| <span class="string">&#x27;\\_&#x27;</span></span><br><span class="line">	| <span class="string">&#x27;\\[&#x27;</span></span><br><span class="line">	| <span class="string">&#x27;\\]&#x27;</span></span><br><span class="line">	| <span class="string">&#x27;\\(&#x27;</span></span><br><span class="line">	| <span class="string">&#x27;\\)&#x27;</span></span><br><span class="line">	| <span class="string">&#x27;\\&#123;&#x27;</span></span><br><span class="line">	| <span class="string">&#x27;\\&#125;&#x27;</span></span><br><span class="line">	| <span class="string">&#x27;\\#&#x27;</span></span><br><span class="line">	| <span class="string">&#x27;\\-&#x27;</span></span><br><span class="line">	| <span class="string">&#x27;\\+&#x27;</span></span><br><span class="line">	| <span class="string">&#x27;\\.&#x27;</span></span><br><span class="line">	| <span class="string">&#x27;\\!&#x27;</span></span><br><span class="line">	| <span class="string">&#x27;\\|&#x27;</span></span><br><span class="line">	| <span class="string">&#x27;\\~&#x27;</span>;</span><br><span class="line"></span><br><span class="line">QUOTE_MODE_END: (<span class="string">&#x27; &#x27;</span> | <span class="string">&#x27;\t&#x27;</span>)* <span class="string">&#x27;\r&#x27;</span>? <span class="string">&#x27;\n&#x27;</span> -&gt; popMode;</span><br><span class="line"></span><br><span class="line">QUOTE_IMAGE_TAB: (<span class="string">&#x27; &#x27;</span> | <span class="string">&#x27;\t&#x27;</span>)? <span class="string">&#x27;![&#x27;</span> -&gt; <span class="built_in">pushMode</span>(IF_LINK_IMAGE_TAB_MODE);</span><br><span class="line">QUOTE_LINK_TAB: (<span class="string">&#x27; &#x27;</span> | <span class="string">&#x27;\t&#x27;</span>)? <span class="string">&#x27;[&#x27;</span> -&gt; <span class="built_in">pushMode</span>(IF_LINK_IMAGE_TAB_MODE);</span><br><span class="line">QUOTE_BOLD_ITALIC: (<span class="string">&#x27; &#x27;</span> | <span class="string">&#x27;\t&#x27;</span>)? (<span class="string">&#x27;***&#x27;</span> | <span class="string">&#x27;___&#x27;</span>) -&gt; <span class="built_in">pushMode</span>(BOLD_ITALIC_MODE);</span><br><span class="line">QUOTE_BOLD: (<span class="string">&#x27; &#x27;</span> | <span class="string">&#x27;\t&#x27;</span>)? (<span class="string">&#x27;**&#x27;</span> | <span class="string">&#x27;__&#x27;</span>) -&gt; <span class="built_in">pushMode</span>(BOLD_MODE);</span><br><span class="line">QUOTE_ITALIC: (<span class="string">&#x27; &#x27;</span> | <span class="string">&#x27;\t&#x27;</span>)? (<span class="string">&#x27;*&#x27;</span> | <span class="string">&#x27;_&#x27;</span>) -&gt; <span class="built_in">pushMode</span>(ITALIC_MODE);</span><br><span class="line">QUOTE_CODE: (<span class="string">&#x27; &#x27;</span> | <span class="string">&#x27;\t&#x27;</span>)? (<span class="string">&#x27;`&#x27;</span> | <span class="string">&#x27;~&#x27;</span>) -&gt; <span class="built_in">pushMode</span>(CODE_MODE);</span><br><span class="line"></span><br><span class="line">QUOTE_MODE_STRING: ~(<span class="string">&#x27; &#x27;</span> | <span class="string">&#x27;\t&#x27;</span> | <span class="string">&#x27;\r&#x27;</span> | <span class="string">&#x27;\n&#x27;</span>) | (<span class="string">&#x27; &#x27;</span> | <span class="string">&#x27;\t&#x27;</span>) ~(<span class="string">&#x27; &#x27;</span> | <span class="string">&#x27;\t&#x27;</span> | <span class="string">&#x27;\\&#x27;</span> | <span class="string">&#x27;\r&#x27;</span> | <span class="string">&#x27;\n&#x27;</span>);</span><br><span class="line">QUOTE_WS: (<span class="string">&#x27; &#x27;</span> | <span class="string">&#x27;\t&#x27;</span>) -&gt; skip;</span><br><span class="line"></span><br><span class="line">mode LIST_TAB_MODE;</span><br><span class="line"></span><br><span class="line">LIST_TRAMFORM_4:</span><br><span class="line">	<span class="string">&#x27;\\\\&#x27;</span></span><br><span class="line">	| <span class="string">&#x27;\\`&#x27;</span></span><br><span class="line">	| <span class="string">&#x27;\\*&#x27;</span></span><br><span class="line">	| <span class="string">&#x27;\\_&#x27;</span></span><br><span class="line">	| <span class="string">&#x27;\\[&#x27;</span></span><br><span class="line">	| <span class="string">&#x27;\\]&#x27;</span></span><br><span class="line">	| <span class="string">&#x27;\\(&#x27;</span></span><br><span class="line">	| <span class="string">&#x27;\\)&#x27;</span></span><br><span class="line">	| <span class="string">&#x27;\\&#123;&#x27;</span></span><br><span class="line">	| <span class="string">&#x27;\\&#125;&#x27;</span></span><br><span class="line">	| <span class="string">&#x27;\\#&#x27;</span></span><br><span class="line">	| <span class="string">&#x27;\\-&#x27;</span></span><br><span class="line">	| <span class="string">&#x27;\\+&#x27;</span></span><br><span class="line">	| <span class="string">&#x27;\\.&#x27;</span></span><br><span class="line">	| <span class="string">&#x27;\\!&#x27;</span></span><br><span class="line">	| <span class="string">&#x27;\\|&#x27;</span></span><br><span class="line">	| <span class="string">&#x27;\\~&#x27;</span>;</span><br><span class="line"></span><br><span class="line">LIST_TAB_END: (<span class="string">&#x27; &#x27;</span> | <span class="string">&#x27;\t&#x27;</span>)* <span class="string">&#x27;\r&#x27;</span>? <span class="string">&#x27;\n&#x27;</span> -&gt; popMode;</span><br><span class="line"></span><br><span class="line">LIST_IMAGE_TAB: (<span class="string">&#x27; &#x27;</span> | <span class="string">&#x27;\t&#x27;</span>)? <span class="string">&#x27;![&#x27;</span> -&gt; <span class="built_in">pushMode</span>(IF_LINK_IMAGE_TAB_MODE);</span><br><span class="line">LIST_LINK_TAB: (<span class="string">&#x27; &#x27;</span> | <span class="string">&#x27;\t&#x27;</span>)? <span class="string">&#x27;[&#x27;</span> -&gt; <span class="built_in">pushMode</span>(IF_LINK_IMAGE_TAB_MODE);</span><br><span class="line">LIST_BOLD_ITALIC: (<span class="string">&#x27; &#x27;</span> | <span class="string">&#x27;\t&#x27;</span>)? (<span class="string">&#x27;***&#x27;</span> | <span class="string">&#x27;___&#x27;</span>) -&gt; <span class="built_in">pushMode</span>(BOLD_ITALIC_MODE);</span><br><span class="line">LIST_BOLD: (<span class="string">&#x27; &#x27;</span> | <span class="string">&#x27;\t&#x27;</span>)? (<span class="string">&#x27;**&#x27;</span> | <span class="string">&#x27;__&#x27;</span>) -&gt; <span class="built_in">pushMode</span>(BOLD_MODE);</span><br><span class="line">LIST_ITALIC: (<span class="string">&#x27; &#x27;</span> | <span class="string">&#x27;\t&#x27;</span>)? (<span class="string">&#x27;*&#x27;</span> | <span class="string">&#x27;_&#x27;</span>) -&gt; <span class="built_in">pushMode</span>(ITALIC_MODE);</span><br><span class="line">LIST_CODE: (<span class="string">&#x27; &#x27;</span> | <span class="string">&#x27;\t&#x27;</span>)? (<span class="string">&#x27;`&#x27;</span> | <span class="string">&#x27;~&#x27;</span>) -&gt; <span class="built_in">pushMode</span>(CODE_MODE);</span><br><span class="line"></span><br><span class="line">LIST_TAB_STRING: ~(<span class="string">&#x27; &#x27;</span> | <span class="string">&#x27;\t&#x27;</span> | <span class="string">&#x27;\r&#x27;</span> | <span class="string">&#x27;\n&#x27;</span>) | (<span class="string">&#x27; &#x27;</span> | <span class="string">&#x27;\t&#x27;</span>) ~(<span class="string">&#x27; &#x27;</span> | <span class="string">&#x27;\t&#x27;</span> | <span class="string">&#x27;\\&#x27;</span> | <span class="string">&#x27;\r&#x27;</span> | <span class="string">&#x27;\n&#x27;</span>);</span><br><span class="line">LIST_TAB_WS: (<span class="string">&#x27; &#x27;</span> | <span class="string">&#x27;\t&#x27;</span>) -&gt; skip;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <p>其中<code>CODE_TEXT</code>处为</p>
 <h6 id="CODE-TEXT-‘-‘-‘-t’-‘-’-‘-’-‘-n’-‘-n’-pushMode-CODE-TEXT-MODE"><a href="#CODE-TEXT-‘-‘-‘-t’-‘-’-‘-’-‘-n’-‘-n’-pushMode-CODE-TEXT-MODE" class="headerlink" title="CODE_TEXT: (‘ ‘ | ‘\t’)* (‘&#96;&#96;&#96;’ | ‘~~~’) ~(‘\n’)* ‘\n’ -&gt; pushMode(CODE_TEXT_MODE);"></a>CODE_TEXT: (‘ ‘ | ‘\t’)* (‘&#96;&#96;&#96;’ | ‘~~~’) ~(‘\n’)* ‘\n’ -&gt; pushMode(CODE_TEXT_MODE);</h6><p>而<code>CODE_TEXT_END</code>处为</p>
 <h6 id="CODE-TEXT-END-‘-‘-‘-t’-‘-’-‘-’-‘-n’-‘-n’-popMode"><a href="#CODE-TEXT-END-‘-‘-‘-t’-‘-’-‘-’-‘-n’-‘-n’-popMode" class="headerlink" title="CODE_TEXT_END: (‘ ‘ | ‘\t’)* (‘&#96;&#96;&#96;’ | ‘~~~’) ~(‘\n’)* ‘\n’ -&gt; popMode;"></a>CODE_TEXT_END: (‘ ‘ | ‘\t’)* (‘&#96;&#96;&#96;’ | ‘~~~’) ~(‘\n’)* ‘\n’ -&gt; popMode;</h6><p>你问我为什么不把这两个填到上面一起，因为这个博客就是用这个来解析markdown的，而我的markdown解析器在解析代码文本是存在bug的（就是一旦识别出两处代码文本的标记符，就直接归为代码文本了），而且也懒得去改了（反正一般情况下也不会出现）</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://hvhghv.github.io/myBlog/myBlog/simple/2023-11-14/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/myBlog/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="HvH洋的小站">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/myBlog/simple/2023-11-14/" itemprop="url">初学汇编认识到的一些小玩意</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2023-11-14T00:00:00+00:00">
-                2023-11-14
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/myBlog/categories/%E9%9B%B6%E7%A2%8E%E7%9A%84%E5%B0%8F%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index">
-                    <span itemprop="name">零碎的小笔记</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="初学汇编认识到的一些小玩意"><a href="#初学汇编认识到的一些小玩意" class="headerlink" title="初学汇编认识到的一些小玩意"></a>初学汇编认识到的一些小玩意</h1><ul>
-<li>sp尽量64字节对齐，不然一些window api 直接报c05错误</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">;sp对齐方式</span><br><span class="line">    and sp,0FF00h	</span><br></pre></td></tr></table></figure>
-
-<p>在调用WindowsApi时，有时候会用到xmm0,ymm0,zmm0等这些寄存器。其中的一些指令是需要内存对齐的。假如sp没有对齐，就会导致内存访问错误。</p>
-<ul>
-<li>调试时，假如出现错误但总找不到错误原因时，那可能错误原因在指令上。</li>
-</ul>
-<p>有些指令的调用是需要一定条件的</p>
-<ul>
-<li>64位调用WindowsApi时,需要预留一些栈空间。（32位不清楚）</li>
-</ul>
-<p>调试时发现，调用WindowsApi时，会在开辟栈空间前，使用部分原有的栈空间。</p>
-<p>也就是说，假如call了WindowsApi，调用完后发现[sp]里面的数据已经变了。</p>
 
           
         
@@ -1449,6 +1293,162 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://hvhghv.github.io/myBlog/myBlog/simple/2023-11-14/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/myBlog/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HvH洋的小站">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/myBlog/simple/2023-11-14/" itemprop="url">初学汇编认识到的一些小玩意</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2023-11-14T00:00:00+00:00">
+                2023-11-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/myBlog/categories/%E9%9B%B6%E7%A2%8E%E7%9A%84%E5%B0%8F%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index">
+                    <span itemprop="name">零碎的小笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="初学汇编认识到的一些小玩意"><a href="#初学汇编认识到的一些小玩意" class="headerlink" title="初学汇编认识到的一些小玩意"></a>初学汇编认识到的一些小玩意</h1><ul>
+<li>sp尽量64字节对齐，不然一些window api 直接报c05错误</li>
+</ul>
+<figure class="highlight mipsasm"><table><tr><td class="code"><pre><span class="line"><span class="comment">;sp对齐方式</span></span><br><span class="line">    <span class="keyword">and </span><span class="built_in">sp</span>,<span class="number">0</span>FF00h	</span><br></pre></td></tr></table></figure>
+
+<p>在调用WindowsApi时，有时候会用到xmm0,ymm0,zmm0等这些寄存器。其中的一些指令是需要内存对齐的。假如sp没有对齐，就会导致内存访问错误。</p>
+<ul>
+<li>调试时，假如出现错误但总找不到错误原因时，那可能错误原因在指令上。</li>
+</ul>
+<p>有些指令的调用是需要一定条件的</p>
+<ul>
+<li>64位调用WindowsApi时,需要预留一些栈空间。（32位不清楚）</li>
+</ul>
+<p>调试时发现，调用WindowsApi时，会在开辟栈空间前，使用部分原有的栈空间。</p>
+<p>也就是说，假如call了WindowsApi，调用完后发现[sp]里面的数据已经变了。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://hvhghv.github.io/myBlog/myBlog/cython/cython3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1546,19 +1546,19 @@
 <ul>
 <li>坑点一, cython里extern并不能共享变量<br>先看下面一行代码</li>
 </ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">// py_import.h</span><br><span class="line">#pragma once</span><br><span class="line">#include &lt;Windows.h&gt;</span><br><span class="line"> </span><br><span class="line">int a = 0x03;</span><br><span class="line">int *pa = &amp;a;</span><br><span class="line"> </span><br><span class="line">void print_test(int test_a,int *test_pa)&#123;</span><br><span class="line">	printf(&quot;%x %x \n&quot;,test_a,test_pa);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">// py_import.h</span></span><br><span class="line"><span class="meta">#<span class="keyword">pragma</span> once</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;Windows.h&gt;</span></span></span><br><span class="line"> </span><br><span class="line"><span class="type">int</span> a = <span class="number">0x03</span>;</span><br><span class="line"><span class="type">int</span> *pa = &amp;a;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">print_test</span><span class="params">(<span class="type">int</span> test_a,<span class="type">int</span> *test_pa)</span></span>&#123;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%x %x \n&quot;</span>,test_a,test_pa);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"># test.pyx</span><br><span class="line"># </span><br><span class="line"># cython:language_level=3</span><br><span class="line">#</span><br><span class="line">cdef extern from &quot;py_import.h&quot;:</span><br><span class="line">    int a</span><br><span class="line">    int *pa</span><br><span class="line">    void print_test(int test_a,int *test_pa)</span><br><span class="line"># 只是为了生成头文件才写了这个_函数，不是我们的重点</span><br><span class="line">cdef public void _(): </span><br><span class="line">    pass</span><br><span class="line">print(&quot;from py &quot;)</span><br><span class="line">print_test(a,pa)</span><br></pre></td></tr></table></figure>
+<figure class="highlight axapta"><table><tr><td class="code"><pre><span class="line"><span class="meta"># test.pyx</span></span><br><span class="line"><span class="meta"># </span></span><br><span class="line"><span class="meta"># cython:language_level=3</span></span><br><span class="line"><span class="meta">#</span></span><br><span class="line">cdef extern <span class="keyword">from</span> <span class="string">&quot;py_import.h&quot;</span>:</span><br><span class="line">    <span class="built_in">int</span> a</span><br><span class="line">    <span class="built_in">int</span> *pa</span><br><span class="line">    <span class="keyword">void</span> print_test(<span class="built_in">int</span> test_a,<span class="built_in">int</span> *test_pa)</span><br><span class="line"><span class="meta"># 只是为了生成头文件才写了这个_函数，不是我们的重点</span></span><br><span class="line">cdef <span class="keyword">public</span> <span class="keyword">void</span> _(): </span><br><span class="line">    pass</span><br><span class="line"><span class="keyword">print</span>(<span class="string">&quot;from py &quot;</span>)</span><br><span class="line">print_test(a,pa)</span><br></pre></td></tr></table></figure>
 
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">// Dllmain.cpp</span><br><span class="line">#include &lt;Windows.h&gt;</span><br><span class="line">#include &quot;py_import.h&quot;</span><br><span class="line">#define EDLL extern &quot;C&quot; _declspec(dllexport)</span><br><span class="line"> </span><br><span class="line">// 这个是py解释器初始化函数，不是我们的重点</span><br><span class="line">EDLL int py_init() &#123;</span><br><span class="line">    </span><br><span class="line">    PyObject* pmodule = NULL;</span><br><span class="line">    PyImport_AppendInittab(PY_MOUDLE_NAME, PY_MOUDLE_INIT);</span><br><span class="line">    Py_Initialize();</span><br><span class="line">    pmodule = PyImport_ImportModule(PY_MOUDLE_NAME);</span><br><span class="line">    if (pmodule == NULL) &#123;</span><br><span class="line">        return 0;</span><br><span class="line">    &#125;</span><br><span class="line">    else</span><br><span class="line">    &#123;</span><br><span class="line">        return 1;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">// 这个是py解释器清除函数，不是我们的重点</span><br><span class="line">EDLL int py_exit() &#123;</span><br><span class="line">    return Py_FinalizeEx();</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">// 注意dllmain里调用了py_import.h里的print_test()</span><br><span class="line">BOOL APIENTRY DllMain( HMODULE hModule,</span><br><span class="line">                       DWORD  ul_reason_for_call,</span><br><span class="line">                       LPVOID lpReserved</span><br><span class="line">                     )</span><br><span class="line">&#123;</span><br><span class="line">    switch (ul_reason_for_call)</span><br><span class="line">    &#123;</span><br><span class="line">    case DLL_PROCESS_ATTACH:</span><br><span class="line">        printf(&quot;cpp:\n&quot;);</span><br><span class="line">        print_test(a, pa);</span><br><span class="line">        break;</span><br><span class="line">    case DLL_THREAD_ATTACH:</span><br><span class="line">        break;</span><br><span class="line">    case DLL_THREAD_DETACH:</span><br><span class="line">        break;</span><br><span class="line">    case DLL_PROCESS_DETACH:</span><br><span class="line">        break;</span><br><span class="line">    &#125;</span><br><span class="line">    return TRUE;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">// Dllmain.cpp</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;Windows.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;py_import.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> EDLL extern <span class="string">&quot;C&quot;</span> _declspec(dllexport)</span></span><br><span class="line"> </span><br><span class="line"><span class="comment">// 这个是py解释器初始化函数，不是我们的重点</span></span><br><span class="line"><span class="function">EDLL <span class="type">int</span> <span class="title">py_init</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">    PyObject* pmodule = <span class="literal">NULL</span>;</span><br><span class="line">    <span class="built_in">PyImport_AppendInittab</span>(PY_MOUDLE_NAME, PY_MOUDLE_INIT);</span><br><span class="line">    <span class="built_in">Py_Initialize</span>();</span><br><span class="line">    pmodule = <span class="built_in">PyImport_ImportModule</span>(PY_MOUDLE_NAME);</span><br><span class="line">    <span class="keyword">if</span> (pmodule == <span class="literal">NULL</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="comment">// 这个是py解释器清除函数，不是我们的重点</span></span><br><span class="line"><span class="function">EDLL <span class="type">int</span> <span class="title">py_exit</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Py_FinalizeEx</span>();</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="comment">// 注意dllmain里调用了py_import.h里的print_test()</span></span><br><span class="line"><span class="function">BOOL APIENTRY <span class="title">DllMain</span><span class="params">( HMODULE hModule,</span></span></span><br><span class="line"><span class="params"><span class="function">                       DWORD  ul_reason_for_call,</span></span></span><br><span class="line"><span class="params"><span class="function">                       LPVOID lpReserved</span></span></span><br><span class="line"><span class="params"><span class="function">                     )</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">switch</span> (ul_reason_for_call)</span><br><span class="line">    &#123;</span><br><span class="line">    <span class="keyword">case</span> DLL_PROCESS_ATTACH:</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;cpp:\n&quot;</span>);</span><br><span class="line">        <span class="built_in">print_test</span>(a, pa);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> DLL_THREAD_ATTACH:</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> DLL_THREAD_DETACH:</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> DLL_PROCESS_DETACH:</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> TRUE;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>简单来说，就是<code>test.pyx</code>和<code>Dllmain.cpp</code>都调用了<code>py_import.h</code>里的<code>print_test()</code>，输出a的数值和a的地址。<br>假如两个文件是cpp，他们的结果是一样的，但假如一个文件是<code>cython</code>，另一个是<code>cpp</code>呢？</p>
 <p>来测试一下吧</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">// 用这个文件生成exe来进行测试</span><br><span class="line"> </span><br><span class="line">#include &lt;Windows.h&gt;</span><br><span class="line"> </span><br><span class="line">typedef int (*py_init)();</span><br><span class="line">typedef void (*py_exit)();</span><br><span class="line"> </span><br><span class="line">int main()&#123;</span><br><span class="line">    HMODULE moudle = LoadLibrary(&quot;test.dll&quot;); // test.dll 就是上面编译出来的dll文件</span><br><span class="line">    py_init _init = (py_init)GetProcAddress(moudle,&quot;py_init&quot;);</span><br><span class="line">    py_exit _exit = (py_exit)GetProcAddress(moudle,&quot;py_exit&quot;);</span><br><span class="line">    _init();</span><br><span class="line">    _exit();</span><br><span class="line">    system(&quot;pause&quot;);</span><br><span class="line">&#125;</span><br><span class="line"> </span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 用这个文件生成exe来进行测试</span></span><br><span class="line"> </span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;Windows.h&gt;</span></span></span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">typedef</span> <span class="title">int</span> <span class="params">(*py_init)</span><span class="params">()</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">typedef</span> <span class="title">void</span> <span class="params">(*py_exit)</span><span class="params">()</span></span>;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    HMODULE moudle = <span class="built_in">LoadLibrary</span>(<span class="string">&quot;test.dll&quot;</span>); <span class="comment">// test.dll 就是上面编译出来的dll文件</span></span><br><span class="line">    py_init _init = (py_init)<span class="built_in">GetProcAddress</span>(moudle,<span class="string">&quot;py_init&quot;</span>);</span><br><span class="line">    py_exit _exit = (py_exit)<span class="built_in">GetProcAddress</span>(moudle,<span class="string">&quot;py_exit&quot;</span>);</span><br><span class="line">    _init();</span><br><span class="line">    _exit();</span><br><span class="line">    <span class="built_in">system</span>(<span class="string">&quot;pause&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"> </span><br></pre></td></tr></table></figure>
 
 
 
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">// 输出结果</span><br><span class="line"> </span><br><span class="line">cpp:</span><br><span class="line">3 e4146040</span><br><span class="line">from py</span><br><span class="line">3 e4146044</span><br><span class="line">请按任意键继续. . .</span><br><span class="line"> </span><br></pre></td></tr></table></figure>
+<figure class="highlight angelscript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 输出结果</span></span><br><span class="line"> </span><br><span class="line">cpp:</span><br><span class="line"><span class="number">3</span> e4146040</span><br><span class="line"><span class="keyword">from</span> py</span><br><span class="line"><span class="number">3</span> e4146044</span><br><span class="line">请按任意键继续. . .</span><br><span class="line"> </span><br></pre></td></tr></table></figure>
 
 
 <p>根据结果，我们发现，cpp中的a地址和pyx中的a地址是不一样了，换句话说，pyx对<code>py_import.h</code>里的变量做了深拷贝   </p>
@@ -1567,17 +1567,17 @@
 <li>要共享变量，请使用public，在cython里声明</li>
 </ul>
 <p>现在，我们稍微改动一下代码,</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">// py_import.h</span><br><span class="line">// 注意，这两个变量声明地方换成了pyx</span><br><span class="line">#pragma once</span><br><span class="line">#include &lt;Windows.h&gt;</span><br><span class="line"> </span><br><span class="line">void print_test(int test_a,int *test_pa)&#123;</span><br><span class="line">	printf(&quot;%x %x \n&quot;,test_a,test_pa);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">// py_import.h</span></span><br><span class="line"><span class="comment">// 注意，这两个变量声明地方换成了pyx</span></span><br><span class="line"><span class="meta">#<span class="keyword">pragma</span> once</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;Windows.h&gt;</span></span></span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">print_test</span><span class="params">(<span class="type">int</span> test_a,<span class="type">int</span> *test_pa)</span></span>&#123;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%x %x \n&quot;</span>,test_a,test_pa);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
 
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"># test.pyx</span><br><span class="line"># cython: language_level=3</span><br><span class="line">#</span><br><span class="line">cdef extern from &quot;py_import.h&quot;:</span><br><span class="line">    void print_test(int test_a,int *test_pa)</span><br><span class="line"># 注意，两个变量用public声明定义了</span><br><span class="line">cdef public int a = 0x03</span><br><span class="line">cdef public int *pa = &amp;a</span><br><span class="line"># 只是为了生成头文件才写了这个_函数，可忽略</span><br><span class="line">cdef public void _(): </span><br><span class="line">    pass</span><br><span class="line">print(&quot;from py &quot;)</span><br><span class="line">print_test(a,pa)</span><br></pre></td></tr></table></figure>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="meta"># test.pyx</span></span><br><span class="line"><span class="meta"># cython: language_level=3</span></span><br><span class="line"><span class="meta">#</span></span><br><span class="line">cdef <span class="keyword">extern</span> <span class="keyword">from</span> <span class="string">&quot;py_import.h&quot;</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">print_test</span>(<span class="params"><span class="built_in">int</span> test_a,<span class="built_in">int</span> *test_pa</span>)</span></span><br><span class="line"><span class="function"># 注意，两个变量用<span class="keyword">public</span>声明定义了</span></span><br><span class="line"><span class="function">cdef <span class="keyword">public</span> <span class="built_in">int</span> a</span> = <span class="number">0x03</span></span><br><span class="line">cdef <span class="keyword">public</span> <span class="built_in">int</span> *pa = &amp;a</span><br><span class="line"><span class="meta"># 只是为了生成头文件才写了这个_函数，可忽略</span></span><br><span class="line">cdef <span class="keyword">public</span> <span class="keyword">void</span> _(): </span><br><span class="line">    <span class="function">pass</span></span><br><span class="line"><span class="function"><span class="title">print</span>(<span class="params"><span class="string">&quot;from py &quot;</span></span>)</span></span><br><span class="line"><span class="function"><span class="title">print_test</span>(<span class="params">a,pa</span>)</span></span><br></pre></td></tr></table></figure>
 
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">// Dllmain.cpp</span><br><span class="line"> </span><br><span class="line">#include &lt;Windows.h&gt;</span><br><span class="line">#include &quot;py_import.h&quot;</span><br><span class="line">#define EDLL extern &quot;C&quot; _declspec(dllexport)</span><br><span class="line"> </span><br><span class="line">// 注意，调用print_test()放在了这里</span><br><span class="line">EDLL int py_init() &#123;</span><br><span class="line">    </span><br><span class="line">    PyObject* pmodule = NULL;</span><br><span class="line">    PyImport_AppendInittab(PY_MOUDLE_NAME, PY_MOUDLE_INIT);</span><br><span class="line">    Py_Initialize();</span><br><span class="line">    pmodule = PyImport_ImportModule(PY_MOUDLE_NAME);</span><br><span class="line">    if (pmodule == NULL) &#123;</span><br><span class="line">        return 0;</span><br><span class="line">    &#125;</span><br><span class="line">    else</span><br><span class="line">    &#123;</span><br><span class="line">        printf(&quot;cpp:\n&quot;);</span><br><span class="line">        print_test(a, pa);</span><br><span class="line">        return 1;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">// 这个是py解释器清除函数，不是我们的重点</span><br><span class="line">EDLL int py_exit() &#123;</span><br><span class="line">    return Py_FinalizeEx();</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">// 注意dllmain里print_test()放到了上面的初始化函数里</span><br><span class="line">BOOL APIENTRY DllMain( HMODULE hModule,</span><br><span class="line">                       DWORD  ul_reason_for_call,</span><br><span class="line">                       LPVOID lpReserved</span><br><span class="line">                     )</span><br><span class="line">&#123;</span><br><span class="line">    switch (ul_reason_for_call)</span><br><span class="line">    &#123;</span><br><span class="line">    case DLL_PROCESS_ATTACH:</span><br><span class="line">        break;</span><br><span class="line">    case DLL_THREAD_ATTACH:</span><br><span class="line">        break;</span><br><span class="line">    case DLL_THREAD_DETACH:</span><br><span class="line">        break;</span><br><span class="line">    case DLL_PROCESS_DETACH:</span><br><span class="line">        break;</span><br><span class="line">    &#125;</span><br><span class="line">    return TRUE;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">// Dllmain.cpp</span></span><br><span class="line"> </span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;Windows.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;py_import.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> EDLL extern <span class="string">&quot;C&quot;</span> _declspec(dllexport)</span></span><br><span class="line"> </span><br><span class="line"><span class="comment">// 注意，调用print_test()放在了这里</span></span><br><span class="line"><span class="function">EDLL <span class="type">int</span> <span class="title">py_init</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">    PyObject* pmodule = <span class="literal">NULL</span>;</span><br><span class="line">    <span class="built_in">PyImport_AppendInittab</span>(PY_MOUDLE_NAME, PY_MOUDLE_INIT);</span><br><span class="line">    <span class="built_in">Py_Initialize</span>();</span><br><span class="line">    pmodule = <span class="built_in">PyImport_ImportModule</span>(PY_MOUDLE_NAME);</span><br><span class="line">    <span class="keyword">if</span> (pmodule == <span class="literal">NULL</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;cpp:\n&quot;</span>);</span><br><span class="line">        <span class="built_in">print_test</span>(a, pa);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="comment">// 这个是py解释器清除函数，不是我们的重点</span></span><br><span class="line"><span class="function">EDLL <span class="type">int</span> <span class="title">py_exit</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Py_FinalizeEx</span>();</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="comment">// 注意dllmain里print_test()放到了上面的初始化函数里</span></span><br><span class="line"><span class="function">BOOL APIENTRY <span class="title">DllMain</span><span class="params">( HMODULE hModule,</span></span></span><br><span class="line"><span class="params"><span class="function">                       DWORD  ul_reason_for_call,</span></span></span><br><span class="line"><span class="params"><span class="function">                       LPVOID lpReserved</span></span></span><br><span class="line"><span class="params"><span class="function">                     )</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">switch</span> (ul_reason_for_call)</span><br><span class="line">    &#123;</span><br><span class="line">    <span class="keyword">case</span> DLL_PROCESS_ATTACH:</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> DLL_THREAD_ATTACH:</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> DLL_THREAD_DETACH:</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> DLL_PROCESS_DETACH:</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> TRUE;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>就改动这三个地方。<br>简单来说，原来是在<code>py_import.h</code>里声明，变成了在<code>test.pyx</code>里声明。  </p>
 <p>重新编译运行，看看结果</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">from py</span><br><span class="line">3 e41467d8</span><br><span class="line">cpp:</span><br><span class="line">3 e41467d8</span><br><span class="line">请按任意键继续. . .</span><br></pre></td></tr></table></figure>
+<figure class="highlight dns"><table><tr><td class="code"><pre><span class="line">from py</span><br><span class="line"><span class="number">3</span> e<span class="number">41467d8</span></span><br><span class="line">cpp:</span><br><span class="line"><span class="number">3</span> e<span class="number">41467d8</span></span><br><span class="line">请按任意键继续. . .</span><br></pre></td></tr></table></figure>
 
 <ul>
 <li>坑点二，当放在pyx声明时，必须先初始化py解释后再调用该变量，否则变量处于未初始化状态。</li>
@@ -1585,216 +1585,6 @@
 <p>这次两个地方的地址就是一样了   </p>
 <p>因此，我们就知道，声明放在cython里，才能和cython共享变量   </p>
 <p>cython三期的踩坑记就这样完成了。<br>本来想说说多线程的，但可惜我能知道的东西也不多。     </p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://hvhghv.github.io/myBlog/myBlog/cython/cython1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/myBlog/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="HvH洋的小站">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/myBlog/cython/cython1/" itemprop="url">cython生成dll踩坑记（一）---基础篇</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2023-10-14T00:00:00+00:00">
-                2023-10-14
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/myBlog/categories/cython%E7%9A%84%E5%88%9D%E6%AD%A5%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index">
-                    <span itemprop="name">cython的初步学习</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="cython生成dll踩坑记（一）—基础篇"><a href="#cython生成dll踩坑记（一）—基础篇" class="headerlink" title="cython生成dll踩坑记（一）—基础篇"></a>cython生成dll踩坑记（一）—基础篇</h1><h2 id="2023-10-14"><a href="#2023-10-14" class="headerlink" title="2023-10-14"></a>2023-10-14</h2><p>最近研究了一下cython，花了3天时间才写出了一点成果来（太菜了~~~）。关于cython的教程还是比较少的，大部分还是得自己摸索。（指修完一个bug又出现两个bug）。不过也确实感觉收获了许多。</p>
-<ul>
-<li>坑点一，pyx并不能直接导出函数</li>
-</ul>
-<p>pyx的本质是一个动态链接库，所以，我猜想能不能直接<code>loadlibrary</code>这个动态链接库。于是我写了一个简单的代码测试一下。   </p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cdef public func1():</span><br><span class="line">    print(&quot;hello world&quot;)</span><br></pre></td></tr></table></figure>
-
-<p>然后<code>python setup.py build_ext</code>生成pyd文件，拿pe工具一查，这导出表压根就没有func1函数…..</p>
-<p>所以还是得老老实实的，先生成c代码，再生成dll。</p>
-<ul>
-<li>坑点二，初始化写在了<code>DLL_PROCESS_ATTACH</code>与<code>DLL_PROCESS_DETACH</code>里</li>
-</ul>
-<p>一开始，我是这样的</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">    </span><br><span class="line">#define PY_MOUDLE_NAME &quot;test&quot;</span><br><span class="line">#define PY_MOUDLE_INIT PyInit_test   </span><br><span class="line">    </span><br><span class="line">BOOL APIENTRY DllMain( HMODULE hModule,</span><br><span class="line">                       DWORD  ul_reason_for_call,</span><br><span class="line">                       LPVOID lpReserved</span><br><span class="line">                     )</span><br><span class="line">&#123;</span><br><span class="line">    switch (ul_reason_for_call)</span><br><span class="line">    &#123;</span><br><span class="line">    case DLL_PROCESS_ATTACH:</span><br><span class="line">    </span><br><span class="line">        PyObject* pmodule = NULL;</span><br><span class="line">    </span><br><span class="line">        PyImport_AppendInittab(PY_MOUDLE_NAME, PY_MOUDLE_INIT);</span><br><span class="line">        </span><br><span class="line">        Py_Initialize();</span><br><span class="line">    </span><br><span class="line">        pmodule = PyImport_ImportModule(PY_MOUDLE_NAME);</span><br><span class="line">        </span><br><span class="line">        if (pmodule == NULL) &#123;</span><br><span class="line">    </span><br><span class="line">            return FALSE;</span><br><span class="line">        &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line">    </span><br><span class="line">        break;</span><br><span class="line">    case DLL_THREAD_ATTACH:</span><br><span class="line">        break;</span><br><span class="line">    case DLL_THREAD_DETACH:</span><br><span class="line">        break;</span><br><span class="line">    case DLL_PROCESS_DETACH:</span><br><span class="line">        Py_FinalizeEx()</span><br><span class="line">        break;</span><br><span class="line">    &#125;</span><br><span class="line">    return TRUE;</span><br><span class="line">&#125;</span><br><span class="line">    </span><br></pre></td></tr></table></figure>
-
-
-<p>结果发现在自己的电脑里总报错，后来，我选择手动初始化，手动释放，就没报错了</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">#define PY_MOUDLE_NAME &quot;test&quot;</span><br><span class="line">#define PY_MOUDLE_INIT PyInit_test</span><br><span class="line">#define EDLL extern &quot;C&quot; _declspec(dllexport)</span><br><span class="line">    </span><br><span class="line">EDLL int py_init() &#123;</span><br><span class="line">    </span><br><span class="line">    PyObject* pmodule = NULL;</span><br><span class="line">    </span><br><span class="line">    PyImport_AppendInittab(PY_MOUDLE_NAME, PY_MOUDLE_INIT);</span><br><span class="line">    </span><br><span class="line">    Py_Initialize();</span><br><span class="line">    </span><br><span class="line">    pmodule = PyImport_ImportModule(PY_MOUDLE_NAME);</span><br><span class="line">    </span><br><span class="line">    if (pmodule == NULL) &#123;</span><br><span class="line">        return 0;</span><br><span class="line">    &#125;</span><br><span class="line">    else</span><br><span class="line">    &#123;</span><br><span class="line">        return 1;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">     </span><br><span class="line">     </span><br><span class="line">EDLL int py_exit() &#123;</span><br><span class="line">    return Py_FinalizeEx();</span><br><span class="line">&#125;</span><br><span class="line">      </span><br><span class="line">    </span><br><span class="line">BOOL APIENTRY DllMain( HMODULE hModule,</span><br><span class="line">                       DWORD  ul_reason_for_call,</span><br><span class="line">                       LPVOID lpReserved</span><br><span class="line">                     )</span><br><span class="line">&#123;</span><br><span class="line">    switch (ul_reason_for_call)</span><br><span class="line">    &#123;</span><br><span class="line">    case DLL_PROCESS_ATTACH:</span><br><span class="line">        break;</span><br><span class="line">    case DLL_THREAD_ATTACH:</span><br><span class="line">        break;</span><br><span class="line">    case DLL_THREAD_DETACH:</span><br><span class="line">        break;</span><br><span class="line">    case DLL_PROCESS_DETACH:</span><br><span class="line">        break;</span><br><span class="line">    &#125;</span><br><span class="line">    return TRUE;</span><br><span class="line">&#125;</span><br><span class="line">    </span><br></pre></td></tr></table></figure>
-
-
-<ul>
-<li>坑点三，<code>Py_Init_...()</code>函数不管用</li>
-</ul>
-<p>本来开始时，我的代码是</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">    </span><br><span class="line">Py_Initialize();</span><br><span class="line">PyInit_test();</span><br><span class="line">    </span><br></pre></td></tr></table></figure>
-<p>结果发现一直报指针访问不能为nullptr。<br>后来改成下面这样就好了。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">PyImport_AppendInittab(&quot;test&quot;, PyInit_test);</span><br><span class="line">Py_Initialize();</span><br><span class="line">PyImport_ImportModule(&quot;test&quot;);</span><br></pre></td></tr></table></figure>
-
-<p>小提示: <code>cython3.x</code>版本用<code>Py_Init_...()</code>用这个过不了编译</p>
-<ul>
-<li>坑点四，<code>__PYX_EXTERN_C</code>不能加<code>_declspec(dllexport)</code></li>
-</ul>
-<p>看了cython生成的头文件，发现每个导出函数都有<code>__PYX_EXTERN_C</code>，于是添了个<code>_declspec(dllexport)</code></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#define __PYX_EXTERN_C extern &quot;C&quot; _declspec(dllexport)</span><br></pre></td></tr></table></figure>
-
-
-<p>结果发现无效<br>只能老老实实写函数去包装了</p>
-<ul>
-<li>坑点五，无返回值时，返回值位PyObject问题</li>
-</ul>
-<p>在编写cython函数时，无返回值的函数最好加上<code>void</code>而不是不写。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># 建议不要这样写</span><br><span class="line">cdef public func1():</span><br><span class="line">    print(&quot;hello world&quot;)</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># 而应该这样写</span><br><span class="line">cdef pubilc void func1():</span><br><span class="line">    print(&quot;hello world&quot;)</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>坑点六，字符串问题</li>
-</ul>
-<p>c语言的<code>wchar_t</code>能直接当作cython的str类型来用。<br>c语言的<code>char *</code>能直接当作cython的bytes类型来用。</p>
-<p>但是cython的str类型不能在c++文件里直接使用，要用<code>Py_UNICODE</code>。(bytes还没测试过) </p>
-<p>其中<code>Py_UNICODE</code>是<code>wchar_t</code>的别名  </p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">typedef wchar_t Py_UNICODE</span><br></pre></td></tr></table></figure>
-
-<p>而<code>Py_UNICODE</code>在<code>python.h</code>头文件和<code>cython</code>里均有定义</p>
-<p>所以本人就直接在<code>cython</code>和c++文件统一用<code>Py_UNICODE</code>了（懒得思考类型转换问题）    </p>
-<p>举个例子</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># test.pyx</span><br><span class="line">    </span><br><span class="line">cdef public void test1(Py_UNICODE *a):</span><br><span class="line">    print(a)</span><br><span class="line">    </span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">// dllmain.cpp</span><br><span class="line">    </span><br><span class="line">#define EDLL extern &quot;C&quot; _declspec(dllexport)</span><br><span class="line">    </span><br><span class="line">EDLL void py_test1(Py_UNICODE *a)&#123;</span><br><span class="line">    return test1(a);</span><br><span class="line">&#125;</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-
-<p>生成dll后调用<code>py_test1</code>,传参<code>wchar_t</code>，就能在控制台打印出字符串了。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">注意: char* 在cython中的类型是bytes，而且还需要考虑末尾填&#x27;\0&#x27;。</span><br></pre></td></tr></table></figure>
-
-
-
-<p>大体上我编译时遇到的问题就这些了。<br>基础篇就这些内容了，下一次就谈谈dll生成后的打包方式与变量共享问题吧    </p>
-<ul>
-<li>最后给个小提示，在开发时，把多用try把代码包起来，然后在except中print错误信息，能极大提高找bug效率</li>
-</ul>
 
           
         
@@ -1955,20 +1745,20 @@
 <li>下面是我的方式</li>
 </ul>
 <p>首先，在embed包中，找到<code>python3x._pth</code>结尾的文件（x是版本号），修改里面内容，将site的#删去。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">改成下面这样</span><br><span class="line"></span><br><span class="line">python38.zip</span><br><span class="line">.</span><br><span class="line"></span><br><span class="line"># Uncomment to run site.main() automatically</span><br><span class="line">import site</span><br><span class="line">```  </span><br><span class="line"></span><br><span class="line">之后，把pip装回来。你可以采用get-pip.py的方式或者将电脑上另一个python标准包中的pip，setuptools，easy_install.py,pkg_resources复制到Lib/site-packages里（当然这个文件夹需要你自己新建）</span><br><span class="line"></span><br><span class="line">接着，下载需要的第三方模块</span><br></pre></td></tr></table></figure>
+<figure class="highlight dsconfig"><table><tr><td class="code"><pre><span class="line">改成下面这样</span><br><span class="line"></span><br><span class="line"><span class="string">python38</span>.<span class="string">zip</span></span><br><span class="line">.</span><br><span class="line"></span><br><span class="line"><span class="comment"># Uncomment to run site.main() automatically</span></span><br><span class="line"><span class="string">import</span> <span class="string">site</span></span><br><span class="line">```  </span><br><span class="line"></span><br><span class="line">之后，把<span class="string">pip</span>装回来。你可以采用<span class="built_in">get-pip.py的方式或者将电脑上另一个python标准包中的pip，setuptools，easy_install.py,pkg_resources复制到Lib/site-packages里（当然这个文件夹需要你自己新建）</span></span><br><span class="line"></span><br><span class="line">接着，下载需要的第三方模块</span><br></pre></td></tr></table></figure>
 <p>python -m pip install xxx</p>
 <pre><code>
 最后，将pip，setuptools卸载掉（只需卸载这两个就行啦）   
 
 * 坑点二，先卸setuptools，再卸pip，不要问为什么。。。。。
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">python -m pip uninstall setuptools</span><br><span class="line">python -m pip uninstall pip</span><br><span class="line">~~~  </span><br><span class="line"></span><br><span class="line">现在，基本的python打包环境就已经安装好了。直接把cython生成的dll拖进embed包里，然后exe加载这个dll就行了。     </span><br><span class="line"></span><br><span class="line">这样就解决了依赖python3x.dll的问题。    </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">好了，接下来我们来谈另一个问题，上面的内容都走了一遍，结果发现运行后闪退。。。   </span><br><span class="line"></span><br><span class="line">假如你电脑上还有另一个python环境，而且是相同版本的，那么，下面内容也许对你有帮助，假如不是，那就检查一下自己的代码，或者另寻他路。  </span><br><span class="line"></span><br><span class="line">当时我遇到这个问题时，我也一直没想出个所以然。之后吃饭的时候，我突然意识到dll加载顺序问题。    </span><br><span class="line">拿出调试器一看，果然,cython生成的dll需要python3x.dll，但是它并没有加载embed包下的python3x.dll，而是顺着系统环境变量直接找另一个标准包上的python3x.dll了。   </span><br><span class="line">* 解决办法很简单，在加载cython的dll前提前加载embed包下的python3x.dll就行了   </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight llvm"><table><tr><td class="code"><pre><span class="line">python -m pip uninstall setuptools</span><br><span class="line">python -m pip uninstall pip</span><br><span class="line">~~~  </span><br><span class="line"></span><br><span class="line">现在，基本的python打包环境就已经安装好了。直接把cython生成的dll拖进embed包里，然后exe加载这个dll就行了。     </span><br><span class="line"></span><br><span class="line">这样就解决了依赖python<span class="number">3</span><span class="keyword">x</span>.dll的问题。    </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">好了，接下来我们来谈另一个问题，上面的内容都走了一遍，结果发现运行后闪退。。。   </span><br><span class="line"></span><br><span class="line">假如你电脑上还有另一个python环境，而且是相同版本的，那么，下面内容也许对你有帮助，假如不是，那就检查一下自己的代码，或者另寻他路。  </span><br><span class="line"></span><br><span class="line">当时我遇到这个问题时，我也一直没想出个所以然。之后吃饭的时候，我突然意识到dll加载顺序问题。    </span><br><span class="line">拿出调试器一看，果然<span class="punctuation">,</span>cython生成的dll需要python<span class="number">3</span><span class="keyword">x</span>.dll，但是它并没有加载embed包下的python<span class="number">3</span><span class="keyword">x</span>.dll，而是顺着系统环境变量直接找另一个标准包上的python<span class="number">3</span><span class="keyword">x</span>.dll了。   </span><br><span class="line">* 解决办法很简单，在加载cython的dll前提前加载embed包下的python<span class="number">3</span><span class="keyword">x</span>.dll就行了   </span><br><span class="line"></span><br></pre></td></tr></table></figure>
     
 // 之前的代码是这样的
 // test.dll 是cython生成的dll
     
 HMODULE moudle = LoadLibrary(&quot;test.dll&quot;);
  
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
  
 // 修改后
  
@@ -1984,6 +1774,216 @@ test.dll依赖python38.dll，但我们提前加载好python38.dll，win装载器
 下一期是关于cython变量共享踩坑记。
 
 </code></pre>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://hvhghv.github.io/myBlog/myBlog/cython/cython1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/myBlog/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HvH洋的小站">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/myBlog/cython/cython1/" itemprop="url">cython生成dll踩坑记（一）---基础篇</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2023-10-14T00:00:00+00:00">
+                2023-10-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/myBlog/categories/cython%E7%9A%84%E5%88%9D%E6%AD%A5%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index">
+                    <span itemprop="name">cython的初步学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="cython生成dll踩坑记（一）—基础篇"><a href="#cython生成dll踩坑记（一）—基础篇" class="headerlink" title="cython生成dll踩坑记（一）—基础篇"></a>cython生成dll踩坑记（一）—基础篇</h1><h2 id="2023-10-14"><a href="#2023-10-14" class="headerlink" title="2023-10-14"></a>2023-10-14</h2><p>最近研究了一下cython，花了3天时间才写出了一点成果来（太菜了~~~）。关于cython的教程还是比较少的，大部分还是得自己摸索。（指修完一个bug又出现两个bug）。不过也确实感觉收获了许多。</p>
+<ul>
+<li>坑点一，pyx并不能直接导出函数</li>
+</ul>
+<p>pyx的本质是一个动态链接库，所以，我猜想能不能直接<code>loadlibrary</code>这个动态链接库。于是我写了一个简单的代码测试一下。   </p>
+<figure class="highlight isbl"><table><tr><td class="code"><pre><span class="line"><span class="variable">cdef</span> <span class="variable">public</span> <span class="function"><span class="title">func1</span>():</span></span><br><span class="line"><span class="function">    <span class="title">print</span>(<span class="string">&quot;hello world&quot;</span>)</span></span><br></pre></td></tr></table></figure>
+
+<p>然后<code>python setup.py build_ext</code>生成pyd文件，拿pe工具一查，这导出表压根就没有func1函数…..</p>
+<p>所以还是得老老实实的，先生成c代码，再生成dll。</p>
+<ul>
+<li>坑点二，初始化写在了<code>DLL_PROCESS_ATTACH</code>与<code>DLL_PROCESS_DETACH</code>里</li>
+</ul>
+<p>一开始，我是这样的</p>
+<figure class="highlight objectivec"><table><tr><td class="code"><pre><span class="line">    </span><br><span class="line"><span class="meta">#<span class="keyword">define</span> PY_MOUDLE_NAME <span class="string">&quot;test&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> PY_MOUDLE_INIT PyInit_test   </span></span><br><span class="line">    </span><br><span class="line"><span class="type">BOOL</span> APIENTRY DllMain( HMODULE hModule,</span><br><span class="line">                       DWORD  ul_reason_for_call,</span><br><span class="line">                       LPVOID lpReserved</span><br><span class="line">                     )</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">switch</span> (ul_reason_for_call)</span><br><span class="line">    &#123;</span><br><span class="line">    <span class="keyword">case</span> DLL_PROCESS_ATTACH:</span><br><span class="line">    </span><br><span class="line">        PyObject* pmodule = <span class="literal">NULL</span>;</span><br><span class="line">    </span><br><span class="line">        PyImport_AppendInittab(PY_MOUDLE_NAME, PY_MOUDLE_INIT);</span><br><span class="line">        </span><br><span class="line">        Py_Initialize();</span><br><span class="line">    </span><br><span class="line">        pmodule = PyImport_ImportModule(PY_MOUDLE_NAME);</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> (pmodule == <span class="literal">NULL</span>) &#123;</span><br><span class="line">    </span><br><span class="line">            <span class="keyword">return</span> <span class="literal">FALSE</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line">    </span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> DLL_THREAD_ATTACH:</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> DLL_THREAD_DETACH:</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> DLL_PROCESS_DETACH:</span><br><span class="line">        Py_FinalizeEx()</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">TRUE</span>;</span><br><span class="line">&#125;</span><br><span class="line">    </span><br></pre></td></tr></table></figure>
+
+
+<p>结果发现在自己的电脑里总报错，后来，我选择手动初始化，手动释放，就没报错了</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> PY_MOUDLE_NAME <span class="string">&quot;test&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> PY_MOUDLE_INIT PyInit_test</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> EDLL extern <span class="string">&quot;C&quot;</span> _declspec(dllexport)</span></span><br><span class="line">    </span><br><span class="line"><span class="function">EDLL <span class="type">int</span> <span class="title">py_init</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">    PyObject* pmodule = <span class="literal">NULL</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">PyImport_AppendInittab</span>(PY_MOUDLE_NAME, PY_MOUDLE_INIT);</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">Py_Initialize</span>();</span><br><span class="line">    </span><br><span class="line">    pmodule = <span class="built_in">PyImport_ImportModule</span>(PY_MOUDLE_NAME);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> (pmodule == <span class="literal">NULL</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">     </span><br><span class="line">     </span><br><span class="line"><span class="function">EDLL <span class="type">int</span> <span class="title">py_exit</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Py_FinalizeEx</span>();</span><br><span class="line">&#125;</span><br><span class="line">      </span><br><span class="line">    </span><br><span class="line"><span class="function">BOOL APIENTRY <span class="title">DllMain</span><span class="params">( HMODULE hModule,</span></span></span><br><span class="line"><span class="params"><span class="function">                       DWORD  ul_reason_for_call,</span></span></span><br><span class="line"><span class="params"><span class="function">                       LPVOID lpReserved</span></span></span><br><span class="line"><span class="params"><span class="function">                     )</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">switch</span> (ul_reason_for_call)</span><br><span class="line">    &#123;</span><br><span class="line">    <span class="keyword">case</span> DLL_PROCESS_ATTACH:</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> DLL_THREAD_ATTACH:</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> DLL_THREAD_DETACH:</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> DLL_PROCESS_DETACH:</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> TRUE;</span><br><span class="line">&#125;</span><br><span class="line">    </span><br></pre></td></tr></table></figure>
+
+
+<ul>
+<li>坑点三，<code>Py_Init_...()</code>函数不管用</li>
+</ul>
+<p>本来开始时，我的代码是</p>
+<figure class="highlight scss"><table><tr><td class="code"><pre><span class="line">    </span><br><span class="line"><span class="built_in">Py_Initialize</span>();</span><br><span class="line"><span class="built_in">PyInit_test</span>();</span><br><span class="line">    </span><br></pre></td></tr></table></figure>
+<p>结果发现一直报指针访问不能为nullptr。<br>后来改成下面这样就好了。</p>
+<figure class="highlight scss"><table><tr><td class="code"><pre><span class="line"><span class="built_in">PyImport_AppendInittab</span>(&quot;test&quot;, PyInit_test);</span><br><span class="line"><span class="built_in">Py_Initialize</span>();</span><br><span class="line"><span class="built_in">PyImport_ImportModule</span>(&quot;test&quot;);</span><br></pre></td></tr></table></figure>
+
+<p>小提示: <code>cython3.x</code>版本用<code>Py_Init_...()</code>用这个过不了编译</p>
+<ul>
+<li>坑点四，<code>__PYX_EXTERN_C</code>不能加<code>_declspec(dllexport)</code></li>
+</ul>
+<p>看了cython生成的头文件，发现每个导出函数都有<code>__PYX_EXTERN_C</code>，于是添了个<code>_declspec(dllexport)</code></p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> __PYX_EXTERN_C extern <span class="string">&quot;C&quot;</span> _declspec(dllexport)</span></span><br></pre></td></tr></table></figure>
+
+
+<p>结果发现无效<br>只能老老实实写函数去包装了</p>
+<ul>
+<li>坑点五，无返回值时，返回值位PyObject问题</li>
+</ul>
+<p>在编写cython函数时，无返回值的函数最好加上<code>void</code>而不是不写。</p>
+<figure class="highlight axapta"><table><tr><td class="code"><pre><span class="line"><span class="meta"># 建议不要这样写</span></span><br><span class="line">cdef <span class="keyword">public</span> func1():</span><br><span class="line">    <span class="keyword">print</span>(<span class="string">&quot;hello world&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight axapta"><table><tr><td class="code"><pre><span class="line"><span class="meta"># 而应该这样写</span></span><br><span class="line">cdef pubilc <span class="keyword">void</span> func1():</span><br><span class="line">    <span class="keyword">print</span>(<span class="string">&quot;hello world&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>坑点六，字符串问题</li>
+</ul>
+<p>c语言的<code>wchar_t</code>能直接当作cython的str类型来用。<br>c语言的<code>char *</code>能直接当作cython的bytes类型来用。</p>
+<p>但是cython的str类型不能在c++文件里直接使用，要用<code>Py_UNICODE</code>。(bytes还没测试过) </p>
+<p>其中<code>Py_UNICODE</code>是<code>wchar_t</code>的别名  </p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="type">wchar_t</span> Py_UNICODE</span><br></pre></td></tr></table></figure>
+
+<p>而<code>Py_UNICODE</code>在<code>python.h</code>头文件和<code>cython</code>里均有定义</p>
+<p>所以本人就直接在<code>cython</code>和c++文件统一用<code>Py_UNICODE</code>了（懒得思考类型转换问题）    </p>
+<p>举个例子</p>
+<figure class="highlight axapta"><table><tr><td class="code"><pre><span class="line"><span class="meta"># test.pyx</span></span><br><span class="line">    </span><br><span class="line">cdef <span class="keyword">public</span> <span class="keyword">void</span> test1(Py_UNICODE *a):</span><br><span class="line">    <span class="keyword">print</span>(a)</span><br><span class="line">    </span><br></pre></td></tr></table></figure>
+
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">// dllmain.cpp</span></span><br><span class="line">    </span><br><span class="line"><span class="meta">#<span class="keyword">define</span> EDLL extern <span class="string">&quot;C&quot;</span> _declspec(dllexport)</span></span><br><span class="line">    </span><br><span class="line"><span class="function">EDLL <span class="type">void</span> <span class="title">py_test1</span><span class="params">(Py_UNICODE *a)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">test1</span>(a);</span><br><span class="line">&#125;</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<p>生成dll后调用<code>py_test1</code>,传参<code>wchar_t</code>，就能在控制台打印出字符串了。</p>
+<figure class="highlight livecodeserver"><table><tr><td class="code"><pre><span class="line">注意: <span class="keyword">char</span>* 在cython中的类型是<span class="keyword">bytes</span>，而且还需要考虑末尾填<span class="string">&#x27;\0&#x27;</span>。</span><br></pre></td></tr></table></figure>
+
+
+
+<p>大体上我编译时遇到的问题就这些了。<br>基础篇就这些内容了，下一次就谈谈dll生成后的打包方式与变量共享问题吧    </p>
+<ul>
+<li>最后给个小提示，在开发时，把多用try把代码包起来，然后在except中print错误信息，能极大提高找bug效率</li>
+</ul>
 
           
         
