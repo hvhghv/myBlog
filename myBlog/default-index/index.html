@@ -262,6 +262,176 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://hvhghv.github.io/myBlog/myBlog/mouth/mouth-4/blog/%E7%AC%AC4%E6%9C%9F%20-%20%E9%97%B2%E7%BD%AEAndroid%E5%B9%B3%E6%9D%BF%E8%BF%90%E8%A1%8CLinux%E6%A1%8C%E9%9D%A2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/myBlog/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HvH洋的小站">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/myBlog/mouth/mouth-4/blog/%E7%AC%AC4%E6%9C%9F%20-%20%E9%97%B2%E7%BD%AEAndroid%E5%B9%B3%E6%9D%BF%E8%BF%90%E8%A1%8CLinux%E6%A1%8C%E9%9D%A2/" itemprop="url">第4期 - 闲置Android平板运行Linux桌面</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2025-07-22T03:48:55+00:00">
+                2025-07-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/myBlog/categories/%E6%AF%8F%E6%9C%88%E9%9A%8F%E7%AC%94/" itemprop="url" rel="index">
+                    <span itemprop="name">每月随笔</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><img src="/myBlog/mouth/mouth-4/blog/../_resources/c3eecff074d0ce8e786ea91a891715a5.png" alt="c3eecff074d0ce8e786ea91a891715a5.png"></p>
+<p><img src="/myBlog/mouth/mouth-4/blog/../_resources/d8e643a5c905651a5c59314d118faf26.png" alt="d8e643a5c905651a5c59314d118faf26.png"></p>
+<p><img src="/myBlog/mouth/mouth-4/blog/../_resources/cd7dfae1c2576f1dabae82caacbff561.png" alt="cd7dfae1c2576f1dabae82caacbff561.png"></p>
+<p><img src="/myBlog/mouth/mouth-4/blog/../_resources/3d66485eda63c06a08a048eb8b4a415e.png" alt="3d66485eda63c06a08a048eb8b4a415e.png"></p>
+<p><img src="/myBlog/mouth/mouth-4/blog/../_resources/21d29c7b5db6a2d18c2c76d43ddd6528.png" alt="21d29c7b5db6a2d18c2c76d43ddd6528.png"></p>
+<p>已经好久没写过随笔了。最近折腾了手上有一台闲置的Android平板，打算拿来规划一下好好利用。想起以前了解过的一个开源项目termux，就跑去看看termux现在发展成什么样了。还记得第一次认识学习的linux，其实并不是在window上vmware运行的linux虚拟机，也不是普通的linux主机，还是在偶然下载了termux软件上</p>
+<p>一看，哇，多了好多新功能，用起来更方便了，居然还能把平板变为一个Linux桌面。好家伙，这我得整上一台。</p>
+<p>使用起来，目前感觉和普通的Linux系统没啥两样，Linux上编译好的软件包也可以直接拖到平板上跑，也不需要ROOT。算是外带神机了。可惜一些需要Linux Root权限的应用就不太可能跑起来，要跑也是要termux原生环境那跑而不是proot容器内部。</p>
+<p>后面就只是些折腾的碎碎念。</p>
+<p>去<code>github</code>上下载<code>termux</code>,<code> termux-x11</code>, <code>termux-api</code>，小企鹅输入法这4个apk包安装。</p>
+<p>打开<code>termux</code>, 在<code>termux</code>里安装<code>sshd</code>, 方便文件的传输。安装<code>termux-service</code>（好像是这个名字吧），设置打开自启。有一说一，我也不太习惯用这个启动项管理器，于是后面就找了个<code>joker</code>项目，改改里面的代码写了一个简单好用的启动项管理器</p>
+<p>在github上找到<code>tome-linux</code>项目，根据运行<code>tome-linux.sh</code>，安装<code>Ubuntu-22.04</code>。安装过程有点慢，主要是机子CPU不太好（已经把晓龙662性能全榨干了也都这样了）。桌面环境装<code>xfce</code>或者<code>kde</code>（机子好装kde, 不好装xfce, 其他桌面环境有的我没用过， 有的体验感糟糕pass掉。我选择装了xfce）其中所有有关X11, VNC的项目没必要装，因为<code>termux-x11</code>这玩意的体验比上面那写远程桌面协议舒服很多。</p>
+<p>安装好后，进入<code>Ubuntu-22.04-proot</code>容器内部，输入<code>startxfec</code>，看看有没有啥反映。没有的话敲<code>debian-i</code>去重装就好。</p>
+<p>找一个蓝牙键鼠连接平板，方便后面操作。</p>
+<p>在<code>Ubuntu-22.04-proot</code>内部安装sshd, 方便文件传输。另外有点奇怪的是通过apt安装的<code>openssh-server</code>, <code>dropbear</code>没一个能跑。后面只能找自己以前电脑上的<code>dropbear-2016</code>源码编译安装。而且还跑不了证书登陆，于是就只能跑密码登陆了。</p>
+<p>修改<code>/etc/profile</code>， 添加下面两行</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">export XDG_RUNTIME_DIR=/run/user/$(id -u)</span><br><span class="line">export DISPLAY=&#x27;:2&#x27;</span><br></pre></td></tr></table></figure>
+
+<p>修改<code>/etc/passwd</code>文件，把<code>root</code>里面的登陆用shell改为<code>bash</code>（这个<code>zsh</code>）卡得要死，卸了</p>
+<p>通过<code>debian-i</code>或者<code>apt</code>去里面装些想装的软件， 这样容器环境就差不多搭好了。</p>
+<p>敲<code>exit</code>回到<code>termux</code>原生环境，安装<code>apt install termux-x11-nightly</code>(应该是这个应用名把，不是的话<code>apt search</code>一下找找) 。输入<code>tmoe ls</code>, 挂载tmp文件夹（termux-x11运行的条件之一）。</p>
+<p>改改<code>$PREFIX/var/server/tx11</code>里面的启动命令，改为<code>exec termux-x11: 2</code>，之后敲<code>sv-enable tx11</code>设置自启</p>
+<p>安装<code>screen</code>用于容器包活。这个<code>proot</code>容器有个特点就是，只要没有终端存在，就会把所有杀死所有容器内部的进程。所以我们需要一个虚拟终端来保证容器能持久运行</p>
+<p>回到安卓环境，停止termux后重新进入，敲下列代码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">screen -S &quot;ub-xfce&quot; -X quit</span><br><span class="line">screen -pipe &quot;ub-xfce&quot;</span><br><span class="line">screen -dmS &quot;ub-xfce&quot; /bin/bash -c &quot;exec /bin/bash&quot;</span><br><span class="line">screen -S &quot;ub-xfce&quot; -X stuff &quot;debian\n&quot;</span><br><span class="line">screen -S &quot;ub-xfce&quot; -X stuff &quot;startxfce4\n&quot;</span><br></pre></td></tr></table></figure>
+
+<p>回到安卓环境，打开termux:x11软件，等大概3分钟（启动挺慢的，但超过5分钟没反应那就是环境没搭好），就应该会有桌面环境了。打开<code>termux:x11</code>的设置选项，在<code>output</code>里设置<code>Screen orientation</code>为<code>landscape</code>，关闭<code>Reseed screen while soft keyboard is open</code>。在<code>keyboard</code>里打开所有开关，进入<code>Show additional keyboard</code>，调整<code>Opacity of extra keys bar, %</code>为10（这里是调整下框栏的透明度）</p>
+<p>退出termux:x11，回到安卓环境，修改输入法为<code>小企鹅输入法</code>，重进<code>termux:x11</code>软件，按右下角的键盘图标，敲一下蓝牙键盘的shirt键（没反应重复10次），理论上就会有中文输入法了。按下键盘shirt键切换中英文。</p>
+<p>这样就差不多搭好一切了，这次折腾还挺累的，后面再摸索摸索些新玩意。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://hvhghv.github.io/myBlog/myBlog/mouth/mouth-3/doc/mouth-3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1895,7 +2065,7 @@ test.dll依赖python38.dll，但我们提前加载好python38.dll，win装载器
               
                 <a href="/myBlog/archives">
               
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
